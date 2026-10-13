@@ -9,7 +9,15 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const distArg = process.argv.indexOf('--dist');
 const dist = path.resolve(root, distArg >= 0 ? process.argv[distArg + 1] || 'dist' : 'dist');
 const manifest = JSON.parse(await fs.readFile(new URL('./routes.json', import.meta.url), 'utf8'));
-const { previewOrigin, previewBase, productionOrigin } = manifest;
+const buildTarget = process.env.PUBLIC_SITE_TARGET || 'preview';
+if (!['preview', 'staging', 'production'].includes(buildTarget)) {
+  throw new Error(`Unknown PUBLIC_SITE_TARGET: ${buildTarget}`);
+}
+const isProduction = buildTarget === 'production';
+const hasServerForm = buildTarget !== 'preview';
+const { productionOrigin } = manifest;
+const previewOrigin = hasServerForm ? productionOrigin : manifest.previewOrigin;
+const previewBase = hasServerForm ? '/' : manifest.previewBase;
 const failures = new Set();
 const checkedLinks = new Set();
 const documents = new Map();
@@ -19,7 +27,8 @@ const check = (condition, message) => {
 };
 const cleanRoute = (value) => (value === '/' ? '/' : `/${value.replace(/^\/+|\/+$/g, '')}`);
 const normalizeText = (value) => value.replace(/\s+/g, ' ').trim();
-const canonical = (route) => `${productionOrigin}${cleanRoute(route)}`;
+const canonical = (route) =>
+  `${productionOrigin}${cleanRoute(route)}${cleanRoute(route) === '/' ? '' : '/'}`;
 
 async function walk(directory) {
   const entries = await fs.readdir(directory, { withFileTypes: true });
@@ -93,8 +102,17 @@ for (const file of files) {
   if (/\.(?:html|css|js|json|xml|txt|svg)$/i.test(rel)) {
     const text = await fs.readFile(file, 'utf8');
     textFiles.set(rel, text);
+    const analyticsMarker =
+      /(?:googletagmanager\.com|google-analytics\.com|GTM-[A-Z0-9]+|fm-analytics-choice|analytics-consent-runtime)/i;
+    if (!isProduction)
+      check(!analyticsMarker.test(text), `${rel}: analytics shipped in ${buildTarget} output`);
+    else
+      for (const match of text.matchAll(/\bGTM-[A-Z0-9]+\b/g))
+        check(match[0] === 'GTM-MNZSRTLV', `${rel}: unexpected GTM container ${match[0]}`);
     check(
-      !/(?:C:[\\/]Users[\\/][^\\/\s]+|C:[\\/]Vaults|machine-identity[\\/]|Knowledge Vault)/i.test(text),
+      !/(?:C:[\\/]Users[\\/][^\\/\s]+|C:[\\/]Vaults|machine-identity[\\/]|Knowledge Vault)/i.test(
+        text,
+      ),
       `Private machine path/context leaked: ${rel}`,
     );
     check(
@@ -200,9 +218,17 @@ for (const [file, $] of documents) {
     `${file}: expected one meaningful meta description`,
   );
   const robots = ($('meta[name="robots"]').attr('content') || '').toLowerCase().split(/[\s,]+/);
+  const excluded =
+    !isProduction || ['/404', '/thank-you'].includes(route) || rule?.path !== rule?.target;
   check(
-    robots.includes('noindex') && robots.includes('nofollow'),
-    `${file}: preview must be noindex, nofollow`,
+    excluded
+      ? robots.includes('noindex') && robots.includes('nofollow')
+      : robots.includes('index') && robots.includes('follow') && !robots.includes('noindex'),
+    `${file}: unexpected indexing policy for ${buildTarget}`,
+  );
+  check(
+    isProduction ? !$('.review-label').length : true,
+    `${file}: production still shows a review label`,
   );
   check($('link[rel="canonical"]').length === 1, `${file}: expected exactly one canonical`);
   const expectedCanonical = canonical(rule?.target || route);
@@ -237,6 +263,7 @@ for (const [file, $] of documents) {
   visibleBody.find('script, style, template').remove();
   check(!visibleBody.text().includes('\u2014'), `${file}: authored em dash in visible HTML`);
   const visibleText = normalizeText($('main').text());
+  verifyAnalytics($, file, route, visibleText);
   check(
     !/\b(?:TODO|TBD|lorem ipsum)\b/i.test(visibleText),
     `${file}: unfinished placeholder in visible content`,
@@ -306,8 +333,101 @@ for (const [file, $] of documents) {
   if (route === '/contact') verifyContact($, file, visibleText);
 }
 
+function verifyAnalytics($, file, route, visibleText) {
+  const runtime = $('#analytics-consent-runtime');
+  const notice = $('#analytics-consent');
+  const settings = $('#analytics-settings');
+  if (!isProduction) {
+    check(
+      !runtime.length && !notice.length && !settings.length,
+      `${file}: analytics interface shipped in ${buildTarget}`,
+    );
+    return;
+  }
+  check(
+    runtime.length === 1 && runtime.attr('type') === 'module' && !runtime.attr('src'),
+    `${file}: expected one inline consent runtime`,
+  );
+  check(
+    runtime.text().includes("GOOGLE_TAG_MANAGER_ID = 'GTM-MNZSRTLV'"),
+    `${file}: consent runtime lacks the verified GTM container`,
+  );
+  check(
+    notice.length === 1 && notice.attr('hidden') !== undefined,
+    `${file}: analytics notice must initialize hidden until choices are read`,
+  );
+  check(
+    settings.length === 1 && settings.attr('aria-controls') === 'analytics-consent',
+    `${file}: missing analytics settings control`,
+  );
+  for (const id of ['analytics-accept', 'analytics-decline'])
+    check(
+      notice.find(`button#${id}[type="button"]`).length === 1,
+      `${file}: missing explicit analytics choice ${id}`,
+    );
+  // A consent runtime may contain a loader URL, but no request-bearing element
+  // may contact Google before the visitor's saved or current acceptance.
+  const markup = load($.html(), { scriptingEnabled: false });
+  markup('[src], [href]').each((_, element) => {
+    const url = markup(element).attr('src') || markup(element).attr('href') || '';
+    check(
+      !/(?:googletagmanager\.com|google-analytics\.com)/i.test(url),
+      `${file}: eager analytics request before consent: ${url}`,
+    );
+  });
+  if (route === '/privacy') {
+    check(
+      $('a[href="https://policies.google.com/privacy"]').length === 1,
+      `${file}: missing Google privacy reference`,
+    );
+    check(
+      /Analytics stays off until you accept/.test(visibleText),
+      `${file}: missing analytics choice disclosure`,
+    );
+    check(
+      !/does not install advertising trackers, analytics scripts/.test(visibleText),
+      `${file}: stale no-analytics claim in production`,
+    );
+  }
+}
+
 function verifyContact($, file, visibleText) {
   const form = $('#inquiry-form');
+  if (hasServerForm) {
+    check(form.length === 1, `${file}: expected one inquiry form`);
+    check(form.attr('name') === 'inquiry', `${file}: Netlify form name must be inquiry`);
+    check(form.attr('method')?.toLowerCase() === 'post', `${file}: inquiry must POST`);
+    check(form.attr('data-netlify') === 'true', `${file}: Netlify static form detection missing`);
+    check(
+      form.attr('action') === '/thank-you/',
+      `${file}: native POST must target the direct success route`,
+    );
+    check(
+      form.attr('netlify-honeypot') === 'bot-field' ||
+        form.attr('data-netlify-honeypot') === 'bot-field',
+      `${file}: missing spam honeypot declaration`,
+    );
+    check(
+      form.find('input[name="form-name"]').attr('value') === 'inquiry',
+      `${file}: missing form-name payload`,
+    );
+    check(form.find('input[name="bot-field"]').length === 1, `${file}: missing honeypot control`);
+    for (const name of ['name', 'email', 'message']) {
+      check(
+        form.find(`[name="${name}"][required]`).length === 1,
+        `${file}: missing required ${name}`,
+      );
+    }
+    check(
+      !form.find('fieldset[disabled]').length,
+      `${file}: production form must work without JavaScript`,
+    );
+    check(
+      !/Nothing is submitted or stored/.test(visibleText),
+      `${file}: production retains preview storage claim`,
+    );
+    return;
+  }
   const fields = form.find('#inquiry-fields');
   check(form.length === 1, `${file}: expected one inquiry draft form`);
   check(
@@ -496,8 +616,29 @@ check(
   !/^Disallow:\s*\/\s*$/im.test(robotsText),
   'robots.txt blocks all crawling, preventing crawlers from reading preview noindex metadata.',
 );
+const sitemap = load(textFiles.get('sitemap.xml') || '', { xmlMode: true });
+const sitemapUrls = sitemap('loc')
+  .toArray()
+  .map((el) => sitemap(el).text());
+const expectedSitemap = isProduction
+  ? manifest.routes
+      .filter((item) => item.path === item.target && !['/404', '/thank-you'].includes(item.path))
+      .map((item) => canonical(item.path))
+  : [];
+check(
+  sitemapUrls.length === expectedSitemap.length,
+  'Sitemap URL count does not match the indexing policy.',
+);
+for (const url of expectedSitemap) check(sitemapUrls.includes(url), `Sitemap missing ${url}`);
+check(
+  isProduction
+    ? robotsText.includes(`Sitemap: ${productionOrigin}/sitemap.xml`)
+    : !robotsText.includes('Sitemap:'),
+  'robots.txt sitemap policy is incorrect.',
+);
 
 const summary = {
+  buildTarget,
   htmlPages: documents.size,
   expectedRoutes: manifest.routes.length,
   existingUrlsCovered: 28,
@@ -507,6 +648,7 @@ const summary = {
   draftsChecked: draftCount,
   localReferencesChecked: checkedLinks.size,
   deployableFiles: files.length,
+  analytics: isProduction ? 'consent-gated GTM-MNZSRTLV' : 'absent',
   failures: failures.size,
 };
 console.log(JSON.stringify(summary, null, 2));
@@ -516,5 +658,5 @@ if (failures.size) {
   process.exitCode = 1;
 } else
   console.log(
-    'PASS: static preview routes, references, metadata, evidence and output boundaries verified.',
+    `PASS: ${buildTarget} routes, references, metadata, evidence and output boundaries verified.`,
   );

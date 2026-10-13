@@ -3,7 +3,7 @@
   "previewOrigin": "https://jowidy.github.io",
   "previewBase": "/force-multiplier-preview/",
   "productionOrigin": "https://www.forcemultiplier.work",
-  "description": "Public URL mapping. Aliases are review pages on GitHub Pages, not verified HTTP redirects. Production migration still requires permanent redirects.",
+  "description": "Public URL mapping. GitHub aliases are fallback pages. Netlify config supplies permanent redirects, subject to deployed verification.",
   "routes": [
     { "path": "/", "target": "/", "origin": "existing" },
     { "path": "/appointments", "target": "/contact", "origin": "existing" },
@@ -91,6 +91,7 @@
     { "path": "/start", "target": "/contact", "origin": "existing" },
     { "path": "/websites-and-messaging", "target": "/websites-and-messaging", "origin": "new" },
     { "path": "/privacy", "target": "/privacy", "origin": "new" },
-    { "path": "/404", "target": "/404", "origin": "new" }
+    { "path": "/404", "target": "/404", "origin": "new" },
+    { "path": "/thank-you", "target": "/thank-you", "origin": "new" }
   ]
 }

@@ -1,0 +1,59 @@
+[build]
+  command = "pnpm check && pnpm test && pnpm build && pnpm test:output"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
+  PNPM_VERSION = "11.25.0"
+  # Keep the first deployment out of search results until domain/form QA passes.
+  PUBLIC_SITE_TARGET = "staging"
+
+[context.deploy-preview.environment]
+  PUBLIC_SITE_TARGET = "staging"
+
+[context.branch-deploy.environment]
+  PUBLIC_SITE_TARGET = "staging"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    X-Frame-Options = "DENY"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Only retired URLs are forced. Contact POST and unknown paths are untouched.
+[[redirects]]
+  from = "/home"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/start"
+  to = "/contact/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/appointments"
+  to = "/contact/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/smb-home"
+  to = "/"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/legacy-start-archive-2026-09-03"
+  to = "/"
+  status = 301
+  force = true

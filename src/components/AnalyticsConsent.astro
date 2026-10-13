@@ -1,0 +1,82 @@
+---
+import { href } from '../lib/site';
+import analyticsScript from '../lib/analytics-consent.mjs?raw';
+---
+
+<section
+  id="analytics-consent"
+  class="analytics-consent"
+  aria-labelledby="analytics-consent-heading"
+  hidden
+>
+  <h2 id="analytics-consent-heading">Help us understand what’s useful.</h2>
+  <p>
+    May we use Google Analytics to measure page visits and navigation? It uses cookies and browser
+    information. The website works either way. <a href={href('/privacy')}>Privacy details</a>
+  </p>
+  <div class="analytics-actions">
+    <button id="analytics-accept" type="button">Accept analytics</button>
+    <button id="analytics-decline" type="button">No thanks</button>
+  </div>
+  <p class="analytics-choice-note">Change your choice in Analytics settings in the footer.</p>
+</section>
+<script id="analytics-consent-runtime" is:inline type="module" set:html={analyticsScript} />
+
+<style>
+  .analytics-consent {
+    position: fixed;
+    z-index: 100;
+    right: 1rem;
+    bottom: max(1rem, env(safe-area-inset-bottom));
+    width: min(31rem, calc(100% - 2rem));
+    max-height: calc(100dvh - 2rem);
+    overflow-y: auto;
+    padding: 1.25rem;
+    color: #17232e;
+    background: #fff;
+    border: 2px solid #06529f;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 2rem rgb(16 43 70 / 20%);
+  }
+  .analytics-consent[hidden] {
+    display: none;
+  }
+  h2 {
+    margin: 0 0 0.6rem;
+    font-size: 1.125rem;
+    line-height: 1.4;
+  }
+  p {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+  a {
+    color: #06529f;
+    text-decoration: underline;
+  }
+  .analytics-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin: 1rem 0 0.75rem;
+  }
+  button {
+    min-height: 44px;
+    padding: 0.65rem 0.5rem;
+    border: 1px solid #06529f;
+    border-radius: 0.25rem;
+    background: #fff;
+    color: #06529f;
+    font: inherit;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  button:hover {
+    background: #eaf2fa;
+  }
+  .analytics-choice-note {
+    font-size: 0.75rem;
+  }
+</style>

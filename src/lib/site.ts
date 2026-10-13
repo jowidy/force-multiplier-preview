@@ -1,3 +1,6 @@
+export const buildTarget = import.meta.env.PUBLIC_SITE_TARGET || 'preview';
+export const isProduction = buildTarget === 'production';
+export const hasServerForm = buildTarget === 'staging' || isProduction;
 export const site = {
   name: 'Force Multiplier',
   domain: 'https://www.forcemultiplier.work',
@@ -12,7 +15,7 @@ export const href = (path = '/') =>
   `${base}/${path.replace(/^\/+|\/+$/g, '')}${path === '/' ? '' : '/'}`;
 export const asset = (path: string) => `${base}/${path.replace(/^\/+/, '')}`;
 export const canonical = (path = '/') =>
-  `${site.domain}${path === '/' ? '/' : `/${path.replace(/^\/+|\/+$/g, '')}`}`;
+  `${site.domain}${path === '/' ? '/' : `/${path.replace(/^\/+|\/+$/g, '')}/`}`;
 export const nav = [
   ['Services', '/services'],
   ['Work', '/case-studies'],
