@@ -1,0 +1,66 @@
+---
+import Icon from './Icon.astro';
+interface Props {
+  path: string;
+}
+const { path } = Astro.props;
+const scope = path.includes('local-proof-online');
+const content = path.includes('customer-questions') || path.includes('clear-offer');
+---
+
+<div
+  class:list={['case-cover', scope ? 'cover-scope' : content ? 'cover-content' : 'cover-search']}
+  aria-hidden="true"
+>
+  {
+    scope ? (
+      <>
+        <div class="scope-visual">
+          <>
+            <span>60</span>
+            <Icon name="right" />
+            <strong>30</strong>
+          </>
+        </div>
+        <p>
+          Estimated hours.
+          <br />A narrower first phase.
+        </p>
+      </>
+    ) : content ? (
+      <>
+        <div class="content-visual">
+          <>
+            <span>Questions</span>
+            <Icon name="right" />
+            <strong>Clarity.</strong>
+          </>
+        </div>
+        <p>
+          Put what customers need
+          <br />
+          at the heart of the page.
+        </p>
+      </>
+    ) : (
+      <>
+        <div class="search-visual">
+          <>
+            <span class="search-orbit" />
+            <span class="search-center">
+              <Icon name="right" />
+            </span>
+          </>
+        </div>
+        <p>
+          The right search.
+          <>
+            <br />
+            <strong>The right business.</strong>
+          </>
+        </p>
+      </>
+    )
+  }
+  <span class="cover-caption">Case-study illustration</span>
+</div>

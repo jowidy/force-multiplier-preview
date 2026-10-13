@@ -1,0 +1,23 @@
+---
+import { asset } from '../lib/site';
+interface Props {
+  kind?: 'connected-work' | 'clear-path';
+  priority?: boolean;
+  caption?: boolean;
+}
+const { kind = 'connected-work', priority = false, caption = false } = Astro.props;
+---
+
+<figure class:list={['editorial-art', `art-${kind}`]}>
+  <img
+    src={asset(`/images/${kind}-960.webp`)}
+    srcset={`${asset(`/images/${kind}-640.webp`)} 640w, ${asset(`/images/${kind}-960.webp`)} 960w`}
+    sizes="(min-width: 1000px) 600px, 100vw"
+    width="960"
+    height="640"
+    alt=""
+    loading={priority ? 'eager' : 'lazy'}
+    fetchpriority={priority ? 'high' : 'auto'}
+  />
+  {caption && <figcaption>Original editorial illustration</figcaption>}
+</figure>

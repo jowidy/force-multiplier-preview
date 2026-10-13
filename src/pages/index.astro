@@ -2,6 +2,8 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import Icon from '../components/Icon.astro';
 import CallToAction from '../components/CallToAction.astro';
+import EditorialArt from '../components/EditorialArt.astro';
+import CaseCover from '../components/CaseCover.astro';
 import { href, asset, serviceGroups } from '../lib/site';
 ---
 
@@ -9,25 +11,28 @@ import { href, asset, serviceGroups } from '../lib/site';
   title="Force Multiplier"
   description="Practical marketing, websites and operations support. Based in Monroe, Louisiana, Force Multiplier helps businesses get found, explain their work and move forward."
 >
-  <section class="hero wrap">
-    <div class="hero-copy">
-      <h1>Make the next<br class="desktop-break" /> move count.</h1><p class="lead">
-        Marketing, websites and better ways of working. Built around what your business needs next.
-      </p><div class="actions">
-        <a class="button" href={href('/contact')}>Start a conversation <Icon /></a><a
-          class="text-link"
-          href={href('/case-studies')}>See our work <Icon name="right" /></a>
-      </div><p class="hero-location">Based in Monroe, Louisiana. Built around your business.</p>
+  <section class="hero-stage">
+    <div class="hero wrap">
+      <div class="hero-copy">
+        <h1>Make the next<br class="desktop-break" /> move <span>count.</span></h1><p class="lead">
+          Marketing, websites and better ways of working. Built around what your business needs
+          next.
+        </p><div class="actions">
+          <a class="button" href={href('/contact')}>Start a conversation <Icon /></a><a
+            class="text-link"
+            href={href('/case-studies')}>See our work <Icon name="right" /></a
+          >
+        </div><p class="hero-location">Based in Monroe, Louisiana. Built around your business.</p>
+      </div>
+      <EditorialArt priority caption />
     </div>
-    <a class="hero-case" href={href('/case-studies/local-service-wrong-clicks')}
-      ><span class="case-category">From the work · Local search</span><h2>
-        Getting the right people to the right business.
-      </h2><p>
-        A closer look at wrong-fit search traffic, customer questions and the path to a useful
-        inquiry.
-      </p><span class="text-link">Read the case <Icon /></span></a
-    >
   </section>
+  <a class="proof-ribbon" href={href('/case-studies/local-service-wrong-clicks')}>
+    <span class="wrap proof-ribbon-inner"
+      ><span>From the work</span><strong>Getting the right people to the right business.</strong
+      ><span class="text-link">Read the case <Icon /></span></span
+    >
+  </a>
   <section class="section services-section" aria-labelledby="services-heading">
     <div class="wrap">
       <div class="section-heading">
@@ -35,25 +40,28 @@ import { href, asset, serviceGroups } from '../lib/site';
           You do not need every marketing service.<br class="desktop-break" /> You need the right work,
           done well.
         </p>
-      </div><div class="service-list">
-        {
-          serviceGroups.map((service) => (
-            <a class="service-row" href={href(service.path)}>
-              <>
-                <div>
-                  <>
-                    <h3>{service.title}</h3>
-                    <p class="service-detail">{service.detail}</p>
-                  </>
-                </div>
-                <p class="service-explanation">{service.text}</p>
-                <Icon />
-              </>
-            </a>
-          ))
-        }
+      </div><div class="service-showcase">
+        <EditorialArt kind="clear-path" /><div class="service-list">
+          {
+            serviceGroups.map((service) => (
+              <a class="service-row" href={href(service.path)}>
+                <>
+                  <div>
+                    <>
+                      <h3>{service.title}</h3>
+                      <p class="service-detail">{service.detail}</p>
+                    </>
+                  </div>
+                  <p class="service-explanation">{service.text}</p>
+                  <Icon />
+                </>
+              </a>
+            ))
+          }
+        </div>
       </div><a class="text-link section-link" href={href('/services')}
-        >Explore all services <Icon name="right" /></a>
+        >Explore all services <Icon name="right" /></a
+      >
     </div>
   </section>
   <section class="section work-section">
@@ -62,23 +70,29 @@ import { href, asset, serviceGroups } from '../lib/site';
         <h2>A closer look<br />at the work.</h2><div>
           <p>Specific problems. Practical interventions. A clear account of what changed.</p><a
             class="text-link"
-            href={href('/case-studies')}>View all work <Icon /></a>
+            href={href('/case-studies')}>View all work <Icon /></a
+          >
         </div>
       </div><div class="featured-work">
         <a class="work-feature" href={href('/case-studies/customer-questions-search-pages')}
-          ><div class="work-feature-top"><span>Search + content</span><Icon /></div><h3>
-            Turn customer questions into pages that help.
-          </h3><p>
-            Building useful search content around the questions people ask before they are ready to
-            make contact.
-          </p><span class="text-link">See the approach <Icon name="right" /></span></a
+          ><CaseCover path="customer-questions" /><div class="work-feature-body">
+            <div class="work-feature-top"><span>Search + content</span><Icon /></div><h3>
+              Turn customer questions into pages that help.
+            </h3><p>
+              Building useful search content around the questions people ask before they are ready
+              to make contact.
+            </p><span class="text-link">See the approach <Icon name="right" /></span>
+          </div></a
         ><a class="work-feature light" href={href('/case-studies/local-proof-online')}
-          ><div class="work-feature-top"><span>Scope + operations</span><Icon /></div><h3>
-            A clearer scope.<br />A more workable plan.
-          </h3><p>
-            How a narrower first phase changed an estimated 60 hours of work to 30. A scope
-            decision, not a claim of realized savings.
-          </p><span class="text-link">Read the case <Icon name="right" /></span></a>
+          ><CaseCover path="local-proof-online" /><div class="work-feature-body">
+            <div class="work-feature-top"><span>Scope + operations</span><Icon /></div><h3>
+              A clearer scope.<br />A more workable plan.
+            </h3><p>
+              How a narrower first phase changed an estimated 60 hours of work to 30. A scope
+              decision, not a claim of realized savings.
+            </p><span class="text-link">Read the case <Icon name="right" /></span>
+          </div></a
+        >
       </div>
     </div>
   </section>
@@ -110,15 +124,17 @@ import { href, asset, serviceGroups } from '../lib/site';
   </section>
   <section class="section people-section">
     <div class="wrap people-grid">
-      <img
-        src={asset('/images/john-dye-420.webp')}
-        srcset={`${asset('/images/john-dye-420.webp')} 420w, ${asset('/images/john-dye.webp')} 834w`}
-        sizes="(min-width: 900px) 360px, 280px"
-        width="420"
-        height="498"
-        alt="John Dye, Head of Strategy at Force Multiplier"
-        loading="lazy"
-      /><div>
+      <div class="people-portrait">
+        <img
+          src={asset('/images/john-dye-420.webp')}
+          srcset={`${asset('/images/john-dye-420.webp')} 420w, ${asset('/images/john-dye.webp')} 834w`}
+          sizes="(min-width: 900px) 360px, 280px"
+          width="420"
+          height="498"
+          alt="John Dye, Head of Strategy at Force Multiplier"
+          loading="lazy"
+        />
+      </div><div>
         <h2>Strategy stays close<br />to the work.</h2><p class="lead">
           Force Multiplier connects direction with delivery.
         </p><p>
@@ -127,8 +143,27 @@ import { href, asset, serviceGroups } from '../lib/site';
           search campaign or the process behind the follow-up.
         </p><p class="person-signature"><strong>John Dye</strong><span>Head of Strategy</span></p><a
           class="text-link"
-          href={href('/about')}>Meet Force Multiplier <Icon /></a>
+          href={href('/about')}>Meet Force Multiplier <Icon /></a
+        >
       </div>
+    </div>
+  </section>
+  <section class="studio-section">
+    <div class="studio-image">
+      <img
+        src={asset('/images/fm-studio-960.webp')}
+        srcset={`${asset('/images/fm-studio-640.webp')} 640w, ${asset('/images/fm-studio-960.webp')} 960w`}
+        sizes="(min-width: 900px) 60vw, 100vw"
+        width="960"
+        height="540"
+        loading="lazy"
+        alt="Force Multiplier workspace with a blue sofa, yellow chair, artwork and the Force Multiplier wall sign"
+      />
+    </div>
+    <div class="studio-copy">
+      <h2>Local roots.<br />A wider view.</h2><p>
+        Based in Monroe, Louisiana. Working wherever the work takes us.
+      </p><a class="text-link" href={href('/about')}>Meet Force Multiplier <Icon /></a>
     </div>
   </section>
   <CallToAction />

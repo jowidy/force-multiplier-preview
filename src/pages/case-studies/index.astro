@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import SiteLayout from '../../layouts/SiteLayout.astro';
 import Icon from '../../components/Icon.astro';
 import CallToAction from '../../components/CallToAction.astro';
+import CaseCover from '../../components/CaseCover.astro';
 import { href } from '../../lib/site';
 const cases = (await getCollection('entries', (e) => !e.data.draft && e.data.kind === 'case')).sort(
   (a, b) => a.data.order - b.data.order,
@@ -28,12 +29,15 @@ const cases = (await getCollection('entries', (e) => !e.data.draft && e.data.kin
         cases.map((entry, index) => (
           <a class:list={['case-card', index % 3 === 0 && 'blue']} href={href(entry.data.path)}>
             <>
-              <span class="case-category">{entry.data.category}</span>
-              <h2>{entry.data.title}</h2>
-              <p>{entry.data.description}</p>
-              <span class="text-link">
-                Read the case <Icon />
-              </span>
+              <CaseCover path={entry.data.path} />
+              <div class="case-card-body">
+                <span class="case-category">{entry.data.category}</span>
+                <h2>{entry.data.title}</h2>
+                <p>{entry.data.description}</p>
+                <span class="text-link">
+                  Read the case <Icon />
+                </span>
+              </div>
             </>
           </a>
         ))

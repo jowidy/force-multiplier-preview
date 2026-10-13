@@ -38,6 +38,118 @@
           "sha256": "2a93f859c64478dea03623ad8ee2944db13a6dcc57e29ef5ba542b98a33c0fbf"
         }
       ]
+    },
+    {
+      "id": "fm-studio",
+      "type": "photograph",
+      "subject": "Force Multiplier branded office interior",
+      "caption": "A Force Multiplier workspace",
+      "sourcePage": null,
+      "sourceUrl": null,
+      "preparedAt": "2026-10-13T17:27:15.225448+00:00",
+      "rightsBasis": "Existing photograph from the local Force Multiplier Branding master package, reused for the same organization under user authorization. Public-site image match, photographer and separate transferable license are not established.",
+      "provenanceNote": "Original filename: 20241230_152823.jpg. No embedded capture date. Used as decorative brand-space imagery; no current-address or current-office claim.",
+      "sourceFile": {
+        "path": "sources/brand/fm-studio-original.jpg",
+        "format": "JPEG",
+        "width": 1652,
+        "height": 929,
+        "bytes": 328092,
+        "sha256": "e2f3697fdcf50deb64c3ef052cd4bdef581e463537a5a6dd9316e66a1635ada2"
+      },
+      "processing": "RGB conversion, proportional downsampling and WebP encoding. No generative editing, retouching or crop. Source original preserved in ignored sources folder.",
+      "variants": [
+        {
+          "path": "/images/fm-studio-960.webp",
+          "format": "WEBP",
+          "width": 960,
+          "height": 540,
+          "bytes": 69506,
+          "sha256": "eb46c63300dd67e6d67af5c1179fa26426fc3e68533a4ad0627ab6e4550b5555"
+        },
+        {
+          "path": "/images/fm-studio-640.webp",
+          "format": "WEBP",
+          "width": 640,
+          "height": 360,
+          "bytes": 35438,
+          "sha256": "ca5344c5ea75cfb89d80109c20b39ee4eb97c6265d9a42cf0b996e6b831a40c0"
+        }
+      ]
+    },
+    {
+      "id": "connected-work",
+      "type": "generated-illustration",
+      "subject": "Coordinated creative work for local businesses",
+      "generatedDate": "2026-10-13",
+      "generationTool": "built-in image_gen",
+      "prompt": "Use case: illustration-story. Asset: original editorial hero artwork for Force Multiplier, a marketing and operations firm. Create a striking, sophisticated mixed-media cut-paper and screen-print illustration, landscape 3:2, suitable as the entire right half of a bold blue website hero. Subject: a small local business connecting with its customers through coordinated creative work. A beautifully drawn warm ivory storefront with coral awning, a large simplified blue browser page with bold typographic blocks but NO readable text, a golden circular spotlight finding the storefront, and an elegantly winding coral ribbon joining the storefront, page and a small stack of working notes. The arrangement has a confident diagonal visual movement from lower left to upper right, open dimensional paper layers and tactile printed shadows, editorial magazine quality, not cute clipart. Palette tightly constrained to deep Force Multiplier blue #06529F, midnight navy #102B46, warm cream #FFF5E7, golden yellow #FFCA62 and coral #F47A5B. Deep rich blue edge-to-edge background with the subject large and immersive. No people, no hands, no brand names, no fake client work, no dashboards, no fake numerical results, no text, no logos, no watermarks. This is conceptual brand art, not a photograph or portfolio evidence. Sophisticated, energetic, warm, visually distinctive, clean silhouette legible on a phone. Fill the composition generously with imagery, not tiny isolated icons.",
+      "rightsBasis": "Original conceptual brand illustration generated for the Force Multiplier website under user authorization.",
+      "provenanceNote": "Conceptual brand art, not a photograph, client deliverable, portfolio evidence or performance result.",
+      "sourceFile": {
+        "path": "sources/artwork/connected-work.png",
+        "format": "PNG",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 2899229,
+        "sha256": "2aefba6d080aa660a7d33a13dd38e6d7ec2499df0b932da3cda9ce8714525b43"
+      },
+      "processing": "RGB conversion, proportional Lanczos downsampling and WebP encoding at quality 82. Exact generation prompt embedded in EXIF ImageDescription (tag 270). No semantic editing, retouching or crop. Original PNG preserved in ignored sources folder.",
+      "variants": [
+        {
+          "path": "/images/connected-work-960.webp",
+          "format": "WEBP",
+          "width": 960,
+          "height": 640,
+          "bytes": 89848,
+          "sha256": "d0fbddee82ad7923feee0de6cac38913a8dcb564ede220e4508f4b239d464525"
+        },
+        {
+          "path": "/images/connected-work-640.webp",
+          "format": "WEBP",
+          "width": 640,
+          "height": 427,
+          "bytes": 43460,
+          "sha256": "49b9cff792bf11d4ae94dd3452d59e3b3fcf5c4ff58122ce7744e98dfbd7ca3c"
+        }
+      ]
+    },
+    {
+      "id": "clear-path",
+      "type": "generated-illustration",
+      "subject": "Making complex work clear",
+      "generatedDate": "2026-10-13",
+      "generationTool": "built-in image_gen",
+      "prompt": "Use case: illustration-story. Asset: editorial illustration for a bespoke marketing agency's services and insights. Create a landscape 3:2 high-end tactile cut-paper/screen-print composition about making complex work clear. A long broad deep-blue paper ribbon enters from the lower left, folds into three clean connected directional pathways across the image and resolves into a large elegant warm-gold arrow at upper right. At the joins sit cream working pages with simple cobalt blocks and coral tabs, a precise deep-blue circular dial with no numbers, and a compact pair of ivory/coral paper layers suggesting a handoff. Make it feel like a crafted editorial magazine spread photographed in dimensional paper, with considered negative space, crisp graphic shapes, warm material texture and soft real dimensional shadows. It is expressive illustration, not literal workflow UI. Background is solid warm coral #F47A5B; colors restricted to Force Multiplier blue #06529F, navy #102B46, cream #FFF5E7, golden yellow #FFCA62. Large immersive interlocking composition, strong diagonal energy, confident visual intelligence, not childish, not corporate stock illustration, not glossy 3D toy. No words, letters, numbers, people, hands, logos, watermark or fake performance charts.",
+      "rightsBasis": "Original conceptual brand illustration generated for the Force Multiplier website under user authorization.",
+      "provenanceNote": "Conceptual brand art, not a photograph, client deliverable, portfolio evidence or performance result.",
+      "sourceFile": {
+        "path": "sources/artwork/clear-path.png",
+        "format": "PNG",
+        "width": 1536,
+        "height": 1024,
+        "bytes": 2182738,
+        "sha256": "b75c2ad1bcc1ccad211dd4cea2615c843f6bc906c8cc6e7b3580360274f86409"
+      },
+      "processing": "RGB conversion, proportional Lanczos downsampling and WebP encoding at quality 82. Exact generation prompt embedded in EXIF ImageDescription (tag 270). No semantic editing, retouching or crop. Original PNG preserved in ignored sources folder.",
+      "variants": [
+        {
+          "path": "/images/clear-path-960.webp",
+          "format": "WEBP",
+          "width": 960,
+          "height": 640,
+          "bytes": 25398,
+          "sha256": "810ad9b452b569cdd4b4e636f004e1ea29d759834b0fe4b0104461060558f1db"
+        },
+        {
+          "path": "/images/clear-path-640.webp",
+          "format": "WEBP",
+          "width": 640,
+          "height": 427,
+          "bytes": 14844,
+          "sha256": "22712c4d2026513021558fbb2e5fdd213f0de9860290c67423e2acd869b485d8"
+        }
+      ]
     }
   ]
 }

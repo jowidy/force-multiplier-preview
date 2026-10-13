@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import Icon from '../components/Icon.astro';
 import CallToAction from '../components/CallToAction.astro';
+import EditorialArt from '../components/EditorialArt.astro';
 import { href } from '../lib/site';
 const articles = (
   await getCollection('entries', (e) => !e.data.draft && e.data.kind === 'article')
@@ -24,9 +25,12 @@ const articles = (
       articles.map((article) => (
         <a class="article-row" href={href(article.data.path)}>
           <>
-            <span class="article-category">{article.data.category}</span>
+            <EditorialArt
+              kind={article.data.path.includes('lead-generation') ? 'connected-work' : 'clear-path'}
+            />
             <div>
               <>
+                <span class="article-category">{article.data.category}</span>
                 <h2>{article.data.title}</h2>
                 <p>{article.data.description}</p>
               </>

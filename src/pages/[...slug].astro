@@ -3,6 +3,8 @@ import { getCollection, render, type CollectionEntry } from 'astro:content';
 import SiteLayout from '../layouts/SiteLayout.astro';
 import Icon from '../components/Icon.astro';
 import CallToAction from '../components/CallToAction.astro';
+import EditorialArt from '../components/EditorialArt.astro';
+import CaseCover from '../components/CaseCover.astro';
 import { href } from '../lib/site';
 export async function getStaticPaths() {
   return (await getCollection('entries', (e) => !e.data.draft)).map((entry) => ({
@@ -38,6 +40,22 @@ const parent =
   </section>
   <div class="wrap detail-grid section-bottom">
     <article class="prose">
+      <div class="detail-art">
+        {
+          d.kind === 'case' ? (
+            <CaseCover path={d.path} />
+          ) : (
+            <EditorialArt
+              kind={
+                d.path.includes('seo') || d.path.includes('lead') || d.path.includes('website')
+                  ? 'connected-work'
+                  : 'clear-path'
+              }
+              caption
+            />
+          )
+        }
+      </div>
       <Content />{
         d.takeaway && (
           <div class="takeaway">
@@ -66,7 +84,8 @@ const parent =
       </nav><div class="aside-contact">
         <h2>Make it practical.</h2><p>Tell us how this shows up in your business.</p><a
           class="text-link"
-          href={href('/contact')}>Start a conversation <Icon /></a>
+          href={href('/contact')}>Start a conversation <Icon /></a
+        >
       </div>
     </aside>
   </div>

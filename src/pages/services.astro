@@ -2,6 +2,7 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import Icon from '../components/Icon.astro';
 import CallToAction from '../components/CallToAction.astro';
+import EditorialArt from '../components/EditorialArt.astro';
 import { href, serviceGroups } from '../lib/site';
 ---
 
@@ -10,11 +11,13 @@ import { href, serviceGroups } from '../lib/site';
   description="Local search, Google Ads, websites, messaging, marketing operations and strategy. Find the right kind of support for the work ahead."
   path="/services"
 >
-  <section class="page-intro wrap">
-    <h1>The right help<br />for the next step.</h1><p class="lead">
-      Start with the problem in front of you. We can help work out which combination of marketing,
-      strategy and delivery support will make a difference.
-    </p>
+  <section class="page-intro wrap illustrated-intro">
+    <div>
+      <h1>The right help<br />for the next step.</h1><p class="lead">
+        Start with the problem in front of you. We can help work out which combination of marketing,
+        strategy and delivery support will make a difference.
+      </p>
+    </div><EditorialArt kind="clear-path" priority />
   </section>
   <section class="wrap section-bottom">
     <div class="service-list service-list-full">
@@ -73,7 +76,8 @@ import { href, serviceGroups } from '../lib/site';
           We scope the work around the business. Any advertising spend is separate and agreed before
           a campaign goes live.
         </p><a class="text-link" href={href('/case-studies')}
-          >See how that looks in practice <Icon /></a>
+          >See how that looks in practice <Icon /></a
+        >
       </div>
     </div>
   </section>
