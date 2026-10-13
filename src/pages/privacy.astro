@@ -68,10 +68,41 @@ import { hasServerForm, isProduction, site } from '../lib/site';
           </p>
         )
       }
-      <h2>Analytics and cookies</h2><p>
-        This website does not install advertising trackers, analytics scripts or website cookies. It
-        does not save inquiry fields in browser storage. Your browser, email app and other services
-        you choose to use have their own settings and behavior.
+      <h2>Analytics and cookies</h2>
+      {
+        isProduction ? (
+          <>
+            <p>
+              If you accept analytics, this website loads Google Analytics 4 through Google Tag
+              Manager to help us understand website use, including page views, navigation, form
+              interactions and contact and service link clicks. Google Analytics uses cookies and
+              processes information such as pages visited, referral sources, and browser and device
+              details. See <a href="https://policies.google.com/privacy">Google’s privacy policy</a>{' '}
+              for how Google handles this information.
+            </p>
+            <p>
+              Analytics stays off until you accept. Choose No thanks to keep it off, or use
+              Analytics settings in the footer to change your choice. We save your choice in your
+              browser’s local storage. If that storage is unavailable, your choice applies to the
+              current page and you may need to choose again on another page or visit.
+            </p>
+            <p>
+              Turning analytics off after accepting reloads the page to stop the loaded analytics
+              code. This does not delete information already collected or remove existing Google
+              Analytics cookies. You can manage stored cookies through your browser’s settings. The
+              website and inquiry form work without analytics.
+            </p>
+          </>
+        ) : (
+          <p>
+            This {hasServerForm ? 'staging website' : 'preview'} does not install advertising
+            trackers, analytics scripts or website cookies.
+          </p>
+        )
+      }
+      <p>
+        This website does not save inquiry fields in browser storage. Your browser, email app and
+        other services you choose to use have their own settings and behavior.
       </p><h2>Questions or requests</h2><p>
         Contact <a href={`mailto:${site.email}`}>{site.email}</a> with questions about information you
         have shared with Force Multiplier, or to request a correction or deletion.

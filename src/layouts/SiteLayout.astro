@@ -3,6 +3,7 @@ import '../styles/global.css';
 import '../styles/visual.css';
 import { asset, href, canonical, nav, site, isProduction, buildTarget } from '../lib/site';
 import Icon from '../components/Icon.astro';
+import AnalyticsConsent from '../components/AnalyticsConsent.astro';
 interface Props {
   title: string;
   description: string;
@@ -150,6 +151,26 @@ const structuredData = {
         <span>© {new Date().getFullYear()} Force Multiplier</span><a href={href('/privacy')}
           >Privacy</a
         >{
+          isProduction && (
+            <div class="analytics-settings-wrap">
+              <button
+                id="analytics-settings"
+                class="analytics-settings"
+                type="button"
+                aria-controls="analytics-consent"
+                aria-expanded="false"
+                hidden
+              >
+                Analytics settings
+              </button>
+              <span
+                id="analytics-choice-status"
+                class="analytics-choice-status"
+                aria-live="polite"
+              />
+            </div>
+          )
+        }{
           !isProduction && (
             <span class="review-label">
               {buildTarget === 'preview'
@@ -160,6 +181,7 @@ const structuredData = {
         }
       </div>
     </footer>
+    {isProduction && <AnalyticsConsent />}
     <script>
       const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
       const nav = document.querySelector<HTMLElement>('#site-navigation');
@@ -192,3 +214,25 @@ const structuredData = {
     </script>
   </body>
 </html>
+
+<style>
+  .analytics-settings {
+    min-height: 44px;
+    padding: 0.25rem 0;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    text-decoration: underline;
+    cursor: pointer;
+  }
+  .analytics-settings[hidden] {
+    display: none;
+  }
+  .analytics-choice-status {
+    display: block;
+    max-width: 28rem;
+    font-size: 0.75rem;
+    line-height: 1.6;
+  }
+</style>

@@ -50,7 +50,19 @@ Test both the host-provided staging address and the primary domain. Verify the r
 
 Preserve existing email and domain records. Record the exact old web-routing values and keep the Squarespace service available through stabilization. Verify HTTPS, routes, form receipt, analytics and email before any subscription cancellation. This repository does not automatically change production DNS or billing.
 
-The current build does not install analytics or advertising scripts. Reconcile the existing site's tracking container, account access, event behavior and visitor privacy choices before adding tracking. Missing tracking verification is an open migration item.
+## Production analytics
+
+Only production HTML includes the analytics choice notice and footer settings control. Preview and staging output contain no analytics loader or consent interface. The website and inquiry form work without analytics, including when JavaScript is disabled.
+
+The existing Google Tag Manager container is `GTM-MNZSRTLV`, with Google Analytics 4 tag `G-V06S26HMNK`. The authenticated container review found the Google tag and `contact_click` and `service_cta_click` tags. Production loads the container only after an explicit acceptance, or a saved acceptance from an earlier page. There is no noscript tracker. The site's loader adds only GTM's initialization event; it does not send inquiry values or add lead events. Container configuration can change independently of this repository, so review published tags before changing tracking behavior.
+
+Google Analytics measures website use, including page views, navigation and configured link interactions, using cookies and technical information such as referral sources, browser and device details. The verified GA4 stream also enables enhanced measurement for scrolls, outbound clicks, site search, video engagement, file downloads and form interactions. An automatic `form_submit` event is not proof of retained inquiry delivery or a verified conversion. The production privacy page describes website-use and form-interaction analytics and links to [Google’s privacy policy](https://policies.google.com/privacy). This documentation describes the implementation; it makes no legal compliance claim.
+
+The local-storage key `fm-analytics-choice` stores only `yes` or `no`. Both notice choices have equal visual treatment. Analytics settings in the footer reopens the notice. Declining after analytics has loaded saves `no` and reloads the page to stop the loaded code. An accepted page also checks for a later saved decline on a cross-tab storage event and when restored from the browser's back/forward cache. It does not delete historical analytics data or remove existing Google Analytics cookies.
+
+Storage access is guarded. If storage is unavailable, the choice remains in memory for the current page and the interface explains that it may need repeating on another page or visit. When a decline cannot be saved after analytics has already loaded, the reload carries a single deny-only `fm_analytics=no` URL parameter. The next page consumes and removes that parameter before reading stored consent, so an old saved `yes` cannot restart analytics on that reload. A blocked URL cleanup retains the deny-only parameter. No inquiry content is put into storage or the URL.
+
+Run `pnpm test` for the consent state, storage failure and loader checks. The output verifier checks that the consent runtime and fixed container occur only in production, with no eager Google script or iframe. Verify the deployed production behavior and existing click events after consent before treating analytics carryover as confirmed; generated HTML alone does not prove receipt in Google Analytics.
 
 ## Repository boundary
 

@@ -102,6 +102,13 @@ for (const file of files) {
   if (/\.(?:html|css|js|json|xml|txt|svg)$/i.test(rel)) {
     const text = await fs.readFile(file, 'utf8');
     textFiles.set(rel, text);
+    const analyticsMarker =
+      /(?:googletagmanager\.com|google-analytics\.com|GTM-[A-Z0-9]+|fm-analytics-choice|analytics-consent-runtime)/i;
+    if (!isProduction)
+      check(!analyticsMarker.test(text), `${rel}: analytics shipped in ${buildTarget} output`);
+    else
+      for (const match of text.matchAll(/\bGTM-[A-Z0-9]+\b/g))
+        check(match[0] === 'GTM-MNZSRTLV', `${rel}: unexpected GTM container ${match[0]}`);
     check(
       !/(?:C:[\\/]Users[\\/][^\\/\s]+|C:[\\/]Vaults|machine-identity[\\/]|Knowledge Vault)/i.test(
         text,
@@ -256,6 +263,7 @@ for (const [file, $] of documents) {
   visibleBody.find('script, style, template').remove();
   check(!visibleBody.text().includes('\u2014'), `${file}: authored em dash in visible HTML`);
   const visibleText = normalizeText($('main').text());
+  verifyAnalytics($, file, route, visibleText);
   check(
     !/\b(?:TODO|TBD|lorem ipsum)\b/i.test(visibleText),
     `${file}: unfinished placeholder in visible content`,
@@ -323,6 +331,64 @@ for (const [file, $] of documents) {
     );
   });
   if (route === '/contact') verifyContact($, file, visibleText);
+}
+
+function verifyAnalytics($, file, route, visibleText) {
+  const runtime = $('#analytics-consent-runtime');
+  const notice = $('#analytics-consent');
+  const settings = $('#analytics-settings');
+  if (!isProduction) {
+    check(
+      !runtime.length && !notice.length && !settings.length,
+      `${file}: analytics interface shipped in ${buildTarget}`,
+    );
+    return;
+  }
+  check(
+    runtime.length === 1 && runtime.attr('type') === 'module' && !runtime.attr('src'),
+    `${file}: expected one inline consent runtime`,
+  );
+  check(
+    runtime.text().includes("GOOGLE_TAG_MANAGER_ID = 'GTM-MNZSRTLV'"),
+    `${file}: consent runtime lacks the verified GTM container`,
+  );
+  check(
+    notice.length === 1 && notice.attr('hidden') !== undefined,
+    `${file}: analytics notice must initialize hidden until choices are read`,
+  );
+  check(
+    settings.length === 1 && settings.attr('aria-controls') === 'analytics-consent',
+    `${file}: missing analytics settings control`,
+  );
+  for (const id of ['analytics-accept', 'analytics-decline'])
+    check(
+      notice.find(`button#${id}[type="button"]`).length === 1,
+      `${file}: missing explicit analytics choice ${id}`,
+    );
+  // A consent runtime may contain a loader URL, but no request-bearing element
+  // may contact Google before the visitor's saved or current acceptance.
+  const markup = load($.html(), { scriptingEnabled: false });
+  markup('[src], [href]').each((_, element) => {
+    const url = markup(element).attr('src') || markup(element).attr('href') || '';
+    check(
+      !/(?:googletagmanager\.com|google-analytics\.com)/i.test(url),
+      `${file}: eager analytics request before consent: ${url}`,
+    );
+  });
+  if (route === '/privacy') {
+    check(
+      $('a[href="https://policies.google.com/privacy"]').length === 1,
+      `${file}: missing Google privacy reference`,
+    );
+    check(
+      /Analytics stays off until you accept/.test(visibleText),
+      `${file}: missing analytics choice disclosure`,
+    );
+    check(
+      !/does not install advertising trackers, analytics scripts/.test(visibleText),
+      `${file}: stale no-analytics claim in production`,
+    );
+  }
 }
 
 function verifyContact($, file, visibleText) {
@@ -582,6 +648,7 @@ const summary = {
   draftsChecked: draftCount,
   localReferencesChecked: checkedLinks.size,
   deployableFiles: files.length,
+  analytics: isProduction ? 'consent-gated GTM-MNZSRTLV' : 'absent',
   failures: failures.size,
 };
 console.log(JSON.stringify(summary, null, 2));
