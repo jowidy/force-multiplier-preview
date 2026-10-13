@@ -1,0 +1,25 @@
+{
+  "name": "force-multiplier-website",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@11.25.0",
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1",
+    "check": "astro check",
+    "build": "astro build",
+    "preview": "astro preview --host 127.0.0.1",
+    "test:output": "node scripts/verify-output.mjs"
+  },
+  "dependencies": {
+    "@phosphor-icons/core": "2.1.1",
+    "astro": "7.3.8"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.9",
+    "cheerio": "1.1.2",
+    "prettier": "3.6.2",
+    "prettier-plugin-astro": "0.14.1",
+    "typescript": "5.9.3"
+  }
+}

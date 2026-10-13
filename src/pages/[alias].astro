@@ -1,0 +1,40 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Icon from '../components/Icon.astro';
+import { href } from '../lib/site';
+export function getStaticPaths() {
+  return [
+    { alias: 'home', target: '/', label: 'homepage' },
+    { alias: 'start', target: '/contact', label: 'contact page' },
+    { alias: 'appointments', target: '/contact', label: 'contact page' },
+    { alias: 'smb-home', target: '/', label: 'homepage' },
+    { alias: 'legacy-start-archive-2026-09-03', target: '/', label: 'homepage' },
+  ].map(({ alias, ...props }) => ({ params: { alias }, props }));
+}
+interface Props {
+  target: string;
+  label: string;
+}
+const { target, label } = Astro.props;
+---
+
+<SiteLayout
+  title="Continue to Force Multiplier"
+  description="This page has a new home in the Force Multiplier website preview."
+  path={target}
+>
+  <section class="wrap page-intro section-bottom alias-page">
+    <h1>A clearer place<br />to start.</h1><p class="lead">
+      This page is now part of our {label}. Continue to find what you need.
+    </p><a class="button alias-target" href={href(target)}>Continue to the {label} <Icon /></a>
+  </section>
+  <script>
+    const link = document.querySelector<HTMLAnchorElement>('.alias-target');
+    if (link) {
+      const target = new URL(link.href);
+      target.search = window.location.search;
+      target.hash = window.location.hash;
+      window.location.replace(target.href);
+    }
+  </script>
+</SiteLayout>

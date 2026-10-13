@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Icon from '../components/Icon.astro';
+import CallToAction from '../components/CallToAction.astro';
+import { href } from '../lib/site';
+const articles = (
+  await getCollection('entries', (e) => !e.data.draft && e.data.kind === 'article')
+).sort((a, b) => a.data.order - b.data.order);
+---
+
+<SiteLayout
+  title="Insights"
+  description="Practical guides to marketing operations, lead generation, CRM processes and responsible workflow automation."
+  path="/insights"
+>
+  <section class="page-intro wrap">
+    <h1>A clearer view<br />of the work.</h1><p class="lead">
+      Useful explanations for the decisions behind your marketing, tools and operations.
+    </p>
+  </section>
+  <section class="wrap section-bottom article-list">
+    {
+      articles.map((article) => (
+        <a class="article-row" href={href(article.data.path)}>
+          <>
+            <span class="article-category">{article.data.category}</span>
+            <div>
+              <>
+                <h2>{article.data.title}</h2>
+                <p>{article.data.description}</p>
+              </>
+            </div>
+            <Icon />
+          </>
+        </a>
+      ))
+    }
+  </section>
+  <CallToAction
+    title="Put an idea to work."
+    text="If something here describes the problem you are facing, tell us about it. We can help work out the next practical step."
+  />
+</SiteLayout>

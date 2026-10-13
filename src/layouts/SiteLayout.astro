@@ -1,0 +1,185 @@
+---
+import '../styles/global.css';
+import { asset, href, canonical, nav, site } from '../lib/site';
+import Icon from '../components/Icon.astro';
+interface Props {
+  title: string;
+  description: string;
+  path?: string;
+}
+const { title, description, path = '/' } = Astro.props;
+const pageTitle =
+  title === 'Force Multiplier'
+    ? 'Force Multiplier | Marketing, websites & operations'
+    : `${title} | Force Multiplier`;
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: site.name,
+  url: site.domain,
+  email: site.email,
+  logo: `${site.domain}/images/fm-wordmark-blue.png`,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '1220 N 18th St, Suite 200',
+    addressLocality: 'Monroe',
+    addressRegion: 'LA',
+    postalCode: '71201',
+    addressCountry: 'US',
+  },
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#06529f" />
+    <meta name="color-scheme" content="light" />
+    <link rel="canonical" href={canonical(path)} />
+    <link rel="icon" href={asset('/images/favicon.png')} type="image/png" />
+    <link
+      rel="preload"
+      href={asset('/fonts/poppins-regular.woff2')}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href={asset('/fonts/poppins-semibold.woff2')}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical(path)} />
+    <meta
+      property="og:image"
+      content={`https://jowidy.github.io${asset('/images/fm-wordmark-blue.png')}`}
+    />
+    <meta property="og:image:alt" content="Force Multiplier" />
+    <meta name="twitter:card" content="summary" />
+    <title>{pageTitle}</title>
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap header-inner">
+        <a class="brand" href={href('/')} aria-label="Force Multiplier home"
+          ><img
+            src={asset('/images/fm-wordmark-blue.png')}
+            width="563"
+            height="193"
+            alt="Force Multiplier"
+            fetchpriority="high"
+          /></a
+        >
+        <button
+          class="menu-toggle"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-navigation"><span>Menu</span><Icon name="menu" /></button
+        >
+        <nav id="site-navigation" class="site-navigation" aria-label="Main navigation">
+          {
+            nav.map(([label, url]) => (
+              <a
+                href={href(url)}
+                aria-current={
+                  path === url || (url === '/case-studies' && path.startsWith('/case-studies/'))
+                    ? 'page'
+                    : undefined
+                }
+              >
+                {label}
+              </a>
+            ))
+          }
+          <a
+            class="nav-contact"
+            href={href('/contact')}
+            aria-current={path === '/contact' ? 'page' : undefined}>Let’s talk <Icon /></a
+          >
+        </nav>
+      </div>
+    </header>
+    <main id="main" tabindex="-1"><slot /></main>
+    <footer class="site-footer">
+      <div class="wrap footer-grid">
+        <div class="footer-brand">
+          <a href={href('/')} aria-label="Force Multiplier home"
+            ><img
+              src={asset('/images/fm-wordmark-blue.png')}
+              width="563"
+              height="193"
+              alt="Force Multiplier"
+              loading="lazy"
+            /></a
+          ><p>Practical marketing.<br />A business that moves forward.</p><p class="small">
+            Based in Monroe, Louisiana.<br />Working wherever the work takes us.
+          </p>
+        </div>
+        <div>
+          <h2>Explore</h2><ul>
+            {
+              nav.map(([label, url]) => (
+                <li>
+                  <a href={href(url)}>{label}</a>
+                </li>
+              ))
+            }<li><a href={href('/contact')}>Contact</a></li>
+          </ul>
+        </div>
+        <div>
+          <h2>Start a conversation</h2><a class="footer-email" href={`mailto:${site.email}`}
+            >{site.email}</a
+          ><p><a href={`sms:${site.phone}`}>Text {site.displayPhone}</a></p><address>
+            {site.address}
+          </address><a class="text-link" href={href('/contact')}>Tell us what you need <Icon /></a>
+        </div>
+      </div>
+      <div class="wrap footer-bottom">
+        <span>© {new Date().getFullYear()} Force Multiplier</span><a href={href('/privacy')}
+          >Privacy</a
+        ><span class="review-label">Website review preview</span>
+      </div>
+    </footer>
+    <script>
+      const toggle = document.querySelector<HTMLButtonElement>('.menu-toggle');
+      const nav = document.querySelector<HTMLElement>('#site-navigation');
+      if (toggle && nav) {
+        const closeMenu = () => {
+          toggle.setAttribute('aria-expanded', 'false');
+          nav.classList.remove('is-open');
+        };
+        toggle.addEventListener('click', () => {
+          const open = toggle.getAttribute('aria-expanded') !== 'true';
+          toggle.setAttribute('aria-expanded', String(open));
+          nav.classList.toggle('is-open', open);
+        });
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+            closeMenu();
+            toggle.focus();
+          }
+        });
+        document.addEventListener('click', (event) => {
+          if (
+            event.target instanceof Node &&
+            !nav.contains(event.target) &&
+            !toggle.contains(event.target)
+          )
+            closeMenu();
+        });
+        matchMedia('(min-width: 900px)').addEventListener('change', closeMenu);
+      }
+    </script>
+  </body>
+</html>

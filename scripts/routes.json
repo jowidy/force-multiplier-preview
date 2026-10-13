@@ -1,0 +1,96 @@
+{
+  "schemaVersion": 1,
+  "previewOrigin": "https://jowidy.github.io",
+  "previewBase": "/force-multiplier-preview/",
+  "productionOrigin": "https://www.forcemultiplier.work",
+  "description": "Public URL mapping. Aliases are review pages on GitHub Pages, not verified HTTP redirects. Production migration still requires permanent redirects.",
+  "routes": [
+    { "path": "/", "target": "/", "origin": "existing" },
+    { "path": "/appointments", "target": "/contact", "origin": "existing" },
+    { "path": "/contact", "target": "/contact", "origin": "existing" },
+    { "path": "/about", "target": "/about", "origin": "existing" },
+    { "path": "/services", "target": "/services", "origin": "existing" },
+    { "path": "/legacy-start-archive-2026-09-03", "target": "/", "origin": "existing" },
+    {
+      "path": "/marketing-operations-consulting",
+      "target": "/marketing-operations-consulting",
+      "origin": "existing"
+    },
+    { "path": "/go-to-market-strategy", "target": "/go-to-market-strategy", "origin": "existing" },
+    {
+      "path": "/ai-workflow-automation",
+      "target": "/ai-workflow-automation",
+      "origin": "existing"
+    },
+    { "path": "/seo-lead-generation", "target": "/seo-lead-generation", "origin": "existing" },
+    {
+      "path": "/what-is-a-marketing-operations-firm",
+      "target": "/what-is-a-marketing-operations-firm",
+      "origin": "existing"
+    },
+    {
+      "path": "/lead-generation-operating-system",
+      "target": "/lead-generation-operating-system",
+      "origin": "existing"
+    },
+    { "path": "/insights", "target": "/insights", "origin": "existing" },
+    { "path": "/crm-process-diagnosis", "target": "/crm-process-diagnosis", "origin": "existing" },
+    {
+      "path": "/ai-workflow-automation-guide",
+      "target": "/ai-workflow-automation-guide",
+      "origin": "existing"
+    },
+    { "path": "/smb-home", "target": "/", "origin": "existing" },
+    {
+      "path": "/seo-google-ads-local-business",
+      "target": "/seo-google-ads-local-business",
+      "origin": "existing"
+    },
+    {
+      "path": "/dumpster-rental-marketing",
+      "target": "/dumpster-rental-marketing",
+      "origin": "existing"
+    },
+    {
+      "path": "/woodworking-business-marketing",
+      "target": "/woodworking-business-marketing",
+      "origin": "existing"
+    },
+    { "path": "/case-studies", "target": "/case-studies", "origin": "existing" },
+    {
+      "path": "/case-studies/local-service-wrong-clicks",
+      "target": "/case-studies/local-service-wrong-clicks",
+      "origin": "existing"
+    },
+    {
+      "path": "/case-studies/customer-questions-search-pages",
+      "target": "/case-studies/customer-questions-search-pages",
+      "origin": "existing"
+    },
+    {
+      "path": "/case-studies/local-proof-online",
+      "target": "/case-studies/local-proof-online",
+      "origin": "existing"
+    },
+    {
+      "path": "/case-studies/local-leads-without-extra-work",
+      "target": "/case-studies/local-leads-without-extra-work",
+      "origin": "existing"
+    },
+    {
+      "path": "/case-studies/local-search-foundation",
+      "target": "/case-studies/local-search-foundation",
+      "origin": "existing"
+    },
+    {
+      "path": "/case-studies/clear-offer-better-inquiries",
+      "target": "/case-studies/clear-offer-better-inquiries",
+      "origin": "existing"
+    },
+    { "path": "/home", "target": "/", "origin": "existing" },
+    { "path": "/start", "target": "/contact", "origin": "existing" },
+    { "path": "/websites-and-messaging", "target": "/websites-and-messaging", "origin": "new" },
+    { "path": "/privacy", "target": "/privacy", "origin": "new" },
+    { "path": "/404", "target": "/404", "origin": "new" }
+  ]
+}

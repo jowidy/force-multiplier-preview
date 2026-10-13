@@ -1,0 +1,19 @@
+---
+import { href } from '../lib/site';
+import Icon from './Icon.astro';
+interface Props {
+  title?: string;
+  text?: string;
+}
+const {
+  title = 'What feels stuck right now?',
+  text = 'A short note is enough. Tell us what you do, what you are trying to change, and where you could use a hand.',
+} = Astro.props;
+---
+
+<section class="contact-band">
+  <div class="wrap contact-band-inner">
+    <div><h2>{title}</h2><p>{text}</p></div>
+    <a class="button button-white" href={href('/contact')}>Start a conversation <Icon /></a>
+  </div>
+</section>

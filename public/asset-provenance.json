@@ -1,0 +1,43 @@
+{
+  "schemaVersion": 1,
+  "preparedDate": "2026-10-13",
+  "assets": [
+    {
+      "id": "john-dye-portrait",
+      "type": "photograph",
+      "subject": "John Dye",
+      "caption": "John Dye, Head of Strategy at Force Multiplier",
+      "sourcePage": "https://www.forcemultiplier.work/about",
+      "sourceUrl": "https://images.squarespace-cdn.com/content/v1/6720eeb98284d02354928145/5ac387f7-71c1-42c2-b9e8-37905f7322bb/johndye.jpg",
+      "retrievedAt": "2026-10-13T16:22:14.708328+00:00",
+      "rightsBasis": "Existing portrait publicly used by Force Multiplier, reused for the same organization under user authorization. Photographer and a separate transferable license are not established.",
+      "sourceFile": {
+        "path": "/images/john-dye-original.jpg",
+        "format": "JPEG",
+        "width": 834,
+        "height": 989,
+        "bytes": 102050,
+        "sha256": "bd7fbf720661b1802eac0be69bd35f761a814fe34b349bd24d6b95b63222ae22"
+      },
+      "processing": "EXIF orientation normalization, RGB conversion, proportional downsampling for smaller variant, WebP encoding. No generative editing, retouching or crop.",
+      "variants": [
+        {
+          "path": "/images/john-dye.webp",
+          "format": "WebP",
+          "width": 834,
+          "height": 989,
+          "bytes": 63576,
+          "sha256": "ee7fe00ed7e7f53c6f20ebdc20fe9c7e6d8d7ec218db502b3fa13d92019f1974"
+        },
+        {
+          "path": "/images/john-dye-420.webp",
+          "format": "WebP",
+          "width": 420,
+          "height": 498,
+          "bytes": 26704,
+          "sha256": "2a93f859c64478dea03623ad8ee2944db13a6dcc57e29ef5ba542b98a33c0fbf"
+        }
+      ]
+    }
+  ]
+}

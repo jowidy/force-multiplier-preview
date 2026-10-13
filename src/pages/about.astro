@@ -1,0 +1,59 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import CallToAction from '../components/CallToAction.astro';
+import Icon from '../components/Icon.astro';
+import { asset, href } from '../lib/site';
+---
+
+<SiteLayout
+  title="About"
+  description="Meet Force Multiplier, a Monroe, Louisiana marketing and operations consultancy connecting strategy with delivery. John Dye serves as Head of Strategy."
+  path="/about"
+>
+  <section class="page-intro wrap">
+    <h1>Close to the business.<br />Close to the work.</h1><p class="lead">
+      Force Multiplier is a marketing and operations consultancy for businesses and teams that need
+      a useful direction and help carrying it through.
+    </p>
+  </section>
+  <section class="wrap about-person section-bottom">
+    <img
+      src={asset('/images/john-dye.webp')}
+      srcset={`${asset('/images/john-dye-420.webp')} 420w, ${asset('/images/john-dye.webp')} 834w`}
+      sizes="(min-width: 900px) 440px, 100vw"
+      width="834"
+      height="989"
+      alt="John Dye, Head of Strategy at Force Multiplier"
+      fetchpriority="high"
+    /><div>
+      <h2>John Dye</h2><p class="role">Head of Strategy</p><div class="prose">
+        <p>
+          A plan earns its value in the work that follows. Force Multiplier operates where strategy
+          meets execution, helping connect the offer, the marketing and the systems behind delivery.
+        </p><p>
+          Our experience spans B2B, real estate, consumer and service businesses, and nonprofit
+          operations. The problem may be a local business that needs better visibility, or a larger
+          team with a complicated launch and too many disconnected pieces.
+        </p><p>
+          We begin by understanding the business, the people involved and the constraints. Then we
+          agree on the work, the responsibilities and a practical way to review progress.
+        </p>
+      </div><a class="button" href={href('/contact')}>Start a conversation <Icon /></a>
+    </div>
+  </section>
+  <section class="section ink-section">
+    <div class="wrap split-grid">
+      <h2>A partner in<br />getting it done.</h2><div class="prose">
+        <p>
+          Support can include strategy, campaigns, websites, content, systems and day-to-day
+          marketing operations. Where the engagement calls for it, we work within the client's
+          existing workflows and help own the implementation.
+        </p><p>
+          Based in Monroe, Louisiana, we care about making good work understandable and easier to
+          find. The approach stays practical whether the team is local or distributed.
+        </p><a class="text-link" href={href('/case-studies')}>Look at the work <Icon /></a>
+      </div>
+    </div>
+  </section>
+  <CallToAction />
+</SiteLayout>

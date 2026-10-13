@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content';
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import Icon from '../../components/Icon.astro';
+import CallToAction from '../../components/CallToAction.astro';
+import { href } from '../../lib/site';
+const cases = (await getCollection('entries', (e) => !e.data.draft && e.data.kind === 'case')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<SiteLayout
+  title="Our work"
+  description="Explore how Force Multiplier approaches local search, useful content, clearer offers and more workable delivery. Six practical case studies."
+  path="/case-studies"
+>
+  <section class="page-intro wrap">
+    <h1>The work,<br />up close.</h1><p class="lead">
+      The problem, the decisions and what the evidence supports. These cases show how we approach
+      the details that make marketing work.
+    </p><p class="intro-note">
+      Client names are withheld. Some cases describe different parts of the same engagement.
+    </p>
+  </section>
+  <section class="wrap section-bottom">
+    <div class="case-grid">
+      {
+        cases.map((entry, index) => (
+          <a class:list={['case-card', index % 3 === 0 && 'blue']} href={href(entry.data.path)}>
+            <>
+              <span class="case-category">{entry.data.category}</span>
+              <h2>{entry.data.title}</h2>
+              <p>{entry.data.description}</p>
+              <span class="text-link">
+                Read the case <Icon />
+              </span>
+            </>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+  <section class="section pale-section">
+    <div class="wrap split-grid">
+      <h2>Proof should<br />be useful.</h2><div class="prose">
+        <p>
+          We distinguish work completed from outcomes measured. Where a case describes an estimate,
+          a recommendation or an implementation decision, we say so.
+        </p><p>
+          That helps you judge the approach and understand what would need to be measured in your
+          own business.
+        </p>
+      </div>
+    </div>
+  </section>
+  <CallToAction
+    title="Have a similar problem?"
+    text="Tell us what your customers need and where the current process is falling short. We can start there."
+  />
+</SiteLayout>

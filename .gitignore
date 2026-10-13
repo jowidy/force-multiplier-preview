@@ -1,0 +1,17 @@
+node_modules/
+dist/
+.astro/
+.env
+.env.*
+!.env.example
+sources/
+design/
+docs/
+PRODUCT.md
+DESIGN.md
+design-qa.md
+.impeccable/
+qa/
+*.log
+Thumbs.db
+.DS_Store
