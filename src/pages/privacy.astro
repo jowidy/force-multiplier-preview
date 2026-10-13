@@ -1,43 +1,80 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import { site } from '../lib/site';
+import { hasServerForm, isProduction, site } from '../lib/site';
 ---
 
 <SiteLayout
   title="Privacy"
-  description="How the Force Multiplier review website handles contact information, hosting and local interaction data."
+  description="How the Force Multiplier website handles inquiries, hosting and website data."
   path="/privacy"
 >
   <section class="page-intro wrap">
     <h1>Your information,<br />handled plainly.</h1><p class="lead">
-      This page describes the GitHub-hosted website review preview.
+      {
+        hasServerForm
+          ? `This page describes the Force Multiplier ${isProduction ? 'website' : 'staging website'} and its inquiry form.`
+          : 'This page describes the GitHub-hosted website review preview.'
+      }
     </p>
   </section>
   <section class="wrap section-bottom">
     <div class="prose privacy-copy">
-      <h2>Contact information</h2><p>
-        The contact page creates an email draft on your device or lets you copy your inquiry. It
-        does not submit the form fields to a website backend. Sending the draft through your email
-        app shares that message with Force Multiplier and the email providers involved.
-      </p><p>
-        Please avoid sending sensitive personal information in an initial inquiry. If you contact
-        us, we use the information you provide to understand and respond to your request.
-      </p><h2>Website hosting</h2><p>
-        This preview is hosted by GitHub Pages. GitHub may process technical information, such as IP
-        addresses, to provide and secure the hosting service. See <a
-          href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement"
-          >GitHub’s privacy statement</a
-        > for its practices.
-      </p><h2>Analytics and cookies</h2><p>
-        This preview does not install advertising trackers, analytics scripts or website cookies. It
-        does not store inquiry fields in browser storage. Your email app and browser have their own
-        settings and behavior.
+      <h2>Contact information</h2>
+      {
+        hasServerForm ? (
+          <>
+            <p>
+              When you submit an inquiry, the form sends your name, email address, optional business
+              or organization, selected area of interest and message to Netlify Forms. Netlify
+              processes and stores form submissions for Force Multiplier to review. Submissions may
+              also be checked to help prevent spam.
+            </p>
+            <p>
+              We use the information you provide to understand your request, respond to you and
+              discuss relevant work. We store form records in Netlify and related correspondence in
+              our email or business records. Contact us with questions about your information or to
+              request its correction or deletion.
+            </p>
+          </>
+        ) : (
+          <p>
+            The contact page creates an email draft on your device or lets you copy your inquiry. It
+            does not submit the form fields to a website backend. Sending the draft through your
+            email app shares that message with Force Multiplier and the email providers involved.
+          </p>
+        )
+      }
+      <p>
+        Please avoid sending sensitive personal information in an initial inquiry. If you contact us
+        directly by email or text, we use the information you provide to understand and respond to
+        your request. The email or messaging providers involved also process that communication.
+      </p><h2>Website hosting</h2>
+      {
+        hasServerForm ? (
+          <p>
+            This website is hosted by Netlify. Netlify may process technical information, such as IP
+            addresses and request details, to provide hosting, handle forms and protect its
+            services. See <a href="https://www.netlify.com/privacy/">Netlify’s privacy policy</a>{' '}
+            for its practices.
+          </p>
+        ) : (
+          <p>
+            This preview is hosted by GitHub Pages. GitHub may process technical information, such
+            as IP addresses, to provide and secure the hosting service. See{' '}
+            <a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">
+              GitHub’s privacy statement
+            </a>{' '}
+            for its practices.
+          </p>
+        )
+      }
+      <h2>Analytics and cookies</h2><p>
+        This website does not install advertising trackers, analytics scripts or website cookies. It
+        does not save inquiry fields in browser storage. Your browser, email app and other services
+        you choose to use have their own settings and behavior.
       </p><h2>Questions or requests</h2><p>
         Contact <a href={`mailto:${site.email}`}>{site.email}</a> with questions about information you
-        have shared with Force Multiplier.
-      </p><h2>Before production launch</h2><p>
-        The production privacy information will be reviewed when hosting, inquiry delivery and any
-        analytics are configured.
+        have shared with Force Multiplier, or to request a correction or deletion.
       </p>
     </div>
   </section>

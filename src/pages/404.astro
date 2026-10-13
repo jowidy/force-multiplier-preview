@@ -8,6 +8,7 @@ import { href } from '../lib/site';
   title="Page not found"
   description="This page could not be found. Explore Force Multiplier's services or return to the homepage."
   path="/404"
+  noindex
 >
   <section class="page-intro wrap error-page">
     <h1>Let’s get you<br />back on track.</h1><p class="lead">
@@ -15,7 +16,8 @@ import { href } from '../lib/site';
     </p><div class="actions">
       <a class="button" href={href('/')}>Go to the homepage <Icon /></a><a
         class="text-link"
-        href={href('/services')}>Explore services <Icon /></a>
+        href={href('/services')}>Explore services <Icon /></a
+      >
     </div>
   </section>
 </SiteLayout>

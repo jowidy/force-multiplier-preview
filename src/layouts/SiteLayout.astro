@@ -1,14 +1,17 @@
 ---
 import '../styles/global.css';
 import '../styles/visual.css';
-import { asset, href, canonical, nav, site } from '../lib/site';
+import { asset, href, canonical, nav, site, isProduction, buildTarget } from '../lib/site';
 import Icon from '../components/Icon.astro';
 interface Props {
   title: string;
   description: string;
   path?: string;
+  noindex?: boolean;
 }
-const { title, description, path = '/' } = Astro.props;
+const { title, description, path = '/', noindex = false } = Astro.props;
+const excludeFromIndex = !isProduction || noindex;
+const socialOrigin = buildTarget === 'preview' ? 'https://jowidy.github.io' : site.domain;
 const pageTitle =
   title === 'Force Multiplier'
     ? 'Force Multiplier | Marketing, websites & operations'
@@ -37,7 +40,7 @@ const structuredData = {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="robots" content="noindex, nofollow" />
+    <meta name="robots" content={excludeFromIndex ? 'noindex, nofollow' : 'index, follow'} />
     <meta name="theme-color" content="#06529f" />
     <meta name="color-scheme" content="light" />
     <link rel="canonical" href={canonical(path)} />
@@ -60,10 +63,7 @@ const structuredData = {
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical(path)} />
-    <meta
-      property="og:image"
-      content={`https://jowidy.github.io${asset('/images/fm-wordmark-blue.png')}`}
-    />
+    <meta property="og:image" content={`${socialOrigin}${asset('/images/fm-wordmark-blue.png')}`} />
     <meta property="og:image:alt" content="Force Multiplier" />
     <meta name="twitter:card" content="summary" />
     <title>{pageTitle}</title>
@@ -149,7 +149,15 @@ const structuredData = {
       <div class="wrap footer-bottom">
         <span>© {new Date().getFullYear()} Force Multiplier</span><a href={href('/privacy')}
           >Privacy</a
-        ><span class="review-label">Website review preview</span>
+        >{
+          !isProduction && (
+            <span class="review-label">
+              {buildTarget === 'preview'
+                ? 'Website review preview'
+                : 'Pre-launch verification site'}
+            </span>
+          )
+        }
       </div>
     </footer>
     <script>

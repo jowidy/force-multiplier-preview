@@ -12,7 +12,10 @@ concurrency:
   cancel-in-progress: false
 jobs:
   build:
+    if: github.ref == 'refs/heads/codex/site-preview'
     runs-on: ubuntu-latest
+    env:
+      PUBLIC_SITE_TARGET: preview
     steps:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4

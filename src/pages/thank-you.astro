@@ -1,0 +1,31 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import Icon from '../components/Icon.astro';
+import { hasServerForm, href, site } from '../lib/site';
+---
+
+<SiteLayout
+  title="Thank you"
+  description="Contact Force Multiplier or return to the website after sending an inquiry."
+  path="/thank-you"
+  noindex={true}
+>
+  <section class="page-intro wrap">
+    <h1>Thanks for<br />getting in touch.</h1><p class="lead">
+      {
+        hasServerForm
+          ? 'We look forward to learning more about your business.'
+          : 'This review site prepares an email draft. Review and send it in your email app to get in touch.'
+      }
+    </p>
+  </section>
+  <section class="wrap section-bottom">
+    <div class="prose">
+      <h2>Need to add anything?</h2><p>
+        Email <a href={`mailto:${site.email}`}>{site.email}</a> or <a href={`sms:${site.phone}`}
+          >text {site.displayPhone}</a
+        >.
+      </p><a class="text-link" href={href('/')}>Back to Force Multiplier <Icon name="right" /></a>
+    </div>
+  </section>
+</SiteLayout>

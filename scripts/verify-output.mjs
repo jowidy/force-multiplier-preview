@@ -9,7 +9,15 @@ const root = fileURLToPath(new URL('../', import.meta.url));
 const distArg = process.argv.indexOf('--dist');
 const dist = path.resolve(root, distArg >= 0 ? process.argv[distArg + 1] || 'dist' : 'dist');
 const manifest = JSON.parse(await fs.readFile(new URL('./routes.json', import.meta.url), 'utf8'));
-const { previewOrigin, previewBase, productionOrigin } = manifest;
+const buildTarget = process.env.PUBLIC_SITE_TARGET || 'preview';
+if (!['preview', 'staging', 'production'].includes(buildTarget)) {
+  throw new Error(`Unknown PUBLIC_SITE_TARGET: ${buildTarget}`);
+}
+const isProduction = buildTarget === 'production';
+const hasServerForm = buildTarget !== 'preview';
+const { productionOrigin } = manifest;
+const previewOrigin = hasServerForm ? productionOrigin : manifest.previewOrigin;
+const previewBase = hasServerForm ? '/' : manifest.previewBase;
 const failures = new Set();
 const checkedLinks = new Set();
 const documents = new Map();
@@ -19,7 +27,8 @@ const check = (condition, message) => {
 };
 const cleanRoute = (value) => (value === '/' ? '/' : `/${value.replace(/^\/+|\/+$/g, '')}`);
 const normalizeText = (value) => value.replace(/\s+/g, ' ').trim();
-const canonical = (route) => `${productionOrigin}${cleanRoute(route)}`;
+const canonical = (route) =>
+  `${productionOrigin}${cleanRoute(route)}${cleanRoute(route) === '/' ? '' : '/'}`;
 
 async function walk(directory) {
   const entries = await fs.readdir(directory, { withFileTypes: true });
@@ -94,7 +103,9 @@ for (const file of files) {
     const text = await fs.readFile(file, 'utf8');
     textFiles.set(rel, text);
     check(
-      !/(?:C:[\\/]Users[\\/][^\\/\s]+|C:[\\/]Vaults|machine-identity[\\/]|Knowledge Vault)/i.test(text),
+      !/(?:C:[\\/]Users[\\/][^\\/\s]+|C:[\\/]Vaults|machine-identity[\\/]|Knowledge Vault)/i.test(
+        text,
+      ),
       `Private machine path/context leaked: ${rel}`,
     );
     check(
@@ -200,9 +211,17 @@ for (const [file, $] of documents) {
     `${file}: expected one meaningful meta description`,
   );
   const robots = ($('meta[name="robots"]').attr('content') || '').toLowerCase().split(/[\s,]+/);
+  const excluded =
+    !isProduction || ['/404', '/thank-you'].includes(route) || rule?.path !== rule?.target;
   check(
-    robots.includes('noindex') && robots.includes('nofollow'),
-    `${file}: preview must be noindex, nofollow`,
+    excluded
+      ? robots.includes('noindex') && robots.includes('nofollow')
+      : robots.includes('index') && robots.includes('follow') && !robots.includes('noindex'),
+    `${file}: unexpected indexing policy for ${buildTarget}`,
+  );
+  check(
+    isProduction ? !$('.review-label').length : true,
+    `${file}: production still shows a review label`,
   );
   check($('link[rel="canonical"]').length === 1, `${file}: expected exactly one canonical`);
   const expectedCanonical = canonical(rule?.target || route);
@@ -308,6 +327,41 @@ for (const [file, $] of documents) {
 
 function verifyContact($, file, visibleText) {
   const form = $('#inquiry-form');
+  if (hasServerForm) {
+    check(form.length === 1, `${file}: expected one inquiry form`);
+    check(form.attr('name') === 'inquiry', `${file}: Netlify form name must be inquiry`);
+    check(form.attr('method')?.toLowerCase() === 'post', `${file}: inquiry must POST`);
+    check(form.attr('data-netlify') === 'true', `${file}: Netlify static form detection missing`);
+    check(
+      form.attr('action') === '/thank-you/',
+      `${file}: native POST must target the direct success route`,
+    );
+    check(
+      form.attr('netlify-honeypot') === 'bot-field' ||
+        form.attr('data-netlify-honeypot') === 'bot-field',
+      `${file}: missing spam honeypot declaration`,
+    );
+    check(
+      form.find('input[name="form-name"]').attr('value') === 'inquiry',
+      `${file}: missing form-name payload`,
+    );
+    check(form.find('input[name="bot-field"]').length === 1, `${file}: missing honeypot control`);
+    for (const name of ['name', 'email', 'message']) {
+      check(
+        form.find(`[name="${name}"][required]`).length === 1,
+        `${file}: missing required ${name}`,
+      );
+    }
+    check(
+      !form.find('fieldset[disabled]').length,
+      `${file}: production form must work without JavaScript`,
+    );
+    check(
+      !/Nothing is submitted or stored/.test(visibleText),
+      `${file}: production retains preview storage claim`,
+    );
+    return;
+  }
   const fields = form.find('#inquiry-fields');
   check(form.length === 1, `${file}: expected one inquiry draft form`);
   check(
@@ -496,8 +550,29 @@ check(
   !/^Disallow:\s*\/\s*$/im.test(robotsText),
   'robots.txt blocks all crawling, preventing crawlers from reading preview noindex metadata.',
 );
+const sitemap = load(textFiles.get('sitemap.xml') || '', { xmlMode: true });
+const sitemapUrls = sitemap('loc')
+  .toArray()
+  .map((el) => sitemap(el).text());
+const expectedSitemap = isProduction
+  ? manifest.routes
+      .filter((item) => item.path === item.target && !['/404', '/thank-you'].includes(item.path))
+      .map((item) => canonical(item.path))
+  : [];
+check(
+  sitemapUrls.length === expectedSitemap.length,
+  'Sitemap URL count does not match the indexing policy.',
+);
+for (const url of expectedSitemap) check(sitemapUrls.includes(url), `Sitemap missing ${url}`);
+check(
+  isProduction
+    ? robotsText.includes(`Sitemap: ${productionOrigin}/sitemap.xml`)
+    : !robotsText.includes('Sitemap:'),
+  'robots.txt sitemap policy is incorrect.',
+);
 
 const summary = {
+  buildTarget,
   htmlPages: documents.size,
   expectedRoutes: manifest.routes.length,
   existingUrlsCovered: 28,
@@ -516,5 +591,5 @@ if (failures.size) {
   process.exitCode = 1;
 } else
   console.log(
-    'PASS: static preview routes, references, metadata, evidence and output boundaries verified.',
+    `PASS: ${buildTarget} routes, references, metadata, evidence and output boundaries verified.`,
   );
