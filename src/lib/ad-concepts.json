@@ -1,0 +1,316 @@
+{
+  "pilot": {
+    "slug": "google-ads",
+    "title": "Google Ads management",
+    "headlines": [
+      "Google Ads Management: $400",
+      "Force Multiplier",
+      "For Small Business Owners",
+      "$400 Per Month",
+      "Month-to-Month Management",
+      "Get Help With Google Ads",
+      "Get Help Managing Your Ads",
+      "See Exactly What's Included",
+      "Choose One Service at a Time",
+      "Explore Google Ads Management",
+      "Keep Your Focus on Business",
+      "Get Started With Your Ads"
+    ],
+    "descriptions": [
+      "Google Ads management is $400/month. Ad spend and applicable software cost extra.",
+      "Get help managing Google Ads while you focus on your small business. See the scope.",
+      "Choose the service you need. Each is contracted separately, with clear $400 pricing.",
+      "Explore month-to-month management. Review what's included, then ask about getting started."
+    ],
+    "display_path": ["google-ads", "management"],
+    "creative_direction": "Public price, clear service. Match the established blue and gold service-page design."
+  },
+  "expansion": [
+    {
+      "slug": "social-posts",
+      "title": "20 custom social posts with imagery",
+      "headlines": [
+        "$400/Month Social Posts",
+        "20 Custom Posts Each Month",
+        "Posts in Your Brand Voice",
+        "Social Posts With Imagery",
+        "Keep Your Social Feed Moving",
+        "More Time for Your Business",
+        "Social Help for Small Business",
+        "A Month of Fresh Social Posts",
+        "Your Brand. Your Voice.",
+        "Choose a Separate Service",
+        "Month-to-Month Social Posts",
+        "Force Multiplier"
+      ],
+      "descriptions": [
+        "20 custom brand-voice social posts with imagery for $400/month. Separate contract.",
+        "Keep your feed moving with 20 custom posts and imagery each month. $400/month.",
+        "Social posts for your small business: $400/month, month-to-month. Review the scope.",
+        "$400/month for 20 custom posts with imagery. Software and third-party costs are extra."
+      ],
+      "display_path": ["services", "social-posts"],
+      "creative_direction": "A real small-business work surface with a camera and product props; no fake published posts."
+    },
+    {
+      "slug": "community-engagement",
+      "title": "Social community engagement",
+      "headlines": [
+        "$400/Month Community Help",
+        "Social Community Engagement",
+        "Help Keep Conversations Going",
+        "A More Welcoming Social Space",
+        "Make Room for Your Community",
+        "Support Your Social Community",
+        "Help With Social Engagement",
+        "For Small Businesses",
+        "Clear Monthly Pricing",
+        "A Separate Monthly Service",
+        "Month-to-Month Engagement",
+        "Force Multiplier"
+      ],
+      "descriptions": [
+        "Social community engagement for $400/month. Month-to-month, separately contracted.",
+        "Help keep your social conversations moving. $400/month. Review the engagement scope.",
+        "Community engagement for small businesses. $400/month. Agree coverage before starting.",
+        "$400/month for community engagement. Software and other third-party costs are extra."
+      ],
+      "display_path": ["services", "community"],
+      "creative_direction": "An authentic working conversation, with permission; no invented customer comments or response-time claims."
+    },
+    {
+      "slug": "meta-ads",
+      "title": "Meta ads management",
+      "headlines": [
+        "Meta Ads Help: $400/Month",
+        "Meta Ads Management",
+        "Management. Testing. Tweaks.",
+        "Meta Ads for Small Business",
+        "Make Time to Run Your Business",
+        "Get Help Managing Meta Ads",
+        "Clear Monthly Management Fee",
+        "Ad Spend Is Separate",
+        "Review Your Meta Ads Scope",
+        "Month-to-Month Ads Management",
+        "A Separate $400/Month Service",
+        "Force Multiplier"
+      ],
+      "descriptions": [
+        "Meta ads management, optimization and testing: $400/month. Ad spend is extra.",
+        "Get help with Meta ads for $400/month. Month-to-month. Media and software costs extra.",
+        "A separate $400/month Meta ads service for small businesses. Ad spend is separate.",
+        "Review Meta ads management for $400/month. Scope agreed first. Third-party costs extra."
+      ],
+      "display_path": ["services", "meta-ads"],
+      "creative_direction": "A business owner reviewing a campaign plan; never fabricate a Meta dashboard or return on ad spend."
+    },
+    {
+      "slug": "google-ads",
+      "title": "Google Ads management",
+      "headlines": [
+        "Google Ads Help: $400/Month",
+        "Google Ads Management",
+        "Manage, Test and Improve Ads",
+        "Google Ads for Small Business",
+        "Get Help With Your Search Ads",
+        "Clear Monthly Management Fee",
+        "Ad Spend Is Separate",
+        "A Separate $400/Month Service",
+        "Month-to-Month Ads Management",
+        "Review Your Google Ads Scope",
+        "More Time for Your Business",
+        "Force Multiplier"
+      ],
+      "descriptions": [
+        "Google Ads management, optimization and testing: $400/month. Ad spend is extra.",
+        "Get help managing Google Ads for $400/month. Month-to-month. Ad spend is separate.",
+        "A separate $400/month Google Ads service. Review the scope. Media and software extra.",
+        "Google Ads help for small businesses: $400/month. Ad spend and third-party costs extra."
+      ],
+      "display_path": ["services", "google-ads"],
+      "creative_direction": "A real planning session or annotated paper search journey; no mock performance graphs or Google endorsement."
+    },
+    {
+      "slug": "seo-content",
+      "title": "Human-written onsite SEO content",
+      "headlines": [
+        "SEO Content: $400/Month",
+        "Human-Written SEO Content",
+        "Content for Your Website",
+        "Help Customers Understand You",
+        "SEO Writing for Small Business",
+        "Make Your Expertise Clear",
+        "Useful Words for Your Website",
+        "Content Written by Humans",
+        "Review Your Content Scope",
+        "Month-to-Month Content Help",
+        "A Separate $400/Month Service",
+        "Force Multiplier"
+      ],
+      "descriptions": [
+        "Human-written onsite SEO content for $400/month. Month-to-month, separately contracted.",
+        "Explain your business with human-written SEO content. $400/month. Scope agreed first.",
+        "Human-written content for your website: $400/month. Review the content scope.",
+        "$400/month for onsite SEO content. Software and third-party costs are extra."
+      ],
+      "display_path": ["services", "seo-content"],
+      "creative_direction": "A real writer editing printed notes beside a laptop; no stock claims of rankings, traffic or article volume."
+    },
+    {
+      "slug": "newsletters",
+      "title": "Newsletters and list growth",
+      "headlines": [
+        "Newsletters: $400/Month",
+        "Newsletters and List Growth",
+        "Stay in Touch With Customers",
+        "Email Help for Small Business",
+        "Give Customers a Good Read",
+        "Keep Your Business in Mind",
+        "A Clear Monthly Email Service",
+        "Review Your Newsletter Scope",
+        "List Growth Support",
+        "Month-to-Month Email Help",
+        "A Separate $400/Month Service",
+        "Force Multiplier"
+      ],
+      "descriptions": [
+        "Newsletters and active list growth for $400/month. Month-to-month. Separate contract.",
+        "Newsletters and active, consent-based list growth. $400/month. Scope agreed first.",
+        "Newsletter help for small businesses: $400/month. Email software costs are separate.",
+        "$400/month for newsletters and list growth. Software and third-party costs are extra."
+      ],
+      "display_path": ["services", "newsletters"],
+      "creative_direction": "A genuine product story or business update being prepared; no invented subscribers, open rates or inbox interface."
+    },
+    {
+      "slug": "website-support",
+      "title": "Website maintenance and support",
+      "headlines": [
+        "Website Help: $400/Month",
+        "Website Maintenance & Support",
+        "Keep Your Website Cared For",
+        "Support for Your Business Site",
+        "More Time for Your Business",
+        "Help With Website Upkeep",
+        "A Clear Monthly Support Fee",
+        "Review Your Website Scope",
+        "Small-Business Website Help",
+        "Month-to-Month Website Help",
+        "A Separate $400/Month Service",
+        "Force Multiplier"
+      ],
+      "descriptions": [
+        "Website maintenance and support for $400/month. Month-to-month. Review the scope.",
+        "Get help caring for your website for $400/month. Hosting and software costs are extra.",
+        "A separate website maintenance service for $400/month. Agree platform and scope first.",
+        "$400/month for website support. Hosting, software and third-party costs are separate."
+      ],
+      "display_path": ["services", "website-help"],
+      "creative_direction": "An authentic workspace and a website checklist, with no security badge, uptime guarantee or 24/7 implication."
+    },
+    {
+      "slug": "landing-page",
+      "title": "Product, service or event landing page",
+      "headlines": [
+        "A Landing Page for $400",
+        "$400 One-Time Landing Page",
+        "One Page. One Clear Purpose.",
+        "A Page for Your Product",
+        "A Page for Your Service",
+        "A Page for Your Next Event",
+        "Landing Pages for Small Firms",
+        "Turn Your Offer Into a Page",
+        "Give Your Campaign a Home",
+        "Review Your Landing Page Scope",
+        "One Page. Separate Contract.",
+        "Force Multiplier"
+      ],
+      "descriptions": [
+        "A product, service or event landing page for $400 one-time. Separate contract.",
+        "Give your next offer a focused landing page. $400 one-time. Review the page scope.",
+        "One landing page for your small business: $400 one-time. Hosting and software extra.",
+        "A $400 one-time landing page service. Agree the scope first. Third-party costs extra."
+      ],
+      "display_path": ["services", "landing-page"],
+      "creative_direction": "A product or event prop with one clear focal point; use brand cut-paper page art only on the landing page."
+    },
+    {
+      "slug": "homepage",
+      "title": "Small-business homepage",
+      "headlines": [
+        "A Homepage for $400",
+        "$400 One-Time Homepage",
+        "A Clear Business Welcome",
+        "Small-Business Homepage",
+        "Help Visitors Understand You",
+        "Tell Your Story Up Front",
+        "One Homepage. Clear Purpose.",
+        "Give Your Business a Homepage",
+        "Review Your Homepage Scope",
+        "Your Homepage Starts Here",
+        "One Page. Separate Contract.",
+        "Force Multiplier"
+      ],
+      "descriptions": [
+        "A small-business homepage for $400 one-time. One homepage, separately contracted.",
+        "Help visitors understand your business with a $400 one-time homepage. Review the scope.",
+        "One homepage for your small business: $400 one-time. Hosting and software costs extra.",
+        "A $400 one-time homepage service. Agree the scope first. Third-party costs are extra."
+      ],
+      "display_path": ["services", "homepage"],
+      "creative_direction": "A genuine shopfront or owner workspace; no visual implying an entire multi-page website for $400."
+    },
+    {
+      "slug": "website-page",
+      "title": "An additional website page",
+      "headlines": [
+        "Another Website Page for $400",
+        "$400 One-Time Website Page",
+        "Add a Page to Your Website",
+        "Room for One More Good Idea",
+        "A Page for Your Next Service",
+        "Explain More of What You Do",
+        "Build on Your Existing Website",
+        "One Additional Website Page",
+        "Review Your New Page Scope",
+        "A Page for Your Small Business",
+        "One Page. Separate Contract.",
+        "Force Multiplier"
+      ],
+      "descriptions": [
+        "Add one page to your existing website for $400 one-time. Separate contract.",
+        "Give a service or story its own website page. $400 one-time. Review the scope.",
+        "One additional website page for $400 one-time. Hosting and software costs are extra.",
+        "A $400 one-time website page service. Agree platform and scope first. Other costs extra."
+      ],
+      "display_path": ["services", "website-page"],
+      "creative_direction": "A related set of physical business materials with one new sheet; no full-site package implication."
+    },
+    {
+      "slug": "google-business-profile",
+      "title": "Google Business Profile setup and optimization",
+      "headlines": [
+        "Business Profile Help: $400",
+        "$400 One-Time Profile Service",
+        "Google Business Profile Help",
+        "Profile Setup & Optimization",
+        "Help Customers Find Your Info",
+        "Your Business Details, Clear",
+        "Google Setup for Small Firms",
+        "Review Your Profile Scope",
+        "Relevant Analytics Setup",
+        "A Separate One-Time Service",
+        "Get Help With Your Profile",
+        "Force Multiplier"
+      ],
+      "descriptions": [
+        "Google Business Profile creation and optimization: $400 one-time. Service fee only.",
+        "$400 one-time for profile work and relevant Google/Analytics setup. Review the scope.",
+        "Google Business Profile is free. Our setup and optimization service is $400 one-time.",
+        "A separate $400 profile service. Relevant Google setup included. Third-party costs extra."
+      ],
+      "display_path": ["services", "business-info"],
+      "creative_direction": "A real eligible storefront or owner workspace; no Google partner badge, map rank or guaranteed verification."
+    }
+  ]
+}

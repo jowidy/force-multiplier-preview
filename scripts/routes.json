@@ -5,24 +5,56 @@
   "productionOrigin": "https://www.forcemultiplier.work",
   "description": "Public URL mapping. GitHub aliases are fallback pages. Netlify config supplies permanent redirects, subject to deployed verification.",
   "routes": [
-    { "path": "/", "target": "/", "origin": "existing" },
-    { "path": "/appointments", "target": "/contact", "origin": "existing" },
-    { "path": "/contact", "target": "/contact", "origin": "existing" },
-    { "path": "/about", "target": "/about", "origin": "existing" },
-    { "path": "/services", "target": "/services", "origin": "existing" },
-    { "path": "/legacy-start-archive-2026-09-03", "target": "/", "origin": "existing" },
+    {
+      "path": "/",
+      "target": "/",
+      "origin": "existing"
+    },
+    {
+      "path": "/appointments",
+      "target": "/contact",
+      "origin": "existing"
+    },
+    {
+      "path": "/contact",
+      "target": "/contact",
+      "origin": "existing"
+    },
+    {
+      "path": "/about",
+      "target": "/about",
+      "origin": "existing"
+    },
+    {
+      "path": "/services",
+      "target": "/services",
+      "origin": "existing"
+    },
+    {
+      "path": "/legacy-start-archive-2026-09-03",
+      "target": "/",
+      "origin": "existing"
+    },
     {
       "path": "/marketing-operations-consulting",
       "target": "/marketing-operations-consulting",
       "origin": "existing"
     },
-    { "path": "/go-to-market-strategy", "target": "/go-to-market-strategy", "origin": "existing" },
+    {
+      "path": "/go-to-market-strategy",
+      "target": "/go-to-market-strategy",
+      "origin": "existing"
+    },
     {
       "path": "/ai-workflow-automation",
       "target": "/ai-workflow-automation",
       "origin": "existing"
     },
-    { "path": "/seo-lead-generation", "target": "/seo-lead-generation", "origin": "existing" },
+    {
+      "path": "/seo-lead-generation",
+      "target": "/seo-lead-generation",
+      "origin": "existing"
+    },
     {
       "path": "/what-is-a-marketing-operations-firm",
       "target": "/what-is-a-marketing-operations-firm",
@@ -33,14 +65,26 @@
       "target": "/lead-generation-operating-system",
       "origin": "existing"
     },
-    { "path": "/insights", "target": "/insights", "origin": "existing" },
-    { "path": "/crm-process-diagnosis", "target": "/crm-process-diagnosis", "origin": "existing" },
+    {
+      "path": "/insights",
+      "target": "/insights",
+      "origin": "existing"
+    },
+    {
+      "path": "/crm-process-diagnosis",
+      "target": "/crm-process-diagnosis",
+      "origin": "existing"
+    },
     {
       "path": "/ai-workflow-automation-guide",
       "target": "/ai-workflow-automation-guide",
       "origin": "existing"
     },
-    { "path": "/smb-home", "target": "/", "origin": "existing" },
+    {
+      "path": "/smb-home",
+      "target": "/",
+      "origin": "existing"
+    },
     {
       "path": "/seo-google-ads-local-business",
       "target": "/seo-google-ads-local-business",
@@ -56,7 +100,11 @@
       "target": "/woodworking-business-marketing",
       "origin": "existing"
     },
-    { "path": "/case-studies", "target": "/case-studies", "origin": "existing" },
+    {
+      "path": "/case-studies",
+      "target": "/case-studies",
+      "origin": "existing"
+    },
     {
       "path": "/case-studies/local-service-wrong-clicks",
       "target": "/case-studies/local-service-wrong-clicks",
@@ -87,11 +135,95 @@
       "target": "/case-studies/clear-offer-better-inquiries",
       "origin": "existing"
     },
-    { "path": "/home", "target": "/", "origin": "existing" },
-    { "path": "/start", "target": "/contact", "origin": "existing" },
-    { "path": "/websites-and-messaging", "target": "/websites-and-messaging", "origin": "new" },
-    { "path": "/privacy", "target": "/privacy", "origin": "new" },
-    { "path": "/404", "target": "/404", "origin": "new" },
-    { "path": "/thank-you", "target": "/thank-you", "origin": "new" }
+    {
+      "path": "/home",
+      "target": "/",
+      "origin": "existing"
+    },
+    {
+      "path": "/start",
+      "target": "/contact",
+      "origin": "existing"
+    },
+    {
+      "path": "/websites-and-messaging",
+      "target": "/websites-and-messaging",
+      "origin": "new"
+    },
+    {
+      "path": "/privacy",
+      "target": "/privacy",
+      "origin": "new"
+    },
+    {
+      "path": "/404",
+      "target": "/404",
+      "origin": "new"
+    },
+    {
+      "path": "/thank-you",
+      "target": "/thank-you",
+      "origin": "new"
+    },
+    {
+      "path": "/services/social-posts",
+      "target": "/services/social-posts",
+      "origin": "new"
+    },
+    {
+      "path": "/services/community-engagement",
+      "target": "/services/community-engagement",
+      "origin": "new"
+    },
+    {
+      "path": "/services/meta-ads",
+      "target": "/services/meta-ads",
+      "origin": "new"
+    },
+    {
+      "path": "/services/google-ads",
+      "target": "/services/google-ads",
+      "origin": "new"
+    },
+    {
+      "path": "/services/seo-content",
+      "target": "/services/seo-content",
+      "origin": "new"
+    },
+    {
+      "path": "/services/newsletters",
+      "target": "/services/newsletters",
+      "origin": "new"
+    },
+    {
+      "path": "/services/website-support",
+      "target": "/services/website-support",
+      "origin": "new"
+    },
+    {
+      "path": "/services/landing-page",
+      "target": "/services/landing-page",
+      "origin": "new"
+    },
+    {
+      "path": "/services/homepage",
+      "target": "/services/homepage",
+      "origin": "new"
+    },
+    {
+      "path": "/services/website-page",
+      "target": "/services/website-page",
+      "origin": "new"
+    },
+    {
+      "path": "/services/google-business-profile",
+      "target": "/services/google-business-profile",
+      "origin": "new"
+    },
+    {
+      "path": "/ad-concepts",
+      "target": "/ad-concepts",
+      "origin": "new"
+    }
   ]
 }

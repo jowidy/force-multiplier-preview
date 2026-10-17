@@ -4,25 +4,33 @@ import Icon from '../components/Icon.astro';
 import CallToAction from '../components/CallToAction.astro';
 import EditorialArt from '../components/EditorialArt.astro';
 import CaseCover from '../components/CaseCover.astro';
-import { href, asset, serviceGroups } from '../lib/site';
+import PricePowder from '../components/PricePowder.astro';
+import PricingExamples from '../components/PricingExamples.astro';
+import { services } from '../lib/service-catalog';
+import { href, asset } from '../lib/site';
 ---
 
 <SiteLayout
   title="Force Multiplier"
-  description="Practical marketing, websites and operations support. Based in Monroe, Louisiana, Force Multiplier helps businesses get found, explain their work and move forward."
+  description="Force Multiplier, the $400 ad agency for small businesses. Pick practical marketing and website services, with a clear price and a separate agreement for each."
 >
   <section class="hero-stage">
     <div class="hero wrap">
       <div class="hero-copy">
-        <h1>Make the next<br class="desktop-break" /> move <span>count.</span></h1><p class="lead">
-          Marketing, websites and better ways of working. Built around what your business needs
-          next.
+        <h1 class="national-positioning">
+          Force Multiplier,<br />the <span>$400 ad agency</span><br />for small businesses.
+        </h1><p class="lead">
+          More time for your business. A little help with the marketing. Choose one useful service,
+          know the price, and keep control.
         </p><div class="actions">
-          <a class="button" href={href('/contact')}>Start a conversation <Icon /></a><a
+          <a class="button" href={href('/services')}>Find your $400 service <Icon /></a><a
             class="text-link"
             href={href('/case-studies')}>See our work <Icon name="right" /></a
           >
-        </div><p class="hero-location">Based in Monroe, Louisiana. Built around your business.</p>
+        </div><p class="hero-location">
+          Monthly or one time. Each service has its own agreement.<br />Advertising spend and other
+          third-party costs are separate.
+        </p>
       </div>
       <EditorialArt priority caption />
     </div>
@@ -36,31 +44,31 @@ import { href, asset, serviceGroups } from '../lib/site';
   <section class="section services-section" aria-labelledby="services-heading">
     <div class="wrap">
       <div class="section-heading">
-        <h2 id="services-heading">What needs to<br />move forward?</h2><p>
-          You do not need every marketing service.<br class="desktop-break" /> You need the right work,
-          done well.
+        <h2 id="services-heading">What could you<br />use a hand with?</h2><p>
+          Seven monthly services. Four one-time projects.<br class="desktop-break" /> All $400 each.
+          Pick a useful place to start.
         </p>
-      </div><div class="service-showcase">
-        <EditorialArt kind="clear-path" /><div class="service-list">
-          {
-            serviceGroups.map((service) => (
-              <a class="service-row" href={href(service.path)}>
+      </div><div class="home-offer-list">
+        {
+          ['social-posts', 'google-ads', 'homepage']
+            .map((slug) => services.find((s) => s.slug === slug)!)
+            .map((service) => (
+              <a href={href(`/services/${service.slug}`)}>
                 <>
-                  <div>
-                    <>
-                      <h3>{service.title}</h3>
-                      <p class="service-detail">{service.detail}</p>
-                    </>
-                  </div>
-                  <p class="service-explanation">{service.text}</p>
-                  <Icon />
+                  <p class="eyebrow">
+                    $400 {service.category === 'monthly' ? 'per month' : 'one time'}
+                  </p>
+                  <h3>{service.shortTitle}</h3>
+                  <p>{service.benefit}</p>
+                  <span class="text-link">
+                    See the service <Icon />
+                  </span>
                 </>
               </a>
             ))
-          }
-        </div>
+        }
       </div><a class="text-link section-link" href={href('/services')}
-        >Explore all services <Icon name="right" /></a
+        >Explore all 11 services <Icon name="right" /></a
       >
     </div>
   </section>
@@ -95,6 +103,19 @@ import { href, asset, serviceGroups } from '../lib/site';
         >
       </div>
     </div>
+  </section>
+  <section class="section wrap home-price-grid">
+    <div>
+      <p class="eyebrow">Clear price. Real choices.</p><h2>
+        A smaller decision.<br />A useful next move.
+      </h2><p>
+        Choose ongoing help or get one project finished. Each service comes with its own $400
+        agreement, so you can start with what matters and add more only when it makes sense.
+      </p><p>
+        We confirm the scope and outside costs first. You keep control of your accounts and approved
+        work.
+      </p><a class="text-link" href={href('/services')}>Find the right fit <Icon /></a>
+    </div><PricePowder />
   </section>
   <section class="section process-section">
     <div class="wrap process-grid">
@@ -167,4 +188,5 @@ import { href, asset, serviceGroups } from '../lib/site';
     </div>
   </section>
   <CallToAction />
+  <PricingExamples />
 </SiteLayout>

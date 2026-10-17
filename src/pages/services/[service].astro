@@ -1,0 +1,153 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import EditorialArt from '../../components/EditorialArt.astro';
+import ServiceInquiry from '../../components/ServiceInquiry.astro';
+import Icon from '../../components/Icon.astro';
+import { services } from '../../lib/service-catalog';
+import { href } from '../../lib/site';
+export function getStaticPaths() {
+  return services.map((service) => ({ params: { service: service.slug }, props: { service } }));
+}
+const { service } = Astro.props;
+const monthly = service.category === 'monthly';
+---
+
+<SiteLayout
+  title={`${service.shortTitle} for $400`}
+  description={`${service.lead} $400 ${monthly ? 'per month, month-to-month' : 'one time'}, with a separate agreement and clear outside costs.`}
+  path={`/services/${service.slug}`}
+>
+  <section class="hero-stage service-hero">
+    <div class="wrap hero">
+      <div class="hero-copy">
+        <a class="back-link" href={href('/services')}>← All $400 services</a><p class="eyebrow">
+          {service.eyebrow}
+        </p><h1>{service.headline}</h1><p class="lead">{service.lead}</p><div class="service-price">
+          <strong>$400</strong><span
+            >{monthly ? 'per month' : 'one time'}<small
+              >{
+                monthly
+                  ? 'Month-to-month. Your own agreement.'
+                  : 'One focused project. Your own agreement.'
+              }</small
+            ></span
+          >
+        </div><a class="button" href="#request">Choose this service <Icon /></a><p
+          class="hero-fineprint"
+        >
+          Ad spend, software and other third-party costs are separate where needed. Scope agreed
+          first. No charge in this review preview.
+        </p>
+      </div>
+      <div class="service-art">
+        <EditorialArt
+          kind={['posts', 'people', 'ads', 'search', 'email', 'profile'].includes(service.icon)
+            ? 'connected-work'
+            : 'clear-path'}
+          priority
+          caption
+        /><div class="art-note"><span aria-hidden="true">✦</span><p>{service.benefit}</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="section cream-section">
+    <div class="wrap scope-grid">
+      <div>
+        <p class="eyebrow">Here’s the useful part</p><h2>What we’ll<br />help you do.</h2><p>
+          {service.benefit}
+        </p>
+      </div><ul class="deliverables">
+        {
+          service.deliverables.map((item, index) => (
+            <li>
+              <>
+                <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                <p>{item}</p>
+              </>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+  <section class="section wrap scope-grid">
+    <div>
+      <p class="eyebrow">Made to fit your business</p><h2>
+        A clear start.<br />Less back-and-forth.
+      </h2><p>
+        Share what you have through a short written brief. We prepare the work and keep decisions
+        together, so you can review when it suits you.
+      </p>
+    </div><div>
+      <h3>What we’ll need from you</h3><ul class="plain-list">
+        {service.preparation.map((item) => <li>{item}</li>)}
+      </ul><p class="ownership-note">
+        You keep control of your accounts and approved deliverables. We’ll agree access and
+        approvals without asking for passwords in this form.
+      </p>
+    </div>
+  </section>
+  <section class="section scope-review-section">
+    <div class="wrap scope-grid">
+      <div>
+        <p class="eyebrow">Before we agree the work</p><h2>Small print,<br />in plain sight.</h2><p>
+          These draft boundaries need review before the service is sold. The $400 price is public;
+          the specific work belongs in your agreement.
+        </p>
+      </div><div class="scope-review">
+        <h3>Scope to confirm</h3><ul>{service.scopeReview.map((item) => <li>{item}</li>)}</ul><p
+          class="small"
+        >
+          Review note: limits beyond the 20 monthly social posts have not been approved. The list
+          above identifies decisions, not extra promised quantities.
+        </p><h3>Costs outside the $400 fee</h3><p>{service.costs}</p>
+      </div>
+    </div>
+  </section>
+  <section class="section wrap faq-section">
+    <h2>A few good questions.</h2>{
+      service.faq.map((f) => (
+        <details>
+          <>
+            <summary>{f.question}</summary>
+            <p>{f.answer}</p>
+          </>
+        </details>
+      ))
+    }<details>
+      <summary>Am I committing to a package of services?</summary><p>
+        No. Each service is separately contracted for $400. Pick the work you need. Monthly services
+        are month-to-month, and one-time projects have a one-time payment. We agree scope and any
+        third-party costs before you approve.
+      </p>
+    </details>
+  </section>
+  <section class="section request-section">
+    <div class="wrap"><ServiceInquiry selected={service.slug} /></div>
+  </section>
+  <section class="section wrap">
+    <div class="section-heading">
+      <h2>Another useful<br />next step.</h2><p>
+        Add another service only when it makes sense. Each has its own agreement.
+      </p>
+    </div><div class="related-services">
+      {
+        service.related
+          .map((slug) => services.find((s) => s.slug === slug))
+          .filter(Boolean)
+          .map((s) => (
+            <a class="related-card" href={href(`/services/${s!.slug}`)}>
+              <>
+                <p class="eyebrow">$400 {s!.category === 'monthly' ? 'per month' : 'one time'}</p>
+                <h3>{s!.shortTitle}</h3>
+                <p>{s!.benefit}</p>
+                <span class="text-link">
+                  See the service <Icon />
+                </span>
+              </>
+            </a>
+          ))
+      }
+    </div>
+  </section>
+</SiteLayout>

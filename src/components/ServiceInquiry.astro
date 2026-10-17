@@ -1,0 +1,135 @@
+---
+import { services } from '../lib/service-catalog';
+interface Props {
+  selected?: string;
+  allowUndecided?: boolean;
+}
+const { selected = '', allowUndecided = false } = Astro.props;
+---
+
+<section class="request-panel" id="request" aria-labelledby="request-heading">
+  <div class="request-intro">
+    <p class="eyebrow">A small first step</p>
+    <h2 id="request-heading">Let’s get your<br />next move ready.</h2>
+    <p>
+      Choose one service. Tell us a little about your business. We’ll confirm the work and any
+      outside costs before you decide.
+    </p>
+    <ol class="simple-steps">
+      <li>Choose your $400 service.</li><li>Review a separate, written agreement.</li><li>
+        Approve the scope before payment or work begins.
+      </li>
+    </ol>
+    <p class="preview-note">
+      <strong>Review preview:</strong> this form is a working demonstration. Nothing is sent, saved,
+      charged or booked. Use sample details to test it.
+    </p>
+  </div>
+  <form class="service-inquiry" data-demo-inquiry>
+    <fieldset disabled data-demo-fields>
+      <div class="field">
+        <label for="service-choice">Your service</label><select
+          id="service-choice"
+          name="service"
+          required
+          ><option value="">Choose a service</option>{
+            services.map((s) => (
+              <option value={s.slug} selected={selected === s.slug} data-frequency={s.category}>
+                {s.shortTitle} · $400 {s.category === 'monthly' ? 'per month' : 'one time'}
+              </option>
+            ))
+          }{allowUndecided && <option value="help-choose">Help me choose a service</option>}</select
+        >
+      </div>
+      <div class="field-pair">
+        <div class="field">
+          <label for="request-name">Your name</label><input
+            id="request-name"
+            name="name"
+            autocomplete="name"
+            required
+            maxlength="100"
+          />
+        </div><div class="field">
+          <label for="request-email">Email</label><input
+            id="request-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            maxlength="254"
+          />
+        </div>
+      </div>
+      <div class="field">
+        <label for="request-business">Business name</label><input
+          id="request-business"
+          name="business"
+          autocomplete="organization"
+          required
+          maxlength="150"
+        />
+      </div>
+      <div class="field">
+        <label for="request-details">What would you like help with? <span>(optional)</span></label
+        ><textarea id="request-details" name="details" rows="3" maxlength="2000"></textarea>
+      </div>
+      <div class="before-payment">
+        <strong>Before you buy</strong><p>
+          Each service has its own $400 agreement. Monthly work is month-to-month; one-time work is
+          paid once. Advertising spend, software, hosting, domains and other third-party costs are
+          separate where needed and must be agreed first. Your accounts stay yours.
+        </p>
+      </div>
+      <label class="check-field"
+        ><input type="checkbox" name="acknowledge" required />
+        <span
+          >I understand the separate service fee and outside costs, and that this preview does not
+          place an order.</span
+        ></label
+      >
+      <button class="button" type="submit" disabled data-demo-submit
+        >Preview my request <span aria-hidden="true">↗</span></button
+      >
+    </fieldset>
+    <noscript
+      ><p>
+        This safe demonstration needs JavaScript to prepare an on-page summary. No information has
+        been sent. You can review all service details without JavaScript.
+      </p></noscript
+    >
+    <div class="request-result" tabindex="-1" hidden aria-labelledby="result-heading">
+      <h3 id="result-heading">Your request is ready to review.</h3><p data-request-summary></p><p>
+        <strong>Demo complete.</strong> Nothing was sent or purchased. On the future live site, the next
+        step will be scope confirmation and a separate agreement.
+      </p><button type="button" class="text-link" data-edit-request>Edit my request</button>
+    </div>
+  </form>
+</section>
+<script>
+  document.querySelectorAll<HTMLFormElement>('[data-demo-inquiry]').forEach((form) => {
+    const submit = form.querySelector<HTMLButtonElement>('[data-demo-submit]');
+    const result = form.querySelector<HTMLElement>('.request-result');
+    const summary = form.querySelector<HTMLElement>('[data-request-summary]');
+    if (!submit || !result || !summary) return;
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+      const choice = form.querySelector<HTMLSelectElement>('select')!;
+      const business = form.querySelector<HTMLInputElement>('[name="business"]')!;
+      summary.textContent =
+        choice.value === 'help-choose'
+          ? `Help choosing a service for ${business.value.trim()}. No service has been selected. Each catalog service is separately contracted for $400; scope, cadence and outside costs need confirmation first.`
+          : `${choice.selectedOptions[0].textContent} for ${business.value.trim()}. Scope and outside costs still need your approval.`;
+      result.hidden = false;
+      result.focus();
+    });
+    form.querySelector('[data-edit-request]')?.addEventListener('click', () => {
+      result.hidden = true;
+      form.querySelector('select')?.focus();
+    });
+    const fields = form.querySelector<HTMLFieldSetElement>('[data-demo-fields]');
+    if (fields) fields.disabled = false;
+    submit.disabled = false;
+  });
+</script>

@@ -1,0 +1,74 @@
+<div class="price-powder" data-powder>
+  <p class="eyebrow">Clear prices. Different scopes.</p>
+  <div class="powder-price">
+    <span class="price-static">$400</span>
+    <span class="provider-overlay" aria-hidden="true"
+      ><small>Feedbird’s published fee</small><strong>$499</strong><small
+        >per month · Google Ads management</small
+      ></span
+    >
+    <span class="powder-cloud" aria-hidden="true"
+      >{
+        Array.from({ length: 28 }, (_, i) => (
+          <i style={`--i:${i};--x:${((i * 37) % 280) - 140}px;--y:${-40 - ((i * 29) % 150)}px`} />
+        ))
+      }</span
+    >
+  </div>
+  <p>
+    <strong>Force Multiplier: $400/month</strong><br />Google Ads management, optimization and
+    testing. Month-to-month, under a separate agreement.
+  </p>
+  <div class="powder-actions">
+    <button class="powder-trigger" type="button" hidden data-play-powder
+      >Reveal the FM price <span aria-hidden="true">✦</span></button
+    ><button type="button" class="powder-trigger" hidden data-skip-powder>Skip animation</button>
+  </div>
+  <p class="small">
+    Published example: <a href="https://feedbird.com/google-ads-management/"
+      >Feedbird’s $499/month offer</a
+    > includes broader campaign types. New conversion tracking is separate. Ad spend is extra for both
+    services. Scope differs; this is not an identical-package savings claim. Checked October 17, 2026.
+  </p>
+</div>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-powder]').forEach((card) => {
+    const play = card.querySelector<HTMLButtonElement>('[data-play-powder]');
+    const skip = card.querySelector<HTMLButtonElement>('[data-skip-powder]');
+    if (!play || !skip) return;
+    const motion = matchMedia('(prefers-reduced-motion: reduce)');
+    let timer: ReturnType<typeof setTimeout>;
+    const finish = () => {
+      clearTimeout(timer);
+      card.classList.remove('is-sparkling');
+      card.classList.add('is-revealed');
+      skip.hidden = true;
+      play.disabled = false;
+      play.textContent = 'Play price reveal again';
+    };
+    const sync = () => {
+      clearTimeout(timer);
+      card.classList.toggle('motion-ready', !motion.matches);
+      card.classList.remove('is-sparkling', 'is-revealed');
+      play.hidden = motion.matches;
+      skip.hidden = true;
+      play.disabled = false;
+    };
+    sync();
+    motion.addEventListener('change', sync);
+    play.addEventListener('click', () => {
+      if (motion.matches) return;
+      card.classList.remove('is-revealed');
+      play.disabled = true;
+      skip.hidden = false;
+      requestAnimationFrame(() => {
+        card.classList.add('is-sparkling');
+        timer = setTimeout(finish, 1300);
+      });
+    });
+    skip.addEventListener('click', () => {
+      finish();
+      play.focus();
+    });
+  });
+</script>

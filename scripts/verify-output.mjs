@@ -392,6 +392,27 @@ function verifyAnalytics($, file, route, visibleText) {
 }
 
 function verifyContact($, file, visibleText) {
+  if (!hasServerForm && $('[data-demo-inquiry]').length) {
+    const demo = $('[data-demo-inquiry]');
+    check(demo.length === 1, `${file}: expected one safe demo form`);
+    check(
+      !demo.attr('action') && !demo.attr('data-netlify'),
+      `${file}: demo must not expose a submission endpoint`,
+    );
+    check(
+      demo.find('fieldset[disabled]').length === 1,
+      `${file}: demo controls must stay disabled until handler registration`,
+    );
+    check(
+      demo.find('button[type="submit"][disabled]').length === 1,
+      `${file}: demo submit must start disabled`,
+    );
+    check(
+      /Nothing is sent, saved, charged or booked/.test(visibleText),
+      `${file}: demo status must be explicit`,
+    );
+    return;
+  }
   const form = $('#inquiry-form');
   if (hasServerForm) {
     check(form.length === 1, `${file}: expected one inquiry form`);

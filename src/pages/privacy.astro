@@ -38,16 +38,17 @@ import { hasServerForm, isProduction, site } from '../lib/site';
           </>
         ) : (
           <p>
-            The contact page creates an email draft on your device or lets you copy your inquiry. It
-            does not submit the form fields to a website backend. Sending the draft through your
-            email app shares that message with Force Multiplier and the email providers involved.
+            The service and contact forms prepare a demonstration summary on the current page. The
+            preview does not send, save or charge for a request. Entered details stay in the current
+            page and are not written to website storage or analytics. Use sample details when
+            testing. A browser may retain form values through its own autofill or history settings.
           </p>
         )
       }
       <p>
         Please avoid sending sensitive personal information in an initial inquiry. If you contact us
-        directly by email or text, we use the information you provide to understand and respond to
-        your request. The email or messaging providers involved also process that communication.
+        directly by email, we use the information you provide to understand and respond to your
+        request. The email providers involved also process that communication.
       </p><h2>Website hosting</h2>
       {
         hasServerForm ? (

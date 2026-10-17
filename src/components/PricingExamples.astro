@@ -1,0 +1,71 @@
+---
+import { href } from '../lib/site';
+const examples = [
+  {
+    name: 'High Meadow Agency',
+    offer: '20-post mixed-format pack',
+    price: '$1,900–$3,800 / month',
+    text: 'Twenty posts across mixed formats. Exact unique-asset wording and format mix are unspecified. Publishing adds $150–$400 per month per platform; third-party costs are extra. Pack-specific setup and minimum term are unspecified.',
+    fm: 'FM: 20 custom brand-voice posts with imagery, $400/month. Formats, publishing and revisions still need scope review.',
+    url: 'https://highmeadowagency.com/services',
+    slug: 'social-posts',
+  },
+  {
+    name: 'Feedbird',
+    offer: 'Google Ads management',
+    price: '$499 / month',
+    text: 'Includes weekly optimization and broader campaign types. Cancel anytime. Media spend and new conversion-tracking setup are separate.',
+    fm: 'FM: Google Ads management, optimization and testing, $400/month. Campaign scope and tracking setup differ.',
+    url: 'https://feedbird.com/google-ads-management/',
+    slug: 'google-ads',
+  },
+  {
+    name: 'Coxswain',
+    offer: 'Showpiece homepage',
+    price: '$1,995 one time',
+    text: 'A homepage package with copy, design, mobile build, inquiry form and handoff. No required care plan. Taxes and third-party costs are excluded unless agreed.',
+    fm: 'FM: a small-business homepage, $400 one time. Design, inputs, revisions and delivery scope differ.',
+    url: 'https://builtbycoxswain.com/pricing/',
+    slug: 'homepage',
+  },
+];
+---
+
+<section class="section cream-section">
+  <div class="wrap">
+    <div class="section-heading">
+      <h2>A little price<br />perspective.</h2><p>
+        Selected published offers. Different scopes. A useful starting point for comparing what you
+        need.
+      </p>
+    </div><div class="comparison-grid">
+      {
+        examples.map((e) => (
+          <article class="comparison-card">
+            <>
+              <p class="eyebrow">{e.offer}</p>
+              <h3>{e.name}</h3>
+              <p class="comparison-price">{e.price}</p>
+              <p>{e.text}</p>
+              <a href={e.url} class="text-link">
+                Read the provider’s offer ↗
+              </a>
+              <hr />
+              <p>
+                <strong>{e.fm}</strong>
+              </p>
+              <a href={href(`/services/${e.slug}`)} class="text-link">
+                Review FM’s service →
+              </a>
+            </>
+          </article>
+        ))
+      }
+    </div><p class="comparison-note">
+      Prices checked October 17, 2026. These examples are not industry averages or identical
+      packages, and do not establish equivalent quality or outcomes. Prices can change. Confirm each
+      provider’s final scope and terms. Every FM service has a separate agreement; third-party costs
+      are additional where needed.
+    </p>
+  </div>
+</section>

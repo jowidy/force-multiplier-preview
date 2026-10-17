@@ -1,13 +1,13 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import Icon from '../components/Icon.astro';
 import InquiryForm from '../components/InquiryForm.astro';
-import { site } from '../lib/site';
+import ServiceInquiry from '../components/ServiceInquiry.astro';
+import { site, hasServerForm } from '../lib/site';
 ---
 
 <SiteLayout
   title="Contact"
-  description="Tell Force Multiplier what feels stuck. Start a conversation about your marketing, website or operations by email or text."
+  description="Choose a $400 service and tell Force Multiplier about your small business. Review the scope and separate costs before deciding."
   path="/contact"
 >
   <section class="page-intro contact-intro wrap">
@@ -18,18 +18,17 @@ import { site } from '../lib/site';
   </section>
   <section class="wrap contact-grid section-bottom">
     <div>
-      <InquiryForm />
+      {hasServerForm ? <InquiryForm /> : <ServiceInquiry allowUndecided />}
     </div><aside class="contact-side">
       <h2>Prefer to reach out directly?</h2><a class="email" href={`mailto:${site.email}`}
         >{site.email}</a
-      ><p>
-        <a class="text-link" href={`sms:${site.phone}`}>Text {site.displayPhone} <Icon /></a>
-      </p><hr /><h2>A useful first note</h2><ul>
+      ><hr /><h2>A useful first note</h2><ul>
         <li>What your business does</li><li>Where things are getting stuck</li><li>
           What a better result would look like
         </li><li>Any timing or constraints that matter</li>
-      </ul><hr /><h2>Find us in Monroe</h2><address>{site.address}</address><p class="small">
-        Please get in touch before planning a visit.
+      </ul><hr /><h2>Local roots. National reach.</h2><p class="small">
+        Based in Monroe, Louisiana. We work remotely with small businesses nationwide. Contact and
+        business-number integration are being reviewed before launch.
       </p>
     </aside>
   </section>
@@ -42,8 +41,9 @@ import { site } from '../lib/site';
         </p>
       </details><details>
         <summary>How is the work priced?</summary><p>
-          We scope the work around the business, the responsibilities and the level of ongoing
-          support. Advertising spend is separate and agreed before campaigns go live.
+          Each catalog service is $400 under a separate agreement. Recurring services are
+          month-to-month; one-time projects are paid once. We confirm scope and separate
+          advertising, software and other third-party costs before you approve.
         </p>
       </details><details>
         <summary>Can you work with our current tools or website?</summary><p>

@@ -1,0 +1,185 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import { href } from '../lib/site';
+import concepts from '../lib/ad-concepts.json';
+const sets = [
+  { ...concepts.pilot, initial: true },
+  ...concepts.expansion.map((ad) => ({ ...ad, initial: false })),
+];
+---
+
+<SiteLayout
+  title="National Google Ads concepts for review"
+  description="Review Force Multiplier's draft Google Search ad copy alongside the eleven $400 service pages. These are concepts, with no ads launched or budget committed."
+  path="/ad-concepts"
+>
+  <section class="page-intro wrap">
+    <p class="eyebrow">Monday review · National Search</p><h1>
+      Short hooks.<br />A clear place to land.
+    </h1><p class="lead">
+      Public price. Understandable services. Draft Search ads that take people to the relevant
+      service page.
+    </p><p class="review-callout">
+      <strong>Review only.</strong> These are illustrative layouts, not Google’s final rendering. No
+      ads are running from this work. Service fees exclude ad spend and applicable third-party costs.
+      The proposed first test focuses on Google Ads management; the other concepts are options for later
+      review.
+    </p>
+  </section>
+  <section class="wrap section-bottom">
+    <div class="ads-review-grid">
+      {
+        sets.map((ad) => (
+          <article class:list={['ad-review-card', { 'initial-pilot': ad.initial }]}>
+            <>
+              <p class="eyebrow">{ad.initial ? 'Proposed initial pilot' : 'Expansion concept'}</p>
+              <h2>{ad.title}</h2>
+              <div class="search-ad">
+                <>
+                  <p class="ad-label">Sponsored · Illustrative draft</p>
+                  <p class="ad-business">Force Multiplier</p>
+                  <p class="ad-path">{ad.display_path.join(' / ')}</p>
+                  <p class="ad-headline">{ad.headlines.slice(0, 2).join(' | ')}</p>
+                  <p>{ad.descriptions[0]}</p>
+                </>
+              </div>
+              <p class="creative-note">{ad.creative_direction}</p>
+              <a class="text-link" href={href(`/services/${ad.slug}`)}>
+                Review the matching page →
+              </a>
+              <details>
+                <>
+                  <summary>Review all copy options</summary>
+                  <h3>
+                    Headlines <small>(30-character maximum)</small>
+                  </h3>
+                  <ol>
+                    {ad.headlines.map((h) => (
+                      <li>
+                        {h} <small>{h.length}/30</small>
+                      </li>
+                    ))}
+                  </ol>
+                  <h3>
+                    Descriptions <small>(90-character maximum)</small>
+                  </h3>
+                  <ol>
+                    {ad.descriptions.map((d) => (
+                      <li>
+                        {d} <small>{d.length}/90</small>
+                      </li>
+                    ))}
+                  </ol>
+                </>
+              </details>
+            </>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</SiteLayout>
+<style>
+  .review-callout {
+    background: var(--cream);
+    border-left: 5px solid var(--coral);
+    padding: 22px;
+    max-width: 950px;
+    font-size: 15px;
+  }
+  .ads-review-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+  }
+  .ad-review-card {
+    padding: 28px;
+    border: 1px solid #bfc8d0;
+    background: #fff;
+    min-width: 0;
+  }
+  .initial-pilot {
+    border: 3px solid var(--blue);
+    background: var(--cream);
+    grid-column: 1/-1;
+  }
+  .ad-review-card h2 {
+    font-size: 27px;
+  }
+  .search-ad {
+    padding: 22px;
+    background: #fff;
+    border: 1px solid #d3d8dd;
+    font:
+      15px/1.6 Arial,
+      sans-serif;
+    margin: 24px 0;
+  }
+  .search-ad p {
+    margin: 0 0 8px;
+  }
+  .search-ad .ad-label {
+    font-size: 12px;
+    color: #465565;
+  }
+  .search-ad .ad-business {
+    font-weight: bold;
+  }
+  .ad-path {
+    font-size: 12px;
+    color: #465565;
+  }
+  .search-ad .ad-headline {
+    color: var(--blue);
+    font-size: 22px;
+    line-height: 1.4;
+  }
+  .creative-note {
+    font-size: 13px;
+  }
+  .ad-review-card details {
+    margin-top: 22px;
+    border-top: 1px solid #bfc8d0;
+    padding-top: 16px;
+  }
+  .ad-review-card summary {
+    cursor: pointer;
+    min-height: 44px;
+    font-weight: 600;
+  }
+  .ad-review-card h3 {
+    font-size: 17px;
+    margin-top: 24px;
+  }
+  .ad-review-card small {
+    font-size: 11px;
+    font-weight: 400;
+    color: #526575;
+  }
+  .ad-review-card li {
+    font-size: 14px;
+    margin-block: 12px;
+  }
+  .ad-review-card a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+  }
+  .ad-review-card ol {
+    padding-left: 22px;
+  }
+  @media (max-width: 700px) {
+    .ads-review-grid {
+      grid-template-columns: 1fr;
+    }
+    .ad-review-card {
+      padding: 20px;
+    }
+    .initial-pilot {
+      grid-column: auto;
+    }
+    .search-ad {
+      padding: 18px;
+    }
+  }
+</style>

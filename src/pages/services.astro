@@ -1,88 +1,129 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import Icon from '../components/Icon.astro';
-import CallToAction from '../components/CallToAction.astro';
 import EditorialArt from '../components/EditorialArt.astro';
-import { href, serviceGroups } from '../lib/site';
+import Icon from '../components/Icon.astro';
+import PricePowder from '../components/PricePowder.astro';
+import { services } from '../lib/service-catalog';
+import { href } from '../lib/site';
 ---
 
 <SiteLayout
-  title="Services"
-  description="Local search, Google Ads, websites, messaging, marketing operations and strategy. Find the right kind of support for the work ahead."
+  title="11 useful services. $400 each."
+  description="Pick practical marketing and website help for your small business. Seven month-to-month services and four one-time projects, each separately contracted for $400."
   path="/services"
 >
-  <section class="page-intro wrap illustrated-intro">
+  <section class="page-intro wrap illustrated-intro catalog-hero">
     <div>
-      <h1>The right help<br />for the next step.</h1><p class="lead">
-        Start with the problem in front of you. We can help work out which combination of marketing,
-        strategy and delivery support will make a difference.
-      </p>
+      <p class="eyebrow">Small-business marketing, made simpler</p><h1>
+        Pick the help.<br />Know the price.
+      </h1><p class="lead">
+        Eleven useful services. <strong>$400 each.</strong> Choose the work your business needs, with
+        a separate agreement for every service.
+      </p><ul class="catalog-summary">
+        <li>7 month-to-month services</li><li>4 one-time projects</li><li>
+          Your accounts stay yours
+        </li>
+      </ul>
     </div><EditorialArt kind="clear-path" priority />
   </section>
-  <section class="wrap section-bottom">
-    <div class="service-list service-list-full">
+  <section class="section cream-section">
+    <div class="wrap">
+      <nav class="catalog-controls" aria-label="Service categories">
+        <a href="#monthly">Monthly support · 7 services ↓</a><a href="#one-time"
+          >One-time projects · 4 services ↓</a
+        ><a href="#how-it-works">How it works ↓</a>
+      </nav>
       {
-        serviceGroups.map((s) => (
-          <a class="service-row" href={href(s.path)}>
+        [
+          {
+            key: 'monthly',
+            id: 'monthly',
+            title: 'A little help, every month.',
+            description:
+              'Keep the work moving with ongoing support. Each service is $400 per month, on its own month-to-month agreement.',
+          },
+          {
+            key: 'once',
+            id: 'one-time',
+            title: 'One job. A clearer next step.',
+            description:
+              'Get a focused project off your list. Each service is $400 one time, with the work agreed before it starts.',
+          },
+        ].map((group) => (
+          <section class="catalog-group" id={group.id}>
             <>
-              <div>
+              <div class="catalog-heading">
                 <>
-                  <h2>{s.title}</h2>
-                  <p class="service-detail">{s.detail}</p>
+                  <h2>{group.title}</h2>
+                  <p>{group.description}</p>
                 </>
               </div>
-              <p class="service-explanation">{s.text}</p>
-              <Icon />
+              <div class="catalog-grid">
+                {services
+                  .filter((s) => s.category === group.key)
+                  .map((s, index) => (
+                    <article class="service-card">
+                      <div class="card-number">
+                        <span>
+                          {String(index + 1).padStart(2, '0')} /{' '}
+                          {group.key === 'monthly' ? 'MONTHLY' : 'ONE TIME'}
+                        </span>
+                        <span aria-hidden="true">✦</span>
+                      </div>
+                      <h3>{s.shortTitle}</h3>
+                      <p>{s.benefit}</p>
+                      <p class="card-price">
+                        <strong>$400</strong> {group.key === 'monthly' ? 'per month' : 'one time'}
+                      </p>
+                      <a class="text-link" href={href(`/services/${s.slug}`)}>
+                        What’s included <Icon />
+                      </a>
+                    </article>
+                  ))}
+              </div>
             </>
-          </a>
+          </section>
         ))
       }
     </div>
   </section>
-  <section class="section pale-section">
-    <div class="wrap split-grid">
-      <div>
-        <h2>More specific<br />help.</h2><p>
-          Already know where the problem sits? Explore the work in more detail.
-        </p>
-      </div><div class="link-list">
-        <a href={href('/seo-lead-generation')}>SEO + lead generation <Icon /></a><a
-          href={href('/ai-workflow-automation')}>AI + workflow automation <Icon /></a
-        ><a href={href('/marketing-operations-consulting')}
-          >Marketing operations consulting <Icon /></a
-        ><a href={href('/go-to-market-strategy')}>Go-to-market strategy <Icon /></a>
-      </div>
-    </div>
-  </section>
-  <section class="section wrap split-grid">
+  <section class="section wrap scope-grid" id="how-it-works">
     <div>
-      <h2>Built around<br />your business.</h2><p>
-        Customer questions and the way work gets booked differ from one business to another. The
-        plan should reflect that.
-      </p>
-    </div><div class="link-list">
-      <a href={href('/seo-google-ads-local-business')}>Local businesses <Icon /></a><a
-        href={href('/dumpster-rental-marketing')}>Dumpster rental businesses <Icon /></a
-      ><a href={href('/woodworking-business-marketing')}>Woodworking businesses <Icon /></a>
-    </div>
+      <p class="eyebrow">Simple selection. Clear ownership.</p><h2>
+        Start with one<br />useful thing.
+      </h2><p>
+        You don’t have to buy a bundle or commit to a long program. Choose the service that helps
+        most right now.
+      </p><a class="text-link" href={href('/contact')}>Help me choose <Icon /></a>
+    </div><ol class="process-list">
+      <li>
+        <h3>Pick the work.</h3><p>
+          Find the service that fits. Use the preview request form to test the next step.
+        </p>
+      </li><li>
+        <h3>Agree what’s included.</h3><p>
+          We confirm deliverables, access and approval steps in a separate agreement. Proposed scope
+          limits are flagged on each draft page.
+        </p>
+      </li><li>
+        <h3>Stay in control.</h3><p>
+          Your accounts and approved deliverables stay yours. Monthly services are month-to-month.
+          Review work through a simple written handoff.
+        </p>
+      </li>
+    </ol>
   </section>
-  <section class="section ink-section">
-    <div class="wrap split-grid">
-      <h2>What an engagement<br />should make clear.</h2><div class="prose">
-        <p>
-          The scope, who is responsible, the next decision and how we will review the work. Support
-          can focus on a particular problem or continue across implementation and operations.
+  <section class="section price-explainer">
+    <div class="wrap home-price-grid">
+      <div>
+        <p class="eyebrow">No price guessing</p><h2>Know the fee.<br />Know what’s extra.</h2><p>
+          The $400 fee pays for the agreed service. It does not include advertising spend, software
+          subscriptions, hosting, domains or other third-party charges where needed.
         </p><p>
-          We scope the work around the business. Any advertising spend is separate and agreed before
-          a campaign goes live.
-        </p><a class="text-link" href={href('/case-studies')}
-          >See how that looks in practice <Icon /></a
-        >
-      </div>
+          We identify those costs before you agree to anything. This review preview cannot take
+          payment or start a contract.
+        </p>
+      </div><PricePowder />
     </div>
   </section>
-  <CallToAction
-    title="Not sure which service you need?"
-    text="Tell us what is happening. You do not need to diagnose the problem or know the marketing vocabulary first."
-  />
 </SiteLayout>

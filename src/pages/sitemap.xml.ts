@@ -1,5 +1,6 @@
 import { getCollection } from 'astro:content';
 import { canonical, isProduction } from '../lib/site';
+import { services } from '../lib/service-catalog';
 
 export async function GET() {
   const entries = await getCollection('entries', ({ data }) => !data.draft);
@@ -12,6 +13,7 @@ export async function GET() {
         '/about',
         '/contact',
         '/privacy',
+        ...services.map((service) => `/services/${service.slug}`),
         ...entries.map(({ data }) => data.path),
       ]
     : [];

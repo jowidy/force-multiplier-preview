@@ -5,8 +5,6 @@ export const site = {
   name: 'Force Multiplier',
   domain: 'https://www.forcemultiplier.work',
   email: 'contact@forcemultiplier.work',
-  phone: '+13183766914',
-  displayPhone: '(318) 376-6914',
   address: '1220 N 18th St, Suite 200, Monroe, LA 71201',
 };
 
