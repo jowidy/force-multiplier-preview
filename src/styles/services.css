@@ -705,6 +705,7 @@
 .provider-overlay {
   display: none;
   position: absolute;
+  z-index: 3;
   inset: 0;
   background: var(--navy);
   color: white;
@@ -738,7 +739,7 @@
   color: var(--navy);
 }
 .price-powder .powder-cloud {
-  z-index: 3;
+  z-index: 4;
 }
 @keyframes price-dissolve {
   0% {

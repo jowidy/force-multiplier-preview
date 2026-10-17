@@ -39,12 +39,14 @@
     const motion = matchMedia('(prefers-reduced-motion: reduce)');
     let timer: ReturnType<typeof setTimeout>;
     const finish = () => {
+      const restoreFocus = document.activeElement === skip;
       clearTimeout(timer);
       card.classList.remove('is-sparkling');
       card.classList.add('is-revealed');
       skip.hidden = true;
-      play.disabled = false;
+      play.setAttribute('aria-disabled', 'false');
       play.textContent = 'Play price reveal again';
+      if (restoreFocus) play.focus();
     };
     const sync = () => {
       clearTimeout(timer);
@@ -52,14 +54,14 @@
       card.classList.remove('is-sparkling', 'is-revealed');
       play.hidden = motion.matches;
       skip.hidden = true;
-      play.disabled = false;
+      play.setAttribute('aria-disabled', 'false');
     };
     sync();
     motion.addEventListener('change', sync);
     play.addEventListener('click', () => {
-      if (motion.matches) return;
+      if (motion.matches || play.getAttribute('aria-disabled') === 'true') return;
       card.classList.remove('is-revealed');
-      play.disabled = true;
+      play.setAttribute('aria-disabled', 'true');
       skip.hidden = false;
       requestAnimationFrame(() => {
         card.classList.add('is-sparkling');
