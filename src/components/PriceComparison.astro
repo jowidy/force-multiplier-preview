@@ -20,143 +20,185 @@ const fitLabels: Record<string, string> = {
   <div class="wrap">
     <div class="comparison-intro">
       <div>
-        <p class="eyebrow">Eleven ways to get a little help</p>
-        <h2 id="comparison-title">Different offers.<br />One clear FM fee.</h2>
+        <p class="eyebrow">A little help. A clear price.</p>
+        <h2 id="comparison-title">Eleven useful services.<br />$400 each.</h2>
       </div>
       <div class="comparison-explanation">
         <p>
-          See published agency prices beside each of our services. Watch the numbers turn to powder,
-          then come together as <strong>$400.</strong>
+          Published agency prices, next to ours. Scroll through and watch the numbers find a new
+          home.
         </p>
         <p class="comparison-small">
-          These are named examples, not industry averages or identical packages. Some cost less than
-          FM. Read the scope notes before comparing.
+          <strong>Examples, not market medians.</strong> The research does not establish comparable medians.
+          Some examples cost less than FM. Open each <span
+            class="info-inline"
+            aria-label="information">i</span
+          > for sources, sample limits and scope differences.
         </p>
       </div>
     </div>
     <div class="comparison-toolbar">
+      <p class="comparison-small" data-comparison-status aria-live="polite">
+        Seven monthly services. Four one-time projects. All prices in USD.
+      </p>
       <div class="comparison-controls" hidden data-comparison-controls>
-        <button type="button" class="comparison-play" data-play-comparisons
-          >Play comparisons as I scroll <span aria-hidden="true">↗</span></button
-        >
-        <button type="button" class="comparison-stop" data-stop-comparisons hidden
-          >Show prices now</button
+        <button type="button" data-stop-comparisons>Show all prices now</button>
+        <button type="button" data-replay-comparisons hidden
+          >Replay as I scroll <span aria-hidden="true">↻</span></button
         >
       </div>
-      <p class="comparison-small" data-comparison-status aria-live="polite">
-        Seven monthly services. Four one-time projects. Each contracted separately.
-      </p>
     </div>
-    <div class="comparison-list">
-      {
-        agencyBenchmarks.map((benchmark, index) => {
-          const service = services.find((item) => item.slug === benchmark.slug)!;
-          return (
-            <article
-              class="comparison-row"
-              data-comparison-row
-              data-service={service.slug}
-              data-state="static"
-              data-cadence={service.category}
-            >
-              <div class="comparison-service">
-                <span class="comparison-index">
-                  {String(index + 1).padStart(2, '0')} /{' '}
-                  {service.category === 'monthly' ? 'MONTHLY' : 'ONE TIME'}
-                </span>
-                <h3>
-                  <a href={href(`/services/${service.slug}`)}>{service.title}</a>
-                </h3>
-                <p>{service.benefit}</p>
-                <div class="comparison-row-controls" hidden data-row-controls>
-                  <button
-                    type="button"
-                    class="comparison-watch"
-                    data-play-row
-                    aria-label={`Animate ${service.shortTitle.toLowerCase()} price comparison`}
-                  >
-                    Watch this price <span aria-hidden="true">→</span>
-                  </button>
-                  <button type="button" class="comparison-watch" data-skip-row hidden>
-                    Skip animation
-                  </button>
-                </div>
-              </div>
-              <div class="comparison-price-track" data-price-track>
-                <div class="comparison-agency">
-                  <p class="comparison-column-label">Agency example</p>
-                  <p class="comparison-provider">{benchmark.provider}</p>
-                  <div class="comparison-number-line">
-                    {benchmark.pricePrefix && (
-                      <span class="comparison-prefix">{benchmark.pricePrefix}</span>
-                    )}
-                    <strong
-                      class:list={[
-                        'comparison-source-number',
-                        { 'comparison-number-wide': benchmark.price.length > 8 },
-                      ]}
-                      data-source-number
-                    >
-                      {benchmark.price}
-                    </strong>
-                  </div>
-                  <p class="comparison-period">{benchmark.period}</p>
-                  <span class="comparison-fit">
-                    {fitLabels[benchmark.fit] || 'Published example'}
+    <div
+      class="comparison-table"
+      role="table"
+      aria-label="Eleven services: published agency examples and Force Multiplier fees"
+    >
+      <div class="comparison-table-head" role="row">
+        <div role="columnheader">Offering / description</div>
+        <div role="columnheader">Agency price<span aria-hidden="true">*</span></div>
+        <div role="columnheader">Force Multiplier</div>
+      </div>
+      <div role="rowgroup">
+        {
+          agencyBenchmarks.map((benchmark, index) => {
+            const service = services.find((item) => item.slug === benchmark.slug)!;
+            return (
+              <div
+                class="comparison-row"
+                role="row"
+                data-comparison-row
+                data-service={service.slug}
+                data-state="static"
+                data-cadence={service.category}
+              >
+                <div class="comparison-service" role="rowheader">
+                  <span class="comparison-index">
+                    {String(index + 1).padStart(2, '0')} /{' '}
+                    {service.category === 'monthly' ? 'MONTHLY' : 'ONE TIME'}
                   </span>
-                </div>
-                <span class="comparison-arrow" aria-hidden="true">
-                  →
-                </span>
-                <div class="comparison-fm">
-                  <p class="comparison-column-label">Force Multiplier</p>
-                  <p class="comparison-provider">Your choice of service</p>
-                  <div class="comparison-number-line">
-                    <strong class="comparison-target-number" data-target-number>
-                      $400
-                    </strong>
-                  </div>
-                  <p class="comparison-period">{benchmark.fmPeriod}</p>
-                  <a class="comparison-service-link" href={href(`/services/${service.slug}`)}>
+                  <h3>
+                    <a href={href(`/services/${service.slug}`)}>{service.title}</a>
+                  </h3>
+                  <p>{service.benefit}</p>
+                  <a class="comparison-scope-link" href={href(`/services/${service.slug}`)}>
                     See FM scope <span aria-hidden="true">↗</span>
                   </a>
                 </div>
-                <canvas class="comparison-canvas" data-price-canvas aria-hidden="true" />
+                <div class="comparison-price-track" role="presentation" data-price-track>
+                  <div class="comparison-agency" role="cell" aria-label="Agency price example">
+                    <div class="comparison-agency-label">
+                      <span>{benchmark.statisticLabel}</span>
+                      <details class="comparison-source-info" data-source-info>
+                        <summary
+                          aria-label={`Sources and scope for ${service.shortTitle.toLowerCase()}`}
+                          title="Open sources and comparison method"
+                        >
+                          <span aria-hidden="true">i</span>
+                        </summary>
+                        <div
+                          class="comparison-evidence"
+                          role="region"
+                          aria-label={`${service.shortTitle}: sources and comparison method`}
+                        >
+                          <p class="source-popover-title">
+                            {service.shortTitle}: behind the number
+                          </p>
+                          <p>
+                            <strong>
+                              {benchmark.provider}:{' '}
+                              {benchmark.pricePrefix ? benchmark.pricePrefix + ' ' : ''}
+                              {benchmark.price} {benchmark.period}.
+                            </strong>
+                          </p>
+                          <p>
+                            <strong>What it covers:</strong> {benchmark.label}
+                          </p>
+                          <p>
+                            <span class="comparison-fit">{fitLabels[benchmark.fit]}</span>{' '}
+                            {benchmark.caveat}
+                          </p>
+                          <p class="comparison-method-note">
+                            <strong>Method and sample:</strong> {benchmark.method} The displayed
+                            amount represents {benchmark.sampleSize} independent published offer
+                            {benchmark.sampleSize === 1 ? '' : 's'}.
+                          </p>
+                          <p class="comparison-citations">
+                            Sources:{' '}
+                            {benchmark.sources.map((source, sourceIndex) => (
+                              <>
+                                <a href={source.url}>{source.label}</a>
+                                {sourceIndex < benchmark.sources.length - 1 ? ' · ' : ''}
+                              </>
+                            ))}
+                            <br />
+                            <span>
+                              Checked {benchmark.checkedAt}. These are reference prices, not
+                              equivalent-package savings.
+                            </span>
+                          </p>
+                          <button
+                            type="button"
+                            class="comparison-source-close"
+                            data-close-source
+                            hidden
+                          >
+                            Close source details
+                          </button>
+                        </div>
+                      </details>
+                    </div>
+                    <div class="comparison-number-block">
+                      <span class="comparison-prefix">{benchmark.pricePrefix || '\u00a0'}</span>
+                      <strong
+                        class:list={[
+                          'comparison-source-number',
+                          { 'comparison-number-wide': benchmark.price.length > 8 },
+                        ]}
+                        data-source-number
+                      >
+                        {benchmark.price}
+                      </strong>
+                      <span class="comparison-period">{benchmark.period}</span>
+                    </div>
+                    <p class="comparison-provider">{benchmark.provider}</p>
+                  </div>
+                  <div
+                    class="comparison-fm"
+                    role="cell"
+                    aria-label={`Force Multiplier: $400 ${benchmark.fmPeriod}`}
+                  >
+                    <div class="comparison-fm-result" data-fm-result>
+                      <strong class="comparison-target-number" data-target-number>
+                        $400
+                      </strong>
+                      <span class="comparison-period">{benchmark.fmPeriod}</span>
+                    </div>
+                  </div>
+                  <canvas class="comparison-canvas" data-price-canvas aria-hidden="true" />
+                </div>
               </div>
-              <div class="comparison-evidence">
-                <p>
-                  <strong>What the example covers:</strong> {benchmark.label}
-                </p>
-                <p>{benchmark.caveat}</p>
-                <p class="comparison-citations">
-                  Source:{' '}
-                  {benchmark.sources.map((source, sourceIndex) => (
-                    <>
-                      <a href={source.url}>{source.label}</a>
-                      {sourceIndex < benchmark.sources.length - 1 ? ' · ' : ''}
-                    </>
-                  ))}{' '}
-                  <span> · Checked {benchmark.checkedAt}</span>
-                </p>
-              </div>
-            </article>
-          );
-        })
-      }
+            );
+          })
+        }
+      </div>
     </div>
     <aside class="comparison-method" aria-label="How to read these comparisons">
-      <h3>A reference point, with the details left in.</h3>
+      <h3>The details stay in the picture.</h3>
       <p>
-        We selected relevant, publicly listed offers from the pricing research. A range belongs to
-        the named provider; it is not a market average. Starting prices, bundles, billing units and
-        conditional add-ons stay labeled. The animation illustrates FM's fee, not a calculation of
-        savings or a claim of equal deliverables.
+        <strong>*Agency prices are named published examples.</strong> A range belongs to the named provider,
+        not the market. There are not enough like-for-like offers to establish defensible comparable
+        medians. Open the information controls for the source, sample and limits of each comparison.
+        Broader bundles, starting fees, lower-priced offers and conditional add-ons stay identified.
       </p>
       <p>
-        FM's recurring services are $400 per month on separate month-to-month agreements. Projects
-        are $400 one time. Apart from 20 social posts per month, proposed limits still need review
-        and agreement. Advertising spend, software, hosting, domains and other third-party costs are
-        separate where needed and disclosed before agreement. This preview accepts no payment.
+        The animation illustrates FM's fee; it is not a savings calculation or a claim of equal
+        deliverables. Each service has its own agreement. Recurring services are $400 per month,
+        month-to-month; projects are $400 one time. Apart from 20 social posts per month, proposed
+        limits still need review and agreement.
+      </p>
+      <p>
+        Advertising spend, software, hosting, domains and other third-party costs are separate where
+        needed and disclosed before agreement. This preview accepts no payment.
       </p>
     </aside>
   </div>
@@ -170,7 +212,7 @@ const fitLabels: Record<string, string> = {
 <style>
   .comparison-section {
     background: var(--cream);
-    scroll-margin-top: 24px;
+    scroll-margin-top: 20px;
   }
   .comparison-intro {
     display: grid;
@@ -192,17 +234,29 @@ const fitLabels: Record<string, string> = {
   }
   .comparison-small {
     font-size: 13px;
-    line-height: 1.65;
+    line-height: 1.7;
+  }
+  .info-inline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    width: 17px;
+    height: 17px;
+    font-size: 11px;
+    font-weight: 600;
   }
   .comparison-toolbar {
     display: flex;
     gap: 24px;
     align-items: center;
     justify-content: space-between;
-    margin: 28px 0 24px;
+    margin: 28px 0 18px;
+    min-height: 44px;
   }
   .comparison-toolbar > p {
-    max-width: 380px;
+    max-width: 640px;
     margin: 0;
   }
   .comparison-controls {
@@ -210,49 +264,62 @@ const fitLabels: Record<string, string> = {
     gap: 12px;
     flex-wrap: wrap;
   }
-  .comparison-play,
-  .comparison-stop,
-  .comparison-watch {
+  .comparison-controls button {
     min-height: 44px;
+    padding: 6px 0;
     border: 0;
-    font-size: 13px;
+    background: transparent;
+    color: var(--blue);
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    font-size: 12px;
     font-weight: 600;
   }
-  .comparison-play {
-    padding: 12px 20px;
-    border-radius: 8px;
-    background: var(--blue);
-    color: #fff;
+  .comparison-table {
+    border: 1px solid #b9c8d6;
+    border-radius: 12px;
+    background: #fff;
   }
-  .comparison-play span {
-    padding-left: 10px;
-  }
-  .comparison-stop {
-    padding: 8px 12px;
-    background: transparent;
-    color: var(--navy);
-    text-decoration: underline;
-  }
-  .comparison-list {
+  .comparison-table-head {
     display: grid;
-    gap: 20px;
+    grid-template-columns: 38% 32% 30%;
+    border-radius: 11px 11px 0 0;
+    color: #fff;
+    background: var(--navy);
+  }
+  .comparison-table-head > div {
+    padding: 20px 24px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.45;
+  }
+  .comparison-table-head > div:not(:first-child) {
+    text-align: center;
   }
   .comparison-row {
     display: grid;
-    grid-template-columns: 0.8fr 1.5fr;
-    background: #fff;
-    border: 1px solid #b9c8d6;
-    border-radius: 16px;
-    overflow: hidden;
+    grid-template-columns: 38% 62%;
+    position: relative;
+    min-height: 230px;
+    border-top: 1px solid #c8d5df;
+  }
+  .comparison-row:first-child {
+    border-top: 0;
+  }
+  .comparison-row:last-child .comparison-fm {
+    border-radius: 0 0 11px 0;
+  }
+  .comparison-row:has(details[open]) {
+    z-index: 5;
   }
   .comparison-service {
     padding: 28px;
   }
   .comparison-index {
     display: block;
-    font-size: 11px;
+    font-size: 10px;
     font-weight: 600;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     color: #4d6074;
     margin-bottom: 10px;
   }
@@ -272,70 +339,87 @@ const fitLabels: Record<string, string> = {
     line-height: 1.65;
     margin: 0;
   }
-  .comparison-row-controls {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px 12px;
-    margin-top: 12px;
-  }
-  .comparison-watch {
-    padding: 4px 0;
-    background: transparent;
+  .comparison-scope-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    font-size: 12px;
     color: var(--blue);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-    text-align: left;
-  }
-  .comparison-watch span {
-    margin-left: 7px;
-  }
-  .comparison-watch[aria-disabled='true'] {
-    color: #4d6074;
-    cursor: default;
+    margin-top: 4px;
   }
   .comparison-price-track {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 32fr 30fr;
     position: relative;
     min-width: 0;
   }
   .comparison-agency,
   .comparison-fm {
-    padding: 26px 16px 22px;
-    text-align: center;
     min-width: 0;
+    text-align: center;
+    padding: 20px 12px;
   }
   .comparison-agency {
-    border-left: 1px solid #dce4eb;
-  }
-  .comparison-fm {
-    background: #fff0cf;
-  }
-  .comparison-column-label {
-    margin: 0 0 5px;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.055em;
-    color: var(--navy);
-  }
-  .comparison-provider {
-    min-height: 24px;
-    margin: 0;
-    font-size: 12px;
-    color: #43576a;
-  }
-  .comparison-number-line {
-    min-height: 76px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
-    padding: 8px 0 2px;
+    border-left: 1px solid #e0e8ef;
+  }
+  .comparison-agency-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 11px;
+    color: #43576a;
+    line-height: 1.45;
+  }
+  .comparison-source-info summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    list-style: none;
+    color: var(--blue);
+  }
+  .comparison-source-info summary::-webkit-details-marker {
+    display: none;
+  }
+  .comparison-source-info summary > span {
+    width: 23px;
+    height: 23px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid currentColor;
+    border-radius: 50%;
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .comparison-source-info summary:hover > span,
+  .comparison-source-info[open] summary > span {
+    background: var(--blue);
+    color: #fff;
+    border-color: var(--blue);
+  }
+  .comparison-source-info summary:focus-visible {
+    outline: 3px solid #bf6200;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+  .comparison-number-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .comparison-prefix {
     font-size: 11px;
-    line-height: 1.2;
+    height: 18px;
+    line-height: 18px;
   }
   .comparison-source-number,
   .comparison-target-number {
@@ -347,49 +431,31 @@ const fitLabels: Record<string, string> = {
     white-space: nowrap;
   }
   .comparison-number-wide {
-    font-size: clamp(20px, 2.6vw, 32px);
-  }
-  .comparison-target-number {
-    font-size: 52px;
+    font-size: clamp(20px, 2.6vw, 34px);
   }
   .comparison-period {
-    margin: 1px 0 12px;
+    display: block;
     font-size: 12px;
     color: #43576a;
-    min-height: 22px;
+    line-height: 1.6;
   }
-  .comparison-fit {
-    display: inline-block;
-    font-size: 10px;
-    line-height: 1.5;
-    border-radius: 4px;
-    padding: 4px 7px;
+  .comparison-provider {
+    font-size: 11px;
+    line-height: 1.6;
     color: #43576a;
-    background: #edf3f8;
+    margin: 14px 0 0;
   }
-  .comparison-service-link {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--navy);
-    display: inline-flex;
+  .comparison-fm {
+    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    min-height: 32px;
+    background: #fff0cf;
   }
-  .comparison-arrow {
-    position: absolute;
-    z-index: 1;
-    left: 50%;
-    top: 46%;
-    transform: translate(-50%, -50%);
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    line-height: 30px;
-    border-radius: 50%;
-    background: var(--coral);
-    color: var(--navy);
+  .comparison-target-number {
+    font-size: 54px;
+  }
+  .comparison-fm-result {
+    padding-top: 16px;
   }
   .comparison-canvas {
     position: absolute;
@@ -399,29 +465,62 @@ const fitLabels: Record<string, string> = {
     pointer-events: none;
     z-index: 2;
   }
-  .comparison-row:global(.has-played) .comparison-source-number {
+  .comparison-row:global(.has-shadow) .comparison-source-number {
     color: #64748b;
     text-shadow: 0 2px 0 #eff3f7;
   }
-  .comparison-row:global(.is-running) .comparison-target-number {
+  .comparison-row:global(.motion-ready):not(:global(.is-complete)) .comparison-fm-result {
     opacity: 0;
   }
   .comparison-evidence {
-    grid-column: 1 / -1;
-    border-top: 1px solid #dce4eb;
-    padding: 16px 28px;
+    position: absolute;
+    top: 52px;
+    left: 0;
+    right: 0;
+    z-index: 8;
+    padding: 22px;
+    border: 1px solid #91a7bc;
+    border-radius: 10px;
+    box-shadow: 0 12px 35px #102b4624;
+    background: #fff;
+    text-align: left;
+    color: var(--ink);
   }
   .comparison-evidence p {
     font-size: 12px;
-    line-height: 1.7;
-    margin: 0 0 5px;
+    line-height: 1.8;
+    margin: 0 0 10px;
   }
-  .comparison-evidence .comparison-citations {
-    margin-bottom: 0;
+  .comparison-evidence .source-popover-title {
+    font-size: 16px;
+    line-height: 1.4;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 14px;
+  }
+  .comparison-fit {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 5px;
+    border-radius: 3px;
+    background: #edf3f8;
     color: #43576a;
-    font-size: 11px;
   }
   .comparison-citations a {
+    color: var(--blue);
+  }
+  .comparison-evidence .comparison-citations {
+    font-size: 11px;
+    margin-bottom: 0;
+  }
+  .comparison-source-close {
+    min-height: 44px;
+    margin-top: 8px;
+    border: 0;
+    padding: 6px 0;
+    font-size: 12px;
+    text-decoration: underline;
+    background: transparent;
     color: var(--blue);
   }
   .comparison-method {
@@ -453,72 +552,87 @@ const fitLabels: Record<string, string> = {
     .comparison-toolbar {
       align-items: flex-start;
       flex-direction: column;
-      gap: 12px;
-    }
-    .comparison-toolbar > p {
-      max-width: none;
-    }
-    .comparison-row {
-      grid-template-columns: 1fr;
+      gap: 8px;
     }
     .comparison-service {
-      padding: 22px 22px 14px;
+      padding: 20px 14px;
     }
-    .comparison-row-controls {
-      margin-top: 6px;
+    .comparison-service h3 {
+      font-size: 18px;
     }
-    .comparison-price-track {
-      border-top: 1px solid #dce4eb;
-    }
-    .comparison-agency {
-      border-left: 0;
+    .comparison-table-head > div {
+      font-size: 12px;
+      padding: 17px 12px;
     }
     .comparison-source-number {
-      font-size: 38px;
+      font-size: 32px;
     }
     .comparison-number-wide {
-      font-size: clamp(18px, 4.5vw, 32px);
+      font-size: clamp(14px, 2.6vw, 25px);
     }
     .comparison-target-number {
-      font-size: 44px;
+      font-size: 38px;
     }
-    .comparison-number-line {
-      min-height: 70px;
+    .comparison-agency-label {
+      gap: 0;
+      flex-direction: column;
     }
     .comparison-evidence {
-      padding: 16px 22px;
+      left: -61.3%;
     }
   }
   @media (max-width: 479px) {
+    .comparison-row {
+      min-height: 270px;
+    }
+    .comparison-service {
+      padding: 18px 10px;
+    }
+    .comparison-service h3 {
+      font-size: 15px;
+      line-height: 1.4;
+    }
+    .comparison-service > p {
+      font-size: 11px;
+      line-height: 1.75;
+    }
+    .comparison-index {
+      font-size: 9px;
+      letter-spacing: 0;
+    }
+    .comparison-scope-link {
+      font-size: 10px;
+      gap: 3px;
+    }
+    .comparison-table-head > div {
+      font-size: 11px;
+      padding: 16px 10px;
+    }
     .comparison-agency,
     .comparison-fm {
-      padding: 20px 8px 18px;
+      padding: 16px 5px;
     }
-    .comparison-column-label {
+    .comparison-agency-label {
       font-size: 10px;
-      letter-spacing: 0.025em;
-    }
-    .comparison-provider {
-      font-size: 10px;
-      min-height: 34px;
     }
     .comparison-source-number {
-      font-size: 31px;
+      font-size: 25px;
     }
     .comparison-number-wide {
-      font-size: 17px;
+      font-size: 13px;
     }
     .comparison-target-number {
-      font-size: 40px;
+      font-size: 31px;
     }
-    .comparison-arrow {
-      width: 24px;
-      height: 24px;
-      line-height: 24px;
-      font-size: 14px;
+    .comparison-period,
+    .comparison-provider {
+      font-size: 10px;
     }
-    .comparison-period {
-      font-size: 11px;
+    .comparison-provider {
+      overflow-wrap: anywhere;
+    }
+    .comparison-evidence {
+      padding: 18px;
     }
     .comparison-method {
       padding: 22px;
@@ -526,11 +640,10 @@ const fitLabels: Record<string, string> = {
   }
   @media (prefers-reduced-motion: reduce) {
     .comparison-canvas,
-    .comparison-controls,
-    .comparison-row-controls {
+    .comparison-controls {
       display: none !important;
     }
-    .comparison-row:global(.is-running) .comparison-target-number {
+    .comparison-row:global(.motion-ready) .comparison-fm-result {
       opacity: 1;
     }
   }

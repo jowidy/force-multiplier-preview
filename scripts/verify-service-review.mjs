@@ -80,8 +80,12 @@ for (const slug of expected) {
     `${slug}: decorative canvas exposed`,
   );
   check(
-    row.find('[data-row-controls][hidden]').length === 1,
-    `${slug}: no-JS animation controls visible`,
+    row.find('[data-source-info] summary').length === 1,
+    `${slug}: missing accessible source disclosure`,
+  );
+  check(
+    row.find('.comparison-method-note').text().includes('Comparable median not established'),
+    `${slug}: missing median limitation`,
   );
 }
 check(

@@ -1,22 +1,46 @@
 type Point = { x: number; y: number };
-type Grain = { from: Point; to: Point; loose: Point; near: Point; delay: number; tint: number };
+type Grain = {
+  from: Point;
+  to: Point;
+  burst: Point;
+  near: Point;
+  phase: number;
+  tint: number;
+  previous: Point;
+};
+type RowPlayer = {
+  row: HTMLElement;
+  visible: boolean;
+  played: boolean;
+  start: () => void;
+  finish: (completed?: boolean) => void;
+  reset: () => void;
+};
 
-/** Sample the actual rendered price glyphs, then carry those pixels to the $400 glyphs. */
+/** One persistent set of sampled glyph particles: hold, radial burst, swirl, re-form. */
 export function initPriceComparisons() {
   document.querySelectorAll<HTMLElement>('[data-price-comparison]').forEach((section) => {
     const reduced = matchMedia('(prefers-reduced-motion: reduce)');
     const controls = section.querySelector<HTMLElement>('[data-comparison-controls]')!;
-    const playAll = section.querySelector<HTMLButtonElement>('[data-play-comparisons]')!;
-    const stopAll = section.querySelector<HTMLButtonElement>('[data-stop-comparisons]')!;
+    const stop = section.querySelector<HTMLButtonElement>('[data-stop-comparisons]')!;
+    const replay = section.querySelector<HTMLButtonElement>('[data-replay-comparisons]')!;
     const status = section.querySelector<HTMLElement>('[data-comparison-status]')!;
-    let armed = false;
+    const HOLD = 2000,
+      BURST = 480,
+      SWIRL = 3000,
+      FORM = 1700,
+      SETTLE = 450;
+    let active: RowPlayer | undefined;
+    let enabled = !reduced.matches;
+    let ready = false;
     let seed = 19;
+    let cycle = 0;
     const random = () => {
       seed = (seed * 16807) % 2147483647;
       return (seed - 1) / 2147483646;
     };
     const ease = (t: number) => t * t * (3 - 2 * t);
-    const between = (a: Point, b: Point, t: number): Point => ({
+    const mix = (a: Point, b: Point, t: number): Point => ({
       x: a.x + (b.x - a.x) * t,
       y: a.y + (b.y - a.y) * t,
     });
@@ -27,238 +51,291 @@ export function initPriceComparisons() {
       }
       return items;
     };
-    const rows = Array.from(section.querySelectorAll<HTMLElement>('[data-comparison-row]')).map(
-      (row) => {
-        const track = row.querySelector<HTMLElement>('[data-price-track]')!;
-        const source = row.querySelector<HTMLElement>('[data-source-number]')!;
-        const target = row.querySelector<HTMLElement>('[data-target-number]')!;
-        const canvas = row.querySelector<HTMLCanvasElement>('[data-price-canvas]')!;
-        const context = canvas.getContext('2d');
-        const rowControls = row.querySelector<HTMLElement>('[data-row-controls]')!;
-        const play = row.querySelector<HTMLButtonElement>('[data-play-row]')!;
-        const skip = row.querySelector<HTMLButtonElement>('[data-skip-row]')!;
-        let frame = 0;
-        let running = false;
-        let pending = false;
-        let played = false;
-        let generation = 0;
-        const finish = (completed = true) => {
-          generation++;
-          pending = false;
-          cancelAnimationFrame(frame);
-          running = false;
-          context?.clearRect(0, 0, canvas.width, canvas.height);
-          row.classList.remove('is-running');
-          if (completed) {
-            played = true;
-            row.classList.add('has-played');
+    const pump = () => {
+      if (!ready || !enabled || reduced.matches || document.hidden || active) return;
+      const next = rows.find((item) => item.visible && !item.played);
+      if (next) {
+        active = next;
+        next.start();
+      }
+    };
+    const rows: RowPlayer[] = Array.from(
+      section.querySelectorAll<HTMLElement>('[data-comparison-row]'),
+    ).map((row) => {
+      const track = row.querySelector<HTMLElement>('[data-price-track]')!;
+      const source = row.querySelector<HTMLElement>('[data-source-number]')!;
+      const target = row.querySelector<HTMLElement>('[data-target-number]')!;
+      const canvas = row.querySelector<HTMLCanvasElement>('[data-price-canvas]')!;
+      const context = canvas.getContext('2d');
+      let frame = 0;
+      let running = false;
+      const player: RowPlayer = { row, visible: false, played: false, start, finish, reset };
+      function finish(completed = true) {
+        cancelAnimationFrame(frame);
+        running = false;
+        context?.clearRect(0, 0, canvas.width, canvas.height);
+        row.classList.remove('is-running');
+        row.classList.toggle('is-complete', completed);
+        row.classList.toggle('has-shadow', completed);
+        player.played = completed;
+        row.dataset.state = completed ? 'complete' : 'waiting';
+        if (active === player) active = undefined;
+        requestAnimationFrame(pump);
+      }
+      function reset() {
+        finish(false);
+        row.classList.toggle('motion-ready', enabled && !reduced.matches && !!context);
+        row.dataset.state = enabled && !reduced.matches && context ? 'waiting' : 'static';
+        if (!context) player.played = true;
+      }
+      function sample(element: HTMLElement, width: number, height: number, step: number) {
+        const mask = document.createElement('canvas');
+        mask.width = Math.ceil(width);
+        mask.height = Math.ceil(height);
+        const maskContext = mask.getContext('2d', { willReadFrequently: true });
+        if (!maskContext) return [];
+        const bounds = element.getBoundingClientRect(),
+          area = track.getBoundingClientRect();
+        const style = getComputedStyle(element);
+        maskContext.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
+        maskContext.textAlign = 'center';
+        const metrics = maskContext.measureText(element.textContent || '');
+        const ascent = metrics.fontBoundingBoxAscent ?? metrics.actualBoundingBoxAscent;
+        const descent = metrics.fontBoundingBoxDescent ?? metrics.actualBoundingBoxDescent;
+        const baseline = bounds.top - area.top + (bounds.height - ascent - descent) / 2 + ascent;
+        maskContext.fillText(
+          element.textContent || '',
+          bounds.left - area.left + bounds.width / 2,
+          baseline,
+        );
+        const pixels = maskContext.getImageData(0, 0, mask.width, mask.height).data;
+        const points: Point[] = [];
+        for (let y = 0; y < mask.height; y += step)
+          for (let x = 0; x < mask.width; x += step) {
+            if (pixels[(Math.floor(y) * mask.width + Math.floor(x)) * 4 + 3] > 100)
+              points.push({ x, y });
           }
-          row.dataset.state = completed ? 'complete' : 'static';
-          play.setAttribute('aria-disabled', 'false');
-          play.innerHTML = completed
-            ? 'Replay this price <span aria-hidden="true">↻</span>'
-            : 'Watch this price <span aria-hidden="true">→</span>';
-          const focusSkip = document.activeElement === skip;
-          skip.hidden = true;
-          if (focusSkip && !reduced.matches) play.focus();
+        return points;
+      }
+      function start() {
+        if (!context || running || !enabled || reduced.matches) {
+          if (active === player) active = undefined;
+          return;
+        }
+        const { width, height } = track.getBoundingClientRect();
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.round(width * dpr);
+        canvas.height = Math.round(height * dpr);
+        context.setTransform(dpr, 0, 0, dpr, 0, 0);
+        const step = width < 350 ? 1.15 : 1.8;
+        const from = shuffle(sample(source, width, height, step));
+        const to = shuffle(sample(target, width, height, step));
+        if (!from.length || !to.length) {
+          finish();
+          return;
+        }
+        const sourceBox = source.getBoundingClientRect(),
+          area = track.getBoundingClientRect();
+        const center = {
+          x: sourceBox.left - area.left + sourceBox.width / 2,
+          y: sourceBox.top - area.top + sourceBox.height / 2,
         };
-        const sample = (element: HTMLElement, width: number, height: number, step: number) => {
-          const mask = document.createElement('canvas');
-          mask.width = Math.ceil(width);
-          mask.height = Math.ceil(height);
-          const maskContext = mask.getContext('2d', { willReadFrequently: true });
-          if (!maskContext) return [];
-          const bounds = element.getBoundingClientRect(),
-            area = track.getBoundingClientRect();
-          const style = getComputedStyle(element);
-          maskContext.font = `${style.fontWeight} ${style.fontSize} ${style.fontFamily}`;
-          maskContext.textAlign = 'center';
-          maskContext.fillStyle = '#000';
-          const text = element.textContent || '';
-          const metrics = maskContext.measureText(text);
-          const centerX = bounds.left - area.left + bounds.width / 2;
-          const centerY = bounds.top - area.top + bounds.height / 2;
-          maskContext.fillText(
-            text,
-            centerX,
-            centerY + (metrics.actualBoundingBoxAscent - metrics.actualBoundingBoxDescent) / 2,
-          );
-          const pixels = maskContext.getImageData(0, 0, mask.width, mask.height).data;
-          const points: Point[] = [];
-          for (let y = 0; y < mask.height; y += step) {
-            for (let x = 0; x < mask.width; x += step) {
-              if (pixels[(Math.floor(y) * mask.width + Math.floor(x)) * 4 + 3] > 100)
-                points.push({ x, y });
-            }
-          }
-          return points;
-        };
-        const start = async () => {
-          if (reduced.matches || !context || running || pending) return;
-          pending = true;
-          const current = ++generation;
-          await document.fonts.ready;
-          if (current !== generation || reduced.matches) return;
-          pending = false;
-          const { width, height } = track.getBoundingClientRect();
-          if (!width || !height) return;
-          const dpr = Math.min(window.devicePixelRatio || 1, 2);
-          canvas.width = Math.round(width * dpr);
-          canvas.height = Math.round(height * dpr);
-          context.setTransform(dpr, 0, 0, dpr, 0, 0);
-          const step = width < 500 ? 1.8 : 2.2;
-          const from = shuffle(sample(source, width, height, step));
-          const to = shuffle(sample(target, width, height, step));
-          if (!from.length || !to.length) {
-            finish();
+        const count = Math.min(1800, Math.max(from.length, to.length));
+        const grains: Grain[] = Array.from({ length: count }, (_, i) => {
+          const origin = from[Math.floor((i * from.length) / count)];
+          const destination = to[Math.floor((i * to.length) / count)];
+          const phase = random() * Math.PI * 2;
+          const angle =
+            Math.atan2(origin.y - center.y, origin.x - center.x) + (random() - 0.5) * 0.6;
+          const radius = Math.min(width * 0.24, 115) * (0.3 + random() * 0.7);
+          return {
+            from: origin,
+            to: destination,
+            previous: origin,
+            phase,
+            tint: Math.floor(random() * 3),
+            burst: {
+              x: Math.max(3, Math.min(width - 3, origin.x + Math.cos(angle) * radius)),
+              y: Math.max(8, Math.min(height - 8, origin.y + Math.sin(angle) * radius)),
+            },
+            near: {
+              x: destination.x + Math.cos(phase) * Math.min(width * 0.08, 35),
+              y: destination.y + Math.sin(phase) * 34,
+            },
+          };
+        });
+        row.dataset.particleCount = String(count);
+        row.dataset.sourceSamples = String(from.length);
+        row.dataset.targetSamples = String(to.length);
+        row.dataset.particleGeneration = String(++cycle);
+        row.dataset.holdMs = String(HOLD);
+        row.dataset.burstMs = String(BURST);
+        row.dataset.swirlMs = String(SWIRL);
+        row.dataset.formMs = String(FORM);
+        row.dataset.state = 'holding';
+        row.classList.add('is-running');
+        row.classList.remove('is-complete', 'has-shadow');
+        running = true;
+        const began = performance.now();
+        const draw = (now: number) => {
+          const elapsed = now - began;
+          context!.clearRect(0, 0, width, height);
+          if (elapsed < HOLD) {
+            row.dataset.state = 'holding';
+            frame = requestAnimationFrame(draw);
             return;
           }
-          const count = Math.min(1400, Math.max(from.length, to.length));
-          const grains: Grain[] = Array.from({ length: count }, (_, i) => {
-            const origin = from[Math.floor((i * from.length) / count)];
-            const destination = to[Math.floor((i * to.length) / count)];
-            return {
-              from: origin,
-              to: destination,
-              loose: {
-                x: Math.max(8, Math.min(width - 8, origin.x + (random() - 0.2) * width * 0.24)),
-                y: Math.max(45, Math.min(height - 34, origin.y + (random() - 0.5) * 100)),
-              },
-              near: {
-                x: Math.max(
-                  width * 0.42,
-                  Math.min(width - 10, destination.x + (random() - 0.6) * width * 0.36),
-                ),
-                y: Math.max(45, Math.min(height - 34, destination.y + (random() - 0.5) * 100)),
-              },
-              delay: 180 + (origin.x / width) * 460 + random() * 380,
-              tint: Math.floor(random() * 3),
-            };
-          });
-          row.dataset.particleCount = String(count);
-          row.dataset.sourceSamples = String(from.length);
-          row.dataset.targetSamples = String(to.length);
-          row.dataset.state = 'dissolving';
-          row.classList.add('is-running', 'has-played');
-          play.setAttribute('aria-disabled', 'true');
-          skip.hidden = false;
-          running = true;
-          played = true;
-          const began = performance.now();
-          const draw = (now: number) => {
-            const elapsed = now - began;
-            context.clearRect(0, 0, width, height);
-            row.dataset.state =
-              elapsed < 1400 ? 'dissolving' : elapsed < 2700 ? 'travelling' : 'reforming';
-            for (const grain of grains) {
-              const t = Math.max(0, Math.min(1, (elapsed - grain.delay) / 3400));
-              let point: Point;
-              if (t < 0.26) point = between(grain.from, grain.loose, ease(t / 0.26));
-              else if (t < 0.66) point = between(grain.loose, grain.near, ease((t - 0.26) / 0.4));
-              else point = between(grain.near, grain.to, ease((t - 0.66) / 0.34));
-              const inFlight = t > 0.08 && t < 0.78;
-              context.fillStyle = inFlight
-                ? ['#06529f', '#e58b20', '#df6344'][grain.tint]
-                : '#06529f';
-              context.beginPath();
-              context.arc(point.x, point.y, step * (inFlight ? 0.55 : 0.61), 0, Math.PI * 2);
-              context.fill();
+          row.classList.add('has-shadow');
+          const time = elapsed - HOLD;
+          row.dataset.state =
+            time < BURST
+              ? 'bursting'
+              : time < BURST + SWIRL
+                ? 'swirling'
+                : time < BURST + SWIRL + FORM
+                  ? 'reforming'
+                  : 'settled';
+          for (const grain of grains) {
+            let point: Point;
+            let flight = false;
+            if (time < BURST) {
+              const t = time / BURST;
+              point = mix(grain.from, grain.burst, 1 - Math.pow(1 - t, 4));
+              flight = true;
+            } else if (time < BURST + SWIRL) {
+              const t = (time - BURST) / SWIRL;
+              point = mix(grain.burst, grain.near, ease(t));
+              const envelope = Math.sin(Math.PI * t);
+              const amplitude = Math.min(width * 0.11, 54) * envelope;
+              point.x += Math.cos(grain.phase + t * Math.PI * 2.3) * amplitude * 0.45;
+              point.y += Math.sin(grain.phase + t * Math.PI * 2.3) * amplitude;
+              flight = t < 0.85;
+            } else {
+              const t = Math.min(1, (time - BURST - SWIRL) / FORM);
+              point = mix(grain.near, grain.to, 1 - Math.pow(1 - t, 3));
             }
-            if (elapsed < 4450) frame = requestAnimationFrame(draw);
-            else finish();
-          };
-          frame = requestAnimationFrame(draw);
+            const color = flight ? ['#06529f', '#d98a1c', '#df6344'][grain.tint] : '#06529f';
+            if (flight && time >= BURST) {
+              context!.globalAlpha = 0.22;
+              context!.strokeStyle = color;
+              context!.lineWidth = step * 0.65;
+              context!.beginPath();
+              context!.moveTo(grain.previous.x, grain.previous.y);
+              context!.lineTo(point.x, point.y);
+              context!.stroke();
+            }
+            context!.globalAlpha = 1;
+            context!.fillStyle = color;
+            context!.beginPath();
+            context!.arc(point.x, point.y, step * (flight ? 0.62 : 0.64), 0, Math.PI * 2);
+            context!.fill();
+            grain.previous = point;
+          }
+          if (time < BURST + SWIRL + FORM + SETTLE) frame = requestAnimationFrame(draw);
+          else finish();
         };
-        play.addEventListener('click', () => {
-          void start();
-        });
-        skip.addEventListener('click', () => {
-          finish();
-          play.focus();
-        });
-        new ResizeObserver(() => {
-          if (running || pending) finish();
-        }).observe(track);
-        return {
-          row,
-          start,
-          finish,
-          get played() {
-            return played;
-          },
-          rearm() {
-            played = false;
-          },
-          sync() {
-            finish(false);
-            rowControls.hidden = reduced.matches || !context;
-          },
-        };
-      },
-    );
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (!armed || reduced.matches) return;
-        for (const entry of entries) {
-          const item = rows.find((candidate) => candidate.row === entry.target);
-          if (entry.isIntersecting && item && !item.played) void item.start();
+        frame = requestAnimationFrame(draw);
+      }
+      new ResizeObserver(() => {
+        if (running) finish();
+      }).observe(track);
+      return player;
+    });
+
+    // Source disclosures remain native details/summary controls without JavaScript.
+    const details = Array.from(section.querySelectorAll<HTMLDetailsElement>('[data-source-info]'));
+    details.forEach((detail) => {
+      const close = detail.querySelector<HTMLButtonElement>('[data-close-source]')!;
+      close.hidden = false;
+      close.addEventListener('click', () => {
+        detail.open = false;
+        detail.querySelector('summary')?.focus();
+      });
+      detail.addEventListener('toggle', () => {
+        if (detail.open)
+          details.forEach((other) => {
+            if (other !== detail) other.open = false;
+          });
+      });
+      detail.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+          detail.open = false;
+          detail.querySelector('summary')?.focus();
         }
-      },
-      { threshold: 0.25 },
-    );
-    rows.forEach(({ row }) => observer.observe(row));
-    playAll.addEventListener('click', () => {
-      if (reduced.matches) return;
-      armed = true;
-      stopAll.hidden = false;
-      playAll.textContent = 'Replay visible comparisons';
-      status.textContent =
-        'Prices animate once as you scroll. You can stop at any time or replay an individual price.';
-      rows.forEach((item) => {
-        item.rearm();
-        const box = item.row.getBoundingClientRect();
-        if (box.bottom > 0 && box.top < innerHeight) void item.start();
       });
     });
-    stopAll.addEventListener('click', () => {
-      armed = false;
+    document.addEventListener('click', (event) => {
+      if (event.target instanceof Node)
+        details.forEach((detail) => {
+          if (!detail.contains(event.target as Node)) detail.open = false;
+        });
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const item = rows.find((candidate) => candidate.row === entry.target);
+          if (!item) continue;
+          item.visible = entry.isIntersecting && entry.intersectionRatio >= 0.45;
+          if (active === item && !item.visible && item.row.dataset.state === 'holding')
+            item.finish(false);
+          else if (active === item && !entry.isIntersecting) item.finish();
+        }
+        pump();
+      },
+      { threshold: [0, 0.45], rootMargin: '-80px 0px -5% 0px' },
+    );
+    rows.forEach((item) => observer.observe(item.row));
+
+    const showStatic = () => {
+      enabled = false;
       rows.forEach((item) => item.finish());
-      stopAll.hidden = true;
+      stop.hidden = true;
+      replay.hidden = reduced.matches;
       status.textContent =
-        'All prices shown. Agency reference prices remain visible alongside FM fees.';
-      playAll.focus();
+        'All agency examples and FM prices are shown. Each service has a separate agreement.';
+    };
+    stop.addEventListener('click', () => {
+      showStatic();
+      replay.focus();
+    });
+    replay.addEventListener('click', () => {
+      enabled = !reduced.matches;
+      rows.forEach((item) => item.reset());
+      stop.hidden = false;
+      replay.hidden = true;
+      stop.focus();
+      status.textContent =
+        'Each visible row plays once, in order. No click needed. All prices in USD.';
+      pump();
     });
     const syncMotion = () => {
-      const focusedControl =
-        reduced.matches &&
-        section.contains(document.activeElement) &&
-        document.activeElement instanceof HTMLButtonElement;
-      armed = false;
-      rows.forEach((item) => item.sync());
+      const focusedMotionControl = controls.contains(document.activeElement);
+      enabled = !reduced.matches;
+      rows.forEach((item) => item.reset());
       controls.hidden = reduced.matches;
-      stopAll.hidden = true;
-      playAll.textContent = 'Play comparisons as I scroll';
+      stop.hidden = false;
+      replay.hidden = true;
       status.textContent = reduced.matches
         ? 'Reduced motion: all agency examples and FM prices are shown without animation.'
-        : 'Seven monthly services. Four one-time projects. Each contracted separately.';
-      if (focusedControl) {
+        : 'Each visible row plays once, in order. No click needed. All prices in USD.';
+      if (reduced.matches && focusedMotionControl) {
         const heading = section.querySelector<HTMLElement>('#comparison-title');
         heading?.setAttribute('tabindex', '-1');
         heading?.focus({ preventScroll: true });
       }
+      pump();
     };
     reduced.addEventListener('change', syncMotion);
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
-        armed = false;
-        rows.forEach((item) => item.finish());
-        stopAll.hidden = true;
-        playAll.textContent = 'Play comparisons as I scroll';
-        status.textContent = reduced.matches
-          ? 'Reduced motion: all agency examples and FM prices are shown without animation.'
-          : 'All prices shown. Press play to animate comparisons as you scroll again.';
-      }
+        if (active) active.finish(false);
+      } else pump();
     });
     syncMotion();
+    void document.fonts.ready.then(() => {
+      ready = true;
+      pump();
+    });
   });
 }
