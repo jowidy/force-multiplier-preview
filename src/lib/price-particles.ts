@@ -5,7 +5,6 @@ type Grain = {
   burst: Point;
   near: Point;
   phase: number;
-  tint: number;
   previous: Point;
 };
 type RowPlayer = {
@@ -122,6 +121,8 @@ export function initPriceComparisons() {
           if (active === player) active = undefined;
           return;
         }
+        row.classList.remove('is-complete', 'has-shadow');
+        const particleColor = getComputedStyle(source).color;
         const { width, height } = track.getBoundingClientRect();
         const dpr = Math.min(window.devicePixelRatio || 1, 2);
         canvas.width = Math.round(width * dpr);
@@ -148,12 +149,13 @@ export function initPriceComparisons() {
           const angle =
             Math.atan2(origin.y - center.y, origin.x - center.x) + (random() - 0.5) * 0.6;
           const radius = Math.min(width * 0.24, 115) * (0.3 + random() * 0.7);
+          // Keep the existing random sequence so a color change does not alter trajectories.
+          random();
           return {
             from: origin,
             to: destination,
             previous: origin,
             phase,
-            tint: Math.floor(random() * 3),
             burst: {
               x: Math.max(3, Math.min(width - 3, origin.x + Math.cos(angle) * radius)),
               y: Math.max(8, Math.min(height - 8, origin.y + Math.sin(angle) * radius)),
@@ -214,10 +216,9 @@ export function initPriceComparisons() {
               const t = Math.min(1, (time - BURST - SWIRL) / FORM);
               point = mix(grain.near, grain.to, 1 - Math.pow(1 - t, 3));
             }
-            const color = flight ? ['#06529f', '#d98a1c', '#df6344'][grain.tint] : '#06529f';
             if (flight && time >= BURST) {
               context!.globalAlpha = 0.22;
-              context!.strokeStyle = color;
+              context!.strokeStyle = particleColor;
               context!.lineWidth = step * 0.65;
               context!.beginPath();
               context!.moveTo(grain.previous.x, grain.previous.y);
@@ -225,7 +226,7 @@ export function initPriceComparisons() {
               context!.stroke();
             }
             context!.globalAlpha = 1;
-            context!.fillStyle = color;
+            context!.fillStyle = particleColor;
             context!.beginPath();
             context!.arc(point.x, point.y, step * (flight ? 0.62 : 0.64), 0, Math.PI * 2);
             context!.fill();
