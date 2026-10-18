@@ -14,6 +14,8 @@ const expected = [
   'google-business-profile',
 ];
 const failures = [];
+const sentences = new Intl.Segmenter('en', { granularity: 'sentence' });
+const pendingComparisons = new Set(['seo-content', 'newsletters', 'website-support']);
 const check = (ok, message) => {
   if (!ok) failures.push(message);
 };
@@ -65,15 +67,25 @@ check(
 for (const slug of expected) {
   const row = $(`[data-comparison-row][data-service="${slug}"]`);
   check(row.length === 1, `${slug}: missing or duplicate comparison`);
-  check(row.find('[data-source-number]').text().includes('$'), `${slug}: missing published amount`);
-  check(row.find('[data-target-number]').text() === '$400', `${slug}: wrong FM fee`);
+  const isPending = pendingComparisons.has(slug);
   check(
-    row.find('.comparison-citations a[href^="https://"]').length > 0,
-    `${slug}: missing source attribution`,
+    isPending
+      ? row.is('[data-comparison-pending]') &&
+          row.find('[data-source-number]').text().trim() === 'Scope pending'
+      : !row.is('[data-comparison-pending]') &&
+          row.find('[data-source-number]').text().includes('$'),
+    `${slug}: estimate/pending state does not match confirmed scope`,
+  );
+  check(row.find('[data-target-number]').text() === '$400', `${slug}: wrong FM fee`);
+  const summary = row.find('[data-comparison-summary]');
+  check(
+    summary.length === 1 && summary.text().trim().length > 0,
+    `${slug}: missing concise comparison summary`,
   );
   check(
-    row.find('.comparison-evidence').text().length > 100,
-    `${slug}: missing scope qualification`,
+    [...sentences.segment(summary.text().trim())].length === 1 &&
+      row.find('.comparison-evidence p').length === 1,
+    `${slug}: comparison disclosure must contain only one sentence`,
   );
   check(
     row.find('[data-price-canvas][aria-hidden="true"]').length === 1,
@@ -84,10 +96,19 @@ for (const slug of expected) {
     `${slug}: missing accessible source disclosure`,
   );
   check(
-    row.find('.comparison-method-note').text().includes('Comparable median not established'),
-    `${slug}: missing median limitation`,
+    row.find('.comparison-number-line [data-source-number]').length === 1 &&
+      row.find('.comparison-number-line [data-source-info]').length === 1,
+    `${slug}: information control must sit next to the comparison price`,
   );
 }
+check(!/published example/i.test($('main').text()), 'Comparison uses the removed label');
+check(
+  $('[data-comparison-pending]').length === 3 &&
+    $('[data-comparison-row]:not([data-comparison-pending])').length === 8,
+  'Expected eight estimates and three unresolved comparison scopes',
+);
+const home = load(await fs.readFile(new URL('../dist/index.html', import.meta.url), 'utf8'));
+check(!/published example/i.test(home('main').text()), 'Homepage uses the removed label');
 check(
   $('[data-comparison-row][data-cadence="monthly"]').length === 7 &&
     $('[data-comparison-row][data-cadence="once"]').length === 4,

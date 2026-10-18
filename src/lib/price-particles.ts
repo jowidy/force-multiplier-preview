@@ -57,7 +57,7 @@ export function initPriceComparisons() {
       for (const item of rows) if (item.visible && !item.played && !item.running) item.start();
     };
     const rows: RowPlayer[] = Array.from(
-      section.querySelectorAll<HTMLElement>('[data-comparison-row]'),
+      section.querySelectorAll<HTMLElement>('[data-comparison-row]:not([data-comparison-pending])'),
     ).map((row) => {
       const track = row.querySelector<HTMLElement>('[data-price-track]')!;
       const source = row.querySelector<HTMLElement>('[data-source-number]')!;
@@ -315,7 +315,7 @@ export function initPriceComparisons() {
       stop.hidden = true;
       replay.hidden = reduced.matches;
       status.textContent =
-        'All agency examples and FM prices are shown. Each service has a separate agreement.';
+        'All agency estimates and FM prices are shown. Each service has a separate agreement.';
     };
     stop.addEventListener('click', () => {
       showStatic();
@@ -341,7 +341,7 @@ export function initPriceComparisons() {
       stop.hidden = false;
       replay.hidden = true;
       status.textContent = reduced.matches
-        ? 'Reduced motion: all agency examples and FM prices are shown without animation.'
+        ? 'Reduced motion: all agency estimates and FM prices are shown without animation.'
         : 'Each visible row plays once, independently. No click needed. All prices in USD.';
       if (reduced.matches && focusedMotionControl) {
         const heading = section.querySelector<HTMLElement>('#comparison-title');

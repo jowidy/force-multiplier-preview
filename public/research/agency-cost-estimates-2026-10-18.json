@@ -1,0 +1,309 @@
+{
+  "version": 1,
+  "researched_at": "2026-10-18",
+  "status": "conditional_pending_FM_scope_inventory",
+  "display_label": "Estimated comparable agency cost",
+  "methodology": "Reasoned estimates for scoped quality US agency work, triangulated from provider pricing, agency research and delivery effort. Not population averages, verified FM quotes or guaranteed savings.",
+  "rows": [
+    {
+      "id": "social_posts",
+      "service": "20 branded social posts",
+      "currency": "USD",
+      "central_estimate": 2000,
+      "plausible_range": {
+        "low": 1500,
+        "high": 3500
+      },
+      "unit": "month",
+      "assumptions": "20 original concepts/captions and custom static branded graphics; modest channel set, scheduling and reporting; no original shoots.",
+      "confidence": "medium",
+      "evidence_classification": "scope_matched_bundles_plus_effort_estimate",
+      "tooltip": "Estimated $2,000/month for 20 custom branded posts, informed by Lotiva, The Hood Collective and scoped agency effort; actual quotes vary.",
+      "sources": [
+        {
+          "name": "Lotiva",
+          "url": "https://lotiva.com/pricing/social-media/"
+        },
+        {
+          "name": "The Hood Collective",
+          "url": "https://www.hoodcollective.com/cannabis-social-media"
+        }
+      ],
+      "fm_scope_confirmed": false
+    },
+    {
+      "id": "community_engagement",
+      "service": "Community engagement and partner amplification",
+      "currency": "USD",
+      "central_estimate": 1500,
+      "plausible_range": {
+        "low": 800,
+        "high": 2500
+      },
+      "unit": "month",
+      "assumptions": "Small brand; inbound/outbound engagement and selected partner amplification; assumed 8\u201315 hours monthly with business-day coverage; no 24/7 moderation or paid influencer fees.",
+      "confidence": "medium-low",
+      "evidence_classification": "historical_provider_survey_plus_effort_estimate",
+      "tooltip": "Estimated $1,500/month for active engagement and partner amplification, informed by Sprout Social\u2019s historical agency survey, The Hood Collective and scoped effort.",
+      "sources": [
+        {
+          "name": "Sprout Social",
+          "url": "https://media.sproutsocial.com/uploads/agency_pricing_packaging_report.pdf"
+        },
+        {
+          "name": "The Hood Collective",
+          "url": "https://www.hoodcollective.com/cannabis-social-media"
+        }
+      ],
+      "fm_scope_confirmed": false
+    },
+    {
+      "id": "meta_ads",
+      "service": "Meta Ads management",
+      "currency": "USD",
+      "central_estimate": 1500,
+      "plausible_range": {
+        "low": 1000,
+        "high": 3000
+      },
+      "unit": "month",
+      "assumptions": "Single business account; approximately $3,000\u2013$15,000 monthly media spend; optimization, creative variants/tests, budget allocation and reporting; media and shoots extra.",
+      "confidence": "medium",
+      "evidence_classification": "scope_matched_provider_prices_plus_effort_estimate",
+      "tooltip": "Estimated $1,500/month for Meta optimization, creative testing and reporting, informed by GrossiWeb and Lotiva; advertising spend is separate.",
+      "sources": [
+        {
+          "name": "GrossiWeb",
+          "url": "https://grossiweb.com/services/marketing/meta-ads-management"
+        },
+        {
+          "name": "Lotiva",
+          "url": "https://lotiva.com/pricing/meta-ads-management/"
+        }
+      ],
+      "fm_scope_confirmed": false
+    },
+    {
+      "id": "google_ads",
+      "service": "Google Ads management",
+      "currency": "USD",
+      "central_estimate": 1500,
+      "plausible_range": {
+        "low": 1000,
+        "high": 3000
+      },
+      "unit": "month",
+      "assumptions": "Single business account; approximately $3,000\u2013$15,000 monthly media spend; ad-copy tests, optimization, budget allocation and reporting; media and major production extra.",
+      "confidence": "medium",
+      "evidence_classification": "provider_pricing_formula_plus_scoped_estimate",
+      "tooltip": "Estimated $1,500/month for Google Ads optimization, testing and reporting, informed by WebFX and Lotiva; advertising spend is separate.",
+      "sources": [
+        {
+          "name": "WebFX",
+          "url": "https://www.webfx.com/ppc/services/"
+        },
+        {
+          "name": "Lotiva",
+          "url": "https://lotiva.com/pricing/google-ads-management/"
+        }
+      ],
+      "fm_scope_confirmed": false
+    },
+    {
+      "id": "seo_content",
+      "service": "Human-written optimized SEO article",
+      "currency": "USD",
+      "central_estimate": 600,
+      "plausible_range": {
+        "low": 400,
+        "high": 1000
+      },
+      "unit": "article",
+      "assumptions": "One 1,000\u20131,500 word article with research, human writing/editing, metadata, internal links, basic image and CMS publishing. Monthly FM cadence is unconfirmed.",
+      "confidence": "medium",
+      "evidence_classification": "production_prices_plus_completion_effort_estimate",
+      "tooltip": "Estimated $600 per fully optimized, human-written article, informed by Express Writers and WebFX; monthly cost depends on the agreed article count.",
+      "sources": [
+        {
+          "name": "Express Writers",
+          "url": "https://shop.expresswriters.com/content/content-writing/?type=blog"
+        },
+        {
+          "name": "WebFX",
+          "url": "https://www.webfx.com/content-marketing/pricing/"
+        }
+      ],
+      "conditional_monthly_scenarios": [
+        {
+          "articles": 2,
+          "central_estimate": 1200,
+          "low": 800,
+          "high": 2000
+        },
+        {
+          "articles": 4,
+          "central_estimate": 2400,
+          "low": 1600,
+          "high": 4000
+        }
+      ],
+      "fm_scope_confirmed": false
+    },
+    {
+      "id": "newsletter_growth",
+      "service": "Newsletters and active list growth",
+      "currency": "USD",
+      "central_estimate": 2500,
+      "plausible_range": {
+        "low": 1500,
+        "high": 4000
+      },
+      "unit": "month",
+      "assumptions": "Conditional scenario: four newsletters/campaigns monthly, copy/design/testing/reporting, opt-in forms/popups/lead-magnet optimization and simple automation. Software and acquisition media extra. FM cadence unconfirmed.",
+      "confidence": "medium",
+      "evidence_classification": "full_scope_package_plus_scoped_estimate",
+      "tooltip": "Estimated $2,500/month for four newsletters plus active list-growth work, informed by Lotiva\u2019s scope and agency effort; software and acquisition ads are separate.",
+      "sources": [
+        {
+          "name": "Lotiva",
+          "url": "https://lotiva.com/pricing/email-sms/"
+        }
+      ],
+      "fm_scope_confirmed": false
+    },
+    {
+      "id": "website_support",
+      "service": "Agency-managed website maintenance and support",
+      "currency": "USD",
+      "central_estimate": 750,
+      "plausible_range": {
+        "low": 500,
+        "high": 1250
+      },
+      "unit": "month",
+      "assumptions": "Conditional agency-support scenario: daily automated checks, patching, QA, tailored reporting and assumed 4\u20136 support/small-fix hours monthly. Does not imply daily human inspection. FM allowance unconfirmed.",
+      "confidence": "medium",
+      "evidence_classification": "engineering_package_and_agency_hourly_rate_estimate",
+      "tooltip": "Estimated $750/month for proactive agency care and a 4\u20136-hour support allowance, informed by BigScoots and Diggles Creative; lighter specialist care can cost less.",
+      "sources": [
+        {
+          "name": "BigScoots",
+          "url": "https://www.bigscoots.com/website-maintenance-engineering-services/"
+        },
+        {
+          "name": "Diggles Creative",
+          "url": "https://www.digglescreative.com/services/website-maintenance.html"
+        }
+      ],
+      "alternative_comparison_group": {
+        "name": "Productized specialist website care",
+        "central_estimate": 350,
+        "low": 200,
+        "high": 600,
+        "unit": "month",
+        "note": "Robust automated monitoring, updates and QA; different support/relationship model. Not a universal minimum."
+      },
+      "fm_scope_confirmed": false
+    },
+    {
+      "id": "landing_page",
+      "service": "Complete landing page",
+      "currency": "USD",
+      "central_estimate": 3000,
+      "plausible_range": {
+        "low": 2000,
+        "high": 5000
+      },
+      "unit": "project",
+      "assumptions": "One responsive conversion page with planning, copy, design/build, form/CTA/tracking and QA; limited revisions; no major custom integrations.",
+      "confidence": "medium",
+      "evidence_classification": "custom_page_prices_plus_scope_adjustment",
+      "tooltip": "Estimated $3,000 for a complete custom landing page, informed by WebFX and Raised Media; copy, integrations and revision scope affect the quote.",
+      "sources": [
+        {
+          "name": "WebFX",
+          "url": "https://www.webfx.com/ppc/services/landing-page-design/"
+        },
+        {
+          "name": "Raised Media",
+          "url": "https://www.raisedmediaco.com/website-design-for-brands"
+        }
+      ],
+      "fm_scope_confirmed": false
+    },
+    {
+      "id": "homepage",
+      "service": "Fully developed small-business homepage",
+      "currency": "USD",
+      "central_estimate": 2500,
+      "plausible_range": {
+        "low": 1500,
+        "high": 4000
+      },
+      "unit": "project",
+      "assumptions": "One original responsive homepage with copy, design/build and QA in ordinary CMS, existing brand; no full multipage site. Uses one-page-site proxy.",
+      "confidence": "medium-low",
+      "evidence_classification": "one_page_site_proxy_plus_effort_estimate",
+      "tooltip": "Estimated $2,500 for a fully developed homepage, informed by Organiq Media\u2019s one-page-site pricing and agency effort; this is a scoped estimate, not a homepage-only survey.",
+      "sources": [
+        {
+          "name": "Organiq Media",
+          "url": "https://www.organiqmedia.com/squarespace-web-design/"
+        }
+      ],
+      "fm_scope_confirmed": false
+    },
+    {
+      "id": "additional_page",
+      "service": "Additional standard website page",
+      "currency": "USD",
+      "central_estimate": 500,
+      "plausible_range": {
+        "low": 300,
+        "high": 1000
+      },
+      "unit": "page",
+      "assumptions": "Ordinary About/Contact/information page reusing an existing design system; light copy, implementation and QA; no complex new template or custom logic.",
+      "confidence": "medium",
+      "evidence_classification": "incremental_page_prices_plus_scope_adjustment",
+      "tooltip": "Estimated $500 for an additional standard page, informed by Organiq Media and Web Design Miami Company; extensive copywriting or custom functionality increases scope.",
+      "sources": [
+        {
+          "name": "Organiq Media",
+          "url": "https://www.organiqmedia.com/squarespace-web-design/"
+        },
+        {
+          "name": "Web Design Miami Company",
+          "url": "https://webdesignmiamicompany.com/pricing"
+        }
+      ],
+      "fm_scope_confirmed": false
+    },
+    {
+      "id": "google_setup",
+      "service": "New GBP and website GA4 setup",
+      "currency": "USD",
+      "central_estimate": 1500,
+      "plausible_range": {
+        "low": 800,
+        "high": 2500
+      },
+      "unit": "project",
+      "assumptions": "One new eligible GBP: creation/verification assistance, optimization and supported account links; one standard site GA4 with ordinary events/conversions and QA; no disputes/ecommerce/multidomain complexity.",
+      "confidence": "medium-low",
+      "evidence_classification": "two_provider_combined_cost_illustration",
+      "tooltip": "Estimated $1,500 for new GBP setup and optimization plus standard GA4 configuration, informed by GMB Gorilla and Eleventh Peak Digital; complex tracking costs more.",
+      "sources": [
+        {
+          "name": "GMB Gorilla",
+          "url": "https://gmbgorilla.com/google-my-business-optimization-service/"
+        },
+        {
+          "name": "Eleventh Peak Digital",
+          "url": "https://eleventhpeakdigital.com/google-analytics-consulting/"
+        }
+      ],
+      "fm_scope_confirmed": false
+    }
+  ]
+}

@@ -322,13 +322,13 @@ export const services: Service[] = [
     category: 'monthly',
     eyebrow: 'Look after the website you rely on',
     headline: 'A little less website worry.',
-    lead: 'Your website still needs attention after launch. Get ongoing maintenance and support suited to the way your site is built, with a clear place to raise a problem and agree what happens next.',
+    lead: 'Your website still needs attention after launch. Get daily check-ins, active patching and updates with QA, and detailed reporting on the care your site receives.',
     benefit: 'Have someone responsible for the website care you agree together.',
     icon: 'support',
     deliverables: [
-      'Ongoing website maintenance and support for a site confirmed as a fit.',
-      'Care and checks appropriate to your platform and the parts of the site your business relies on.',
-      'A clear route to report an issue, understand the response and review agreed changes.',
+      'Daily website check-ins for a site confirmed as a fit.',
+      'Active patching and updating, with QA suited to your platform and the parts of the site your business relies on.',
+      'Detailed reporting on website care, issues and completed work, with a clear route to request support.',
     ],
     preparation: [
       'Your website address, platform and hosting details.',
@@ -338,6 +338,7 @@ export const services: Service[] = [
     scopeReview: [
       'Check platform compatibility, site size, current condition and any custom features before accepting the site.',
       'Agree the maintenance checklist, update and recovery approach, and allowance for content changes.',
+      'Confirm the daily check-in coverage and reporting detail and cadence; no monthly support-hour allowance has been approved in this draft.',
       'Confirm support hours, response expectations, urgent-issue handling and work that would need a separate project.',
     ],
     costs:
