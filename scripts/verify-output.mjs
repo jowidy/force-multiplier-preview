@@ -22,6 +22,12 @@ const failures = new Set();
 const checkedLinks = new Set();
 const documents = new Map();
 const textFiles = new Map();
+// These authored research reports are intentional, linked public downloads.
+// Keep the source/archive boundary closed for every other Markdown file.
+const publicResearchReports = new Set([
+  'research/agency-range-human-hours-enterprise-report-2026-10-18.md',
+  'research/agency-range-smb-enterprise-report-2026-10-18.md',
+]);
 const check = (condition, message) => {
   if (!condition) failures.add(message);
 };
@@ -90,7 +96,8 @@ for (const file of files) {
     `Private or source path shipped: ${rel}`,
   );
   check(
-    !/\.(?:md|mdx|astro|tsx?|map|py|ps1|toml|ya?ml|fig|zip)$/i.test(rel),
+    publicResearchReports.has(rel) ||
+      !/\.(?:md|mdx|astro|tsx?|map|py|ps1|toml|ya?ml|fig|zip)$/i.test(rel),
     `Source/archive file shipped: ${rel}`,
   );
   check(
@@ -99,7 +106,7 @@ for (const file of files) {
     ),
     `Working file shipped: ${rel}`,
   );
-  if (/\.(?:html|css|js|json|xml|txt|svg)$/i.test(rel)) {
+  if (/\.(?:html|css|js|json|xml|txt|svg)$/i.test(rel) || publicResearchReports.has(rel)) {
     const text = await fs.readFile(file, 'utf8');
     textFiles.set(rel, text);
     const analyticsMarker =

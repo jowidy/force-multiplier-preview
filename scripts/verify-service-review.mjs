@@ -15,7 +15,21 @@ const expected = [
 ];
 const failures = [];
 const sentences = new Intl.Segmenter('en', { granularity: 'sentence' });
-const pendingComparisons = new Set(['seo-content', 'newsletters', 'website-support']);
+const scenarioComparisons = new Set(['seo-content', 'newsletters', 'website-support']);
+const selectedRanges = [
+  '$7,100–$9,500+',
+  '$3,500–$4,800+',
+  '$4,200–$5,700+',
+  '$3,900–$5,400+',
+  '$3,700–$5,100+',
+  '$4,600–$6,300+',
+  '$2,600–$3,500+',
+  '$7,400–$9,700+',
+  '$8,800–$11,500+',
+  '$2,400–$3,200+',
+  '$2,600–$3,500+',
+];
+const exactTooltip = 'Estimated from industry standard cost projection methods 2026.';
 const check = (ok, message) => {
   if (!ok) failures.push(message);
 };
@@ -67,20 +81,20 @@ check(
 for (const slug of expected) {
   const row = $(`[data-comparison-row][data-service="${slug}"]`);
   check(row.length === 1, `${slug}: missing or duplicate comparison`);
-  const isPending = pendingComparisons.has(slug);
   check(
-    isPending
-      ? row.is('[data-comparison-pending]') &&
-          row.find('[data-source-number]').text().trim() === 'Scope pending'
-      : !row.is('[data-comparison-pending]') &&
-          row.find('[data-source-number]').text().includes('$'),
-    `${slug}: estimate/pending state does not match confirmed scope`,
+    !row.is('[data-comparison-pending]') &&
+      row.find('[data-source-number]').text().trim() === selectedRanges[expected.indexOf(slug)],
+    `${slug}: comparison must use the selected base SMB-to-enterprise range`,
+  );
+  check(
+    row.find('[data-comparison-scenario]').length === (scenarioComparisons.has(slug) ? 1 : 0),
+    `${slug}: comparison scenario must be distinguished from FM scope`,
   );
   check(row.find('[data-target-number]').text() === '$400', `${slug}: wrong FM fee`);
   const summary = row.find('[data-comparison-summary]');
   check(
-    summary.length === 1 && summary.text().trim().length > 0,
-    `${slug}: missing concise comparison summary`,
+    summary.length === 1 && summary.text().trim() === exactTooltip,
+    `${slug}: comparison tooltip must use the owner's exact wording`,
   );
   check(
     [...sentences.segment(summary.text().trim())].length === 1 &&
@@ -103,12 +117,31 @@ for (const slug of expected) {
 }
 check(!/published example/i.test($('main').text()), 'Comparison uses the removed label');
 check(
-  $('[data-comparison-pending]').length === 3 &&
-    $('[data-comparison-row]:not([data-comparison-pending])').length === 8,
-  'Expected eight estimates and three unresolved comparison scopes',
+  $('[data-comparison-pending]').length === 0 &&
+    $('[data-comparison-row]:not([data-comparison-pending])').length === 11 &&
+    !/Scope pending/i.test($('[data-price-comparison]').text()),
+  'All eleven comparisons must show the selected ranges without pending placeholders',
+);
+check(
+  $('[role="columnheader"]').eq(1).text().trim() === 'Other Agencies',
+  'Comparison heading must remain Other Agencies',
+);
+check(
+  $('details#comparison-methodology > summary').length === 1 &&
+    $('a[href="#comparison-methodology"]').length > 0,
+  'Comparison methodology must be accessible from the adjacent explanation',
 );
 const home = load(await fs.readFile(new URL('../dist/index.html', import.meta.url), 'utf8'));
 check(!/published example/i.test(home('main').text()), 'Homepage uses the removed label');
+check(
+  JSON.stringify(
+    home('.comparison-range')
+      .map((_, el) => home(el).text().trim())
+      .get(),
+  ) === JSON.stringify([selectedRanges[0], selectedRanges[3], selectedRanges[8]]) &&
+    home('.provider-overlay strong').text().trim() === selectedRanges[3],
+  'Homepage comparisons must match the same selected ranges',
+);
 check(
   $('[data-comparison-row][data-cadence="monthly"]').length === 7 &&
     $('[data-comparison-row][data-cadence="once"]').length === 4,

@@ -22,7 +22,8 @@ const examples = ['social-posts', 'google-ads', 'homepage'].map((slug) => ({
               <p class="eyebrow">Other Agencies</p>
               <h3>{service.shortTitle}</h3>
               <p class="comparison-price">
-                {benchmark.price} {benchmark.period}
+                <span class="comparison-range">{benchmark.price}</span>
+                <span class="comparison-price-period">{benchmark.period}</span>
               </p>
               <p>{benchmark.tooltipSummary}</p>
               <hr />
@@ -38,11 +39,23 @@ const examples = ['social-posts', 'google-ads', 'homepage'].map((slug) => ({
         ))
       }
     </div><p class="comparison-note">
-      Agency estimates combine published pricing with scope-based effort assumptions; they are not
-      quotes or guaranteed savings. Every FM service has a separate agreement, with third-party
-      costs additional where needed. <a href={`${href('/services')}#price-comparison`}
-        >See all service comparisons.</a
-      >
+      Modeled comparable-service SMB-to-enterprise fees; actual quotes vary. Recurring agency
+      onboarding, ad spend and third-party costs are separate. Every FM service has its own
+      agreement. <a href={`${href('/services')}#comparison-methodology`}>Methodology and scope.</a>
+      <a href={`${href('/services')}#price-comparison`}>See all service comparisons.</a>
     </p>
   </div>
 </section>
+
+<style>
+  .comparison-range {
+    display: block;
+    white-space: nowrap;
+    font-size: clamp(20px, 2.3vw, 28px);
+  }
+  .comparison-price-period {
+    display: block;
+    font-size: 12px;
+    font-weight: 400;
+  }
+</style>

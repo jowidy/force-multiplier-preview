@@ -9,7 +9,7 @@ const googleAds = agencyBenchmarks.find((benchmark) => benchmark.slug === 'googl
   <div class="powder-price">
     <span class="price-static">$400</span>
     <span class="provider-overlay" aria-hidden="true"
-      ><small>Agency estimate</small><strong>{googleAds.price}</strong><small
+      ><small>Other Agencies</small><strong>{googleAds.price}</strong><small
         >{googleAds.period} · Google Ads management</small
       ></span
     >
@@ -33,6 +33,8 @@ const googleAds = agencyBenchmarks.find((benchmark) => benchmark.slug === 'googl
   <p class="small">
     <strong>{googleAds.price} {googleAds.period} agency estimate:</strong>
     {googleAds.tooltipSummary}
+    Recurring agency onboarding and ad spend are separate.
+    <a href={`${href('/services')}#comparison-methodology`}>Methodology and scope.</a>
     <a href={`${href('/services')}#price-comparison`}>See all service comparisons.</a>
   </p>
 </div>
@@ -80,7 +82,11 @@ const googleAds = agencyBenchmarks.find((benchmark) => benchmark.slug === 'googl
   });
 </script>
 <style>
+  .powder-price {
+    container-type: inline-size;
+  }
   .provider-overlay strong {
-    font-size: clamp(46px, 12vw, 74px);
+    font-size: clamp(16px, 8cqw, 34px);
+    white-space: nowrap;
   }
 </style>

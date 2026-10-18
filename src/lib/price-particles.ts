@@ -9,6 +9,7 @@ type Grain = {
 };
 type RowPlayer = {
   row: HTMLElement;
+  track: HTMLElement;
   visible: boolean;
   played: boolean;
   running: boolean;
@@ -67,6 +68,7 @@ export function initPriceComparisons() {
       let frame = 0;
       const player: RowPlayer = {
         row,
+        track,
         visible: false,
         played: false,
         running: false,
@@ -286,7 +288,8 @@ export function initPriceComparisons() {
       const sweptTop = Math.min(previousViewport?.top ?? viewport.top, viewport.top);
       const sweptBottom = Math.max(previousViewport?.bottom ?? viewport.bottom, viewport.bottom);
       for (const item of rows) {
-        const bounds = item.row.getBoundingClientRect();
+        // On narrow screens the description sits above the prices; start when the price area enters view.
+        const bounds = item.track.getBoundingClientRect();
         const top = bounds.top + window.scrollY;
         const bottom = bounds.bottom + window.scrollY;
         item.visible = bottom > viewport.top && top < viewport.bottom;
@@ -305,7 +308,7 @@ export function initPriceComparisons() {
     }
     // IO also wakes reconciliation after layout changes; its cached entries never set state.
     const observer = new IntersectionObserver(scheduleViewportSync, { threshold: 0 });
-    rows.forEach((item) => observer.observe(item.row));
+    rows.forEach((item) => observer.observe(item.track));
     window.addEventListener('scroll', scheduleViewportSync, { passive: true });
     window.addEventListener('resize', scheduleViewportSync);
 

@@ -1,0 +1,179 @@
+{
+  "title": "Selected SMB-to-enterprise agency comparison basis",
+  "as_of": "2026-10-18",
+  "currency": "USD",
+  "selected_basis": "Same-SME rounded standalone base SMB client fee to rounded standalone base enterprise client fee, displayed with a plus sign after the enterprise endpoint.",
+  "calculation": "Same human role-hours and scopes multiplied by separately modeled SMB and enterprise client billing rate cards. Client rates include overhead and profit; no second markup.",
+  "limits": [
+    "Modeled comparable-service estimates, not surveyed quotes or empirical market medians.",
+    "Endpoints are base scenarios, not low/high model bounds; plus is not a measured upper limit.",
+    "Scope quantities are comparison assumptions, not additional approved FM contractual quantities.",
+    "SEO uses two 900–1,200-word articles monthly; email uses two 400–700-word issues plus active list building; maintenance uses daily human checks plus four routine support hours.",
+    "Recurring onboarding and advertising spend are separate. Software, hosting, domains, image licenses, other third-party expenses and applicable taxes are excluded.",
+    "Do not sum standalone comparisons as a bundle because common account governance would be counted more than once."
+  ],
+  "tooltip": "Estimated from industry standard cost projection methods 2026.",
+  "interpretation": "Industry standard describes the general cost projection method, not independent certification of these prices, role rate cards or scopes.",
+  "rows": [
+    {
+      "source_key": "social",
+      "title": "20 original social posts",
+      "cadence": "monthly",
+      "smb_base_usd": 7100,
+      "enterprise_base_usd": 9500,
+      "standalone_base_hours": 52,
+      "separate_onboarding_smb_base_usd": 3600,
+      "separate_onboarding_enterprise_base_usd": 4700
+    },
+    {
+      "source_key": "community",
+      "title": "Community engagement",
+      "cadence": "monthly",
+      "smb_base_usd": 3500,
+      "enterprise_base_usd": 4800,
+      "standalone_base_hours": 30,
+      "separate_onboarding_smb_base_usd": 2300,
+      "separate_onboarding_enterprise_base_usd": 3000
+    },
+    {
+      "source_key": "meta",
+      "title": "Meta Ads management",
+      "cadence": "monthly",
+      "smb_base_usd": 4200,
+      "enterprise_base_usd": 5700,
+      "standalone_base_hours": 30,
+      "separate_onboarding_smb_base_usd": 4100,
+      "separate_onboarding_enterprise_base_usd": 5600
+    },
+    {
+      "source_key": "google",
+      "title": "Google Ads management",
+      "cadence": "monthly",
+      "smb_base_usd": 3900,
+      "enterprise_base_usd": 5400,
+      "standalone_base_hours": 28,
+      "separate_onboarding_smb_base_usd": 4400,
+      "separate_onboarding_enterprise_base_usd": 6000
+    },
+    {
+      "source_key": "seo_2",
+      "title": "SEO: 2 articles",
+      "cadence": "monthly",
+      "smb_base_usd": 3700,
+      "enterprise_base_usd": 5100,
+      "standalone_base_hours": 29.0,
+      "separate_onboarding_smb_base_usd": 2700,
+      "separate_onboarding_enterprise_base_usd": 3700
+    },
+    {
+      "source_key": "email_2",
+      "title": "Email: 2 issues + active list building",
+      "cadence": "monthly",
+      "smb_base_usd": 4600,
+      "enterprise_base_usd": 6300,
+      "standalone_base_hours": 36,
+      "separate_onboarding_smb_base_usd": 3900,
+      "separate_onboarding_enterprise_base_usd": 5200
+    },
+    {
+      "source_key": "maintenance",
+      "title": "Website maintenance/support",
+      "cadence": "monthly",
+      "smb_base_usd": 2600,
+      "enterprise_base_usd": 3500,
+      "standalone_base_hours": 20.0,
+      "separate_onboarding_smb_base_usd": 3200,
+      "separate_onboarding_enterprise_base_usd": 4200
+    },
+    {
+      "source_key": "landing_page",
+      "title": "Complete responsive landing page",
+      "cadence": "one_time",
+      "smb_base_usd": 7400,
+      "enterprise_base_usd": 9700,
+      "standalone_base_hours": 52,
+      "separate_onboarding_smb_base_usd": null,
+      "separate_onboarding_enterprise_base_usd": null
+    },
+    {
+      "source_key": "homepage",
+      "title": "Small-business homepage",
+      "cadence": "one_time",
+      "smb_base_usd": 8800,
+      "enterprise_base_usd": 11500,
+      "standalone_base_hours": 62,
+      "separate_onboarding_smb_base_usd": null,
+      "separate_onboarding_enterprise_base_usd": null
+    },
+    {
+      "source_key": "additional_page",
+      "title": "Additional existing-system page",
+      "cadence": "one_time",
+      "smb_base_usd": 2400,
+      "enterprise_base_usd": 3200,
+      "standalone_base_hours": 18.0,
+      "separate_onboarding_smb_base_usd": null,
+      "separate_onboarding_enterprise_base_usd": null
+    },
+    {
+      "source_key": "gbp_analytics_setup",
+      "title": "One-location GBP + website analytics",
+      "cadence": "one_time",
+      "smb_base_usd": 2600,
+      "enterprise_base_usd": 3500,
+      "standalone_base_hours": 18,
+      "separate_onboarding_smb_base_usd": null,
+      "separate_onboarding_enterprise_base_usd": null
+    }
+  ],
+  "sources": [
+    {
+      "library_file_id": "libfile_872c64272f4c8191ba8814f009fe8b4d",
+      "file_id": "file_00000000a9bc81f58bacabba1317765d",
+      "original_file_name": "smb-vs-enterprise-pricing.md",
+      "version": 0,
+      "bytes": 12512,
+      "sha256": "78850e05f120335a3ecb2fee35e3107a7d2dded3b3bd2be8fa25e16ff31b01eb"
+    },
+    {
+      "library_file_id": "libfile_6ea13633c0c081918e4d1de2c1915358",
+      "file_id": "file_00000000bbf081f59ceda7c0e2a3ba99",
+      "original_file_name": "smb-vs-enterprise-pricing.json",
+      "version": 0,
+      "bytes": 144498,
+      "sha256": "8ddc19bb0c562a5c4314237a793bc341210f9398bf4f6e3f8a4ef8dd4a77030b"
+    },
+    {
+      "library_file_id": "libfile_390dc2f3dbc0819184951b8e3ba85604",
+      "file_id": "file_000000007108820da3759be7afe2e878",
+      "original_file_name": "agency-estimate-combined-handoff.md",
+      "version": 0,
+      "bytes": 46191,
+      "sha256": "4b548395e65a5125d1daca4a87cae010d892f3966777a19e892c28264b974487"
+    },
+    {
+      "library_file_id": "libfile_f07759046afc819199032a5cbac16096",
+      "file_id": "file_000000008150820cb5b64eb572d6b37d",
+      "original_file_name": "agency-estimate-combined-handoff.json",
+      "version": 0,
+      "bytes": 119834,
+      "sha256": "4d202bbf62ebc161331a11404f749900e1b4f831b7d5bdebbf825d9f64294607"
+    },
+    {
+      "library_file_id": "libfile_9a3e3fffa7ec8191913c86fcf73ddebf",
+      "file_id": "file_00000000944c820d8e26c34c45e8ff4b",
+      "original_file_name": "phase-two-pricing.json",
+      "version": 0,
+      "bytes": 90858,
+      "sha256": "ce4395f9569b264d54c8453a3991c427086d8528b1805a7bc30b76947153d1fb"
+    },
+    {
+      "library_file_id": "libfile_d60c360169548191bdf0f782204b9c37",
+      "file_id": "file_000000002f8c81f6b93ad3b5c5d06889",
+      "original_file_name": "phase-two-pricing.md",
+      "version": 0,
+      "bytes": 17128,
+      "sha256": "eef9a4001c253dfdabd07808b872970aeedb45800d319d1513cdd726980e5bb0"
+    }
+  ]
+}

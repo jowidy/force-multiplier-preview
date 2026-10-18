@@ -1,0 +1,6039 @@
+{
+  "title": "SMB versus enterprise agency client fees, same delivery scope",
+  "as_of": "2026-10-18",
+  "currency": "USD",
+  "enterprise_source_sha256": "ce4395f9569b264d54c8453a3991c427086d8528b1805a7bc30b76947153d1fb",
+  "tooltip": "Estimated from industry standard cost projection methods 2026.",
+  "method": "Same phase-one workstream hours and delivery scope for both offers. Enterprise pricing unchanged. SMB uses a separately modeled fully loaded client rate card for a pooled-specialist standard-scope fixed-fee offer. No second profit markup, automatic company-size discount, or reduced deliverable/governance scope.",
+  "smb_rate_card": {
+    "Strategy/director": {
+      "low": 150,
+      "base": 175,
+      "high": 210
+    },
+    "Account/project management": {
+      "low": 110,
+      "base": 135,
+      "high": 165
+    },
+    "Copywriting/editorial": {
+      "low": 110,
+      "base": 130,
+      "high": 150
+    },
+    "Design/UX": {
+      "low": 115,
+      "base": 140,
+      "high": 170
+    },
+    "Paid media/SEO/analytics specialist": {
+      "low": 125,
+      "base": 145,
+      "high": 180
+    },
+    "Web developer": {
+      "low": 125,
+      "base": 150,
+      "high": 180
+    },
+    "Production/community/QA operations": {
+      "low": 90,
+      "base": 100,
+      "high": 125
+    }
+  },
+  "enterprise_rate_card": {
+    "Strategy/director": {
+      "low": 175,
+      "base": 225,
+      "high": 275
+    },
+    "Account/project management": {
+      "low": 140,
+      "base": 180,
+      "high": 220
+    },
+    "Copywriting/editorial": {
+      "low": 135,
+      "base": 175,
+      "high": 215
+    },
+    "Design/UX": {
+      "low": 145,
+      "base": 185,
+      "high": 230
+    },
+    "Paid media/SEO/analytics specialist": {
+      "low": 160,
+      "base": 200,
+      "high": 245
+    },
+    "Web developer": {
+      "low": 150,
+      "base": 190,
+      "high": 235
+    },
+    "Production/community/QA operations": {
+      "low": 110,
+      "base": 145,
+      "high": 180
+    }
+  },
+  "smb_units": {
+    "social_monthly": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Strategy and editorial planning",
+          "hours": {
+            "low": 4,
+            "base": 6,
+            "high": 9
+          },
+          "billing_role": "Strategy/director",
+          "client_hourly_rate_usd": {
+            "low": 150,
+            "base": 175,
+            "high": 210
+          },
+          "fee_usd": {
+            "low": 600,
+            "base": 1050,
+            "high": 1890
+          }
+        },
+        {
+          "role_or_workstream": "Copywriting and editing",
+          "hours": {
+            "low": 6,
+            "base": 9,
+            "high": 13
+          },
+          "billing_role": "Copywriting/editorial",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 130,
+            "high": 150
+          },
+          "fee_usd": {
+            "low": 660,
+            "base": 1170,
+            "high": 1950
+          }
+        },
+        {
+          "role_or_workstream": "Design and image sourcing",
+          "hours": {
+            "low": 12,
+            "base": 18,
+            "high": 27
+          },
+          "billing_role": "Design/UX",
+          "client_hourly_rate_usd": {
+            "low": 115,
+            "base": 140,
+            "high": 170
+          },
+          "fee_usd": {
+            "low": 1380,
+            "base": 2520,
+            "high": 4590
+          }
+        },
+        {
+          "role_or_workstream": "Scheduling, accessibility and QA",
+          "hours": {
+            "low": 4,
+            "base": 6,
+            "high": 9
+          },
+          "billing_role": "Production/community/QA operations",
+          "client_hourly_rate_usd": {
+            "low": 90,
+            "base": 100,
+            "high": 125
+          },
+          "fee_usd": {
+            "low": 360,
+            "base": 600,
+            "high": 1125
+          }
+        },
+        {
+          "role_or_workstream": "Channel delivery management and reporting",
+          "hours": {
+            "low": 6,
+            "base": 9,
+            "high": 14
+          },
+          "billing_role": "Account/project management",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 135,
+            "high": 165
+          },
+          "fee_usd": {
+            "low": 660,
+            "base": 1215,
+            "high": 2310
+          }
+        }
+      ],
+      "hours": {
+        "low": 32,
+        "base": 48,
+        "high": 72
+      },
+      "fee_usd": {
+        "low": 3660,
+        "base": 6555,
+        "high": 11865
+      }
+    },
+    "community_monthly": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Community strategy and escalation oversight",
+          "hours": {
+            "low": 2,
+            "base": 3,
+            "high": 5
+          },
+          "billing_role": "Strategy/director",
+          "client_hourly_rate_usd": {
+            "low": 150,
+            "base": 175,
+            "high": 210
+          },
+          "fee_usd": {
+            "low": 300,
+            "base": 525,
+            "high": 1050
+          }
+        },
+        {
+          "role_or_workstream": "Community manager execution",
+          "hours": {
+            "low": 11,
+            "base": 20,
+            "high": 33
+          },
+          "billing_role": "Production/community/QA operations",
+          "client_hourly_rate_usd": {
+            "low": 90,
+            "base": 100,
+            "high": 125
+          },
+          "fee_usd": {
+            "low": 990,
+            "base": 2000,
+            "high": 4125
+          }
+        },
+        {
+          "role_or_workstream": "Channel delivery management and reporting",
+          "hours": {
+            "low": 2,
+            "base": 3,
+            "high": 5
+          },
+          "billing_role": "Account/project management",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 135,
+            "high": 165
+          },
+          "fee_usd": {
+            "low": 220,
+            "base": 405,
+            "high": 825
+          }
+        }
+      ],
+      "hours": {
+        "low": 15,
+        "base": 26,
+        "high": 43
+      },
+      "fee_usd": {
+        "low": 1510,
+        "base": 2930,
+        "high": 6000
+      }
+    },
+    "meta_monthly": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Paid-social strategy and optimization",
+          "hours": {
+            "low": 7,
+            "base": 11,
+            "high": 18
+          },
+          "billing_role": "Paid media/SEO/analytics specialist",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 145,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 875,
+            "base": 1595,
+            "high": 3240
+          }
+        },
+        {
+          "role_or_workstream": "Analytics and test interpretation",
+          "hours": {
+            "low": 3,
+            "base": 5,
+            "high": 8
+          },
+          "billing_role": "Paid media/SEO/analytics specialist",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 145,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 375,
+            "base": 725,
+            "high": 1440
+          }
+        },
+        {
+          "role_or_workstream": "Ad copy",
+          "hours": {
+            "low": 2,
+            "base": 3,
+            "high": 5
+          },
+          "billing_role": "Copywriting/editorial",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 130,
+            "high": 150
+          },
+          "fee_usd": {
+            "low": 220,
+            "base": 390,
+            "high": 750
+          }
+        },
+        {
+          "role_or_workstream": "Creative design and adaptation",
+          "hours": {
+            "low": 2,
+            "base": 4,
+            "high": 7
+          },
+          "billing_role": "Design/UX",
+          "client_hourly_rate_usd": {
+            "low": 115,
+            "base": 140,
+            "high": 170
+          },
+          "fee_usd": {
+            "low": 230,
+            "base": 560,
+            "high": 1190
+          }
+        },
+        {
+          "role_or_workstream": "Channel delivery management and reporting",
+          "hours": {
+            "low": 2,
+            "base": 3,
+            "high": 4
+          },
+          "billing_role": "Account/project management",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 135,
+            "high": 165
+          },
+          "fee_usd": {
+            "low": 220,
+            "base": 405,
+            "high": 660
+          }
+        }
+      ],
+      "hours": {
+        "low": 16,
+        "base": 26,
+        "high": 42
+      },
+      "fee_usd": {
+        "low": 1920,
+        "base": 3675,
+        "high": 7280
+      }
+    },
+    "google_monthly": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Paid-search strategy and optimization",
+          "hours": {
+            "low": 8,
+            "base": 13,
+            "high": 21
+          },
+          "billing_role": "Paid media/SEO/analytics specialist",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 145,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 1000,
+            "base": 1885,
+            "high": 3780
+          }
+        },
+        {
+          "role_or_workstream": "Analytics and test interpretation",
+          "hours": {
+            "low": 2,
+            "base": 4,
+            "high": 7
+          },
+          "billing_role": "Paid media/SEO/analytics specialist",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 145,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 250,
+            "base": 580,
+            "high": 1260
+          }
+        },
+        {
+          "role_or_workstream": "Ad copy and asset adaptation",
+          "hours": {
+            "low": 2,
+            "base": 4,
+            "high": 7
+          },
+          "billing_role": "Copywriting/editorial",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 130,
+            "high": 150
+          },
+          "fee_usd": {
+            "low": 220,
+            "base": 520,
+            "high": 1050
+          }
+        },
+        {
+          "role_or_workstream": "Channel delivery management and reporting",
+          "hours": {
+            "low": 2,
+            "base": 3,
+            "high": 5
+          },
+          "billing_role": "Account/project management",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 135,
+            "high": 165
+          },
+          "fee_usd": {
+            "low": 220,
+            "base": 405,
+            "high": 825
+          }
+        }
+      ],
+      "hours": {
+        "low": 14,
+        "base": 24,
+        "high": 40
+      },
+      "fee_usd": {
+        "low": 1690,
+        "base": 3390,
+        "high": 6915
+      }
+    },
+    "seo_per_article": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Research and human writing",
+          "hours": {
+            "low": 4,
+            "base": 6,
+            "high": 9
+          },
+          "billing_role": "Copywriting/editorial",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 130,
+            "high": 150
+          },
+          "fee_usd": {
+            "low": 440,
+            "base": 780,
+            "high": 1350
+          }
+        },
+        {
+          "role_or_workstream": "SEO editing and factual review",
+          "hours": {
+            "low": 1,
+            "base": 1.5,
+            "high": 2.5
+          },
+          "billing_role": "Paid media/SEO/analytics specialist",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 145,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 125,
+            "base": 217.5,
+            "high": 450.0
+          }
+        },
+        {
+          "role_or_workstream": "Images, metadata, linking and CMS publishing",
+          "hours": {
+            "low": 1.5,
+            "base": 2.5,
+            "high": 4
+          },
+          "billing_role": "Production/community/QA operations",
+          "client_hourly_rate_usd": {
+            "low": 90,
+            "base": 100,
+            "high": 125
+          },
+          "fee_usd": {
+            "low": 135.0,
+            "base": 250.0,
+            "high": 500
+          }
+        },
+        {
+          "role_or_workstream": "Production coordination",
+          "hours": {
+            "low": 0.5,
+            "base": 1,
+            "high": 1.5
+          },
+          "billing_role": "Account/project management",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 135,
+            "high": 165
+          },
+          "fee_usd": {
+            "low": 55.0,
+            "base": 135,
+            "high": 247.5
+          }
+        }
+      ],
+      "hours": {
+        "low": 7.0,
+        "base": 11.0,
+        "high": 17.0
+      },
+      "fee_usd": {
+        "low": 755.0,
+        "base": 1382.5,
+        "high": 2547.5
+      }
+    },
+    "seo_monthly_shared": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Topic and keyword planning",
+          "hours": {
+            "low": 1,
+            "base": 2,
+            "high": 3
+          },
+          "billing_role": "Paid media/SEO/analytics specialist",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 145,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 125,
+            "base": 290,
+            "high": 540
+          }
+        },
+        {
+          "role_or_workstream": "Performance review and delivery coordination",
+          "hours": {
+            "low": 1,
+            "base": 1,
+            "high": 2
+          },
+          "billing_role": "Account/project management",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 135,
+            "high": 165
+          },
+          "fee_usd": {
+            "low": 110,
+            "base": 135,
+            "high": 330
+          }
+        }
+      ],
+      "hours": {
+        "low": 2,
+        "base": 3,
+        "high": 5
+      },
+      "fee_usd": {
+        "low": 235,
+        "base": 425,
+        "high": 870
+      }
+    },
+    "email_per_issue": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Copywriting and editing",
+          "hours": {
+            "low": 2,
+            "base": 3,
+            "high": 4.5
+          },
+          "billing_role": "Copywriting/editorial",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 130,
+            "high": 150
+          },
+          "fee_usd": {
+            "low": 220,
+            "base": 390,
+            "high": 675.0
+          }
+        },
+        {
+          "role_or_workstream": "Design and image adaptation",
+          "hours": {
+            "low": 1.5,
+            "base": 2,
+            "high": 3
+          },
+          "billing_role": "Design/UX",
+          "client_hourly_rate_usd": {
+            "low": 115,
+            "base": 140,
+            "high": 170
+          },
+          "fee_usd": {
+            "low": 172.5,
+            "base": 280,
+            "high": 510
+          }
+        },
+        {
+          "role_or_workstream": "Email build, targeting, test send and QA",
+          "hours": {
+            "low": 2,
+            "base": 3,
+            "high": 5
+          },
+          "billing_role": "Production/community/QA operations",
+          "client_hourly_rate_usd": {
+            "low": 90,
+            "base": 100,
+            "high": 125
+          },
+          "fee_usd": {
+            "low": 180,
+            "base": 300,
+            "high": 625
+          }
+        },
+        {
+          "role_or_workstream": "Production coordination",
+          "hours": {
+            "low": 0.5,
+            "base": 1,
+            "high": 1.5
+          },
+          "billing_role": "Account/project management",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 135,
+            "high": 165
+          },
+          "fee_usd": {
+            "low": 55.0,
+            "base": 135,
+            "high": 247.5
+          }
+        }
+      ],
+      "hours": {
+        "low": 6.0,
+        "base": 9,
+        "high": 14.0
+      },
+      "fee_usd": {
+        "low": 627.5,
+        "base": 1105,
+        "high": 2057.5
+      }
+    },
+    "email_monthly_list_building": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Acquisition planning and experiment design",
+          "hours": {
+            "low": 2,
+            "base": 3,
+            "high": 5
+          },
+          "billing_role": "Strategy/director",
+          "client_hourly_rate_usd": {
+            "low": 150,
+            "base": 175,
+            "high": 210
+          },
+          "fee_usd": {
+            "low": 300,
+            "base": 525,
+            "high": 1050
+          }
+        },
+        {
+          "role_or_workstream": "Email operations and acquisition execution",
+          "hours": {
+            "low": 3,
+            "base": 5,
+            "high": 10
+          },
+          "billing_role": "Production/community/QA operations",
+          "client_hourly_rate_usd": {
+            "low": 90,
+            "base": 100,
+            "high": 125
+          },
+          "fee_usd": {
+            "low": 270,
+            "base": 500,
+            "high": 1250
+          }
+        },
+        {
+          "role_or_workstream": "List-quality analysis",
+          "hours": {
+            "low": 1,
+            "base": 2,
+            "high": 3
+          },
+          "billing_role": "Paid media/SEO/analytics specialist",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 145,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 125,
+            "base": 290,
+            "high": 540
+          }
+        }
+      ],
+      "hours": {
+        "low": 6,
+        "base": 10,
+        "high": 18
+      },
+      "fee_usd": {
+        "low": 695,
+        "base": 1315,
+        "high": 2840
+      }
+    },
+    "email_monthly_shared": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Deliverability and performance analysis",
+          "hours": {
+            "low": 1,
+            "base": 2,
+            "high": 3
+          },
+          "billing_role": "Paid media/SEO/analytics specialist",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 145,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 125,
+            "base": 290,
+            "high": 540
+          }
+        },
+        {
+          "role_or_workstream": "Channel delivery coordination",
+          "hours": {
+            "low": 1,
+            "base": 2,
+            "high": 3
+          },
+          "billing_role": "Account/project management",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 135,
+            "high": 165
+          },
+          "fee_usd": {
+            "low": 110,
+            "base": 270,
+            "high": 495
+          }
+        }
+      ],
+      "hours": {
+        "low": 2,
+        "base": 4,
+        "high": 6
+      },
+      "fee_usd": {
+        "low": 235,
+        "base": 560,
+        "high": 1035
+      }
+    },
+    "maintenance_monthly": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Daily human dashboard checks",
+          "hours": {
+            "low": 2.5,
+            "base": 3.5,
+            "high": 5
+          },
+          "billing_role": "Production/community/QA operations",
+          "client_hourly_rate_usd": {
+            "low": 90,
+            "base": 100,
+            "high": 125
+          },
+          "fee_usd": {
+            "low": 225.0,
+            "base": 350.0,
+            "high": 625
+          }
+        },
+        {
+          "role_or_workstream": "Developer patching and updates",
+          "hours": {
+            "low": 2,
+            "base": 4,
+            "high": 7
+          },
+          "billing_role": "Web developer",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 150,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 250,
+            "base": 600,
+            "high": 1260
+          }
+        },
+        {
+          "role_or_workstream": "Developer routine support allowance",
+          "hours": {
+            "low": 2,
+            "base": 4,
+            "high": 8
+          },
+          "billing_role": "Web developer",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 150,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 250,
+            "base": 600,
+            "high": 1440
+          }
+        },
+        {
+          "role_or_workstream": "Regression QA",
+          "hours": {
+            "low": 1,
+            "base": 2.5,
+            "high": 5
+          },
+          "billing_role": "Production/community/QA operations",
+          "client_hourly_rate_usd": {
+            "low": 90,
+            "base": 100,
+            "high": 125
+          },
+          "fee_usd": {
+            "low": 90,
+            "base": 250.0,
+            "high": 625
+          }
+        },
+        {
+          "role_or_workstream": "Delivery management and detailed report",
+          "hours": {
+            "low": 1.5,
+            "base": 2,
+            "high": 3
+          },
+          "billing_role": "Account/project management",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 135,
+            "high": 165
+          },
+          "fee_usd": {
+            "low": 165.0,
+            "base": 270,
+            "high": 495
+          }
+        }
+      ],
+      "hours": {
+        "low": 9.0,
+        "base": 16.0,
+        "high": 28
+      },
+      "fee_usd": {
+        "low": 980.0,
+        "base": 2070.0,
+        "high": 4445
+      }
+    },
+    "landing_page": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Strategy, brief and project management",
+          "hours": {
+            "low": 5,
+            "base": 8,
+            "high": 12
+          },
+          "billing_role": "Strategy/director",
+          "client_hourly_rate_usd": {
+            "low": 150,
+            "base": 175,
+            "high": 210
+          },
+          "fee_usd": {
+            "low": 750,
+            "base": 1400,
+            "high": 2520
+          }
+        },
+        {
+          "role_or_workstream": "Copywriting and editing",
+          "hours": {
+            "low": 5,
+            "base": 8,
+            "high": 12
+          },
+          "billing_role": "Copywriting/editorial",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 130,
+            "high": 150
+          },
+          "fee_usd": {
+            "low": 550,
+            "base": 1040,
+            "high": 1800
+          }
+        },
+        {
+          "role_or_workstream": "UX/UI and responsive design",
+          "hours": {
+            "low": 8,
+            "base": 13,
+            "high": 21
+          },
+          "billing_role": "Design/UX",
+          "client_hourly_rate_usd": {
+            "low": 115,
+            "base": 140,
+            "high": 170
+          },
+          "fee_usd": {
+            "low": 920,
+            "base": 1820,
+            "high": 3570
+          }
+        },
+        {
+          "role_or_workstream": "Development, form and tracking implementation",
+          "hours": {
+            "low": 10,
+            "base": 16,
+            "high": 27
+          },
+          "billing_role": "Web developer",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 150,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 1250,
+            "base": 2400,
+            "high": 4860
+          }
+        },
+        {
+          "role_or_workstream": "Cross-device QA and release",
+          "hours": {
+            "low": 4,
+            "base": 7,
+            "high": 12
+          },
+          "billing_role": "Production/community/QA operations",
+          "client_hourly_rate_usd": {
+            "low": 90,
+            "base": 100,
+            "high": 125
+          },
+          "fee_usd": {
+            "low": 360,
+            "base": 700,
+            "high": 1500
+          }
+        }
+      ],
+      "hours": {
+        "low": 32,
+        "base": 52,
+        "high": 84
+      },
+      "fee_usd": {
+        "low": 3830,
+        "base": 7360,
+        "high": 14250
+      }
+    },
+    "homepage": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Strategy, brief and project management",
+          "hours": {
+            "low": 6,
+            "base": 10,
+            "high": 15
+          },
+          "billing_role": "Strategy/director",
+          "client_hourly_rate_usd": {
+            "low": 150,
+            "base": 175,
+            "high": 210
+          },
+          "fee_usd": {
+            "low": 900,
+            "base": 1750,
+            "high": 3150
+          }
+        },
+        {
+          "role_or_workstream": "Copywriting and editing",
+          "hours": {
+            "low": 6,
+            "base": 10,
+            "high": 15
+          },
+          "billing_role": "Copywriting/editorial",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 130,
+            "high": 150
+          },
+          "fee_usd": {
+            "low": 660,
+            "base": 1300,
+            "high": 2250
+          }
+        },
+        {
+          "role_or_workstream": "UX/UI and responsive design",
+          "hours": {
+            "low": 10,
+            "base": 16,
+            "high": 26
+          },
+          "billing_role": "Design/UX",
+          "client_hourly_rate_usd": {
+            "low": 115,
+            "base": 140,
+            "high": 170
+          },
+          "fee_usd": {
+            "low": 1150,
+            "base": 2240,
+            "high": 4420
+          }
+        },
+        {
+          "role_or_workstream": "Development and CMS implementation",
+          "hours": {
+            "low": 11,
+            "base": 18,
+            "high": 29
+          },
+          "billing_role": "Web developer",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 150,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 1375,
+            "base": 2700,
+            "high": 5220
+          }
+        },
+        {
+          "role_or_workstream": "Cross-device QA and release",
+          "hours": {
+            "low": 5,
+            "base": 8,
+            "high": 13
+          },
+          "billing_role": "Production/community/QA operations",
+          "client_hourly_rate_usd": {
+            "low": 90,
+            "base": 100,
+            "high": 125
+          },
+          "fee_usd": {
+            "low": 450,
+            "base": 800,
+            "high": 1625
+          }
+        }
+      ],
+      "hours": {
+        "low": 38,
+        "base": 62,
+        "high": 98
+      },
+      "fee_usd": {
+        "low": 4535,
+        "base": 8790,
+        "high": 16665
+      }
+    },
+    "additional_page": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Brief and project management",
+          "hours": {
+            "low": 1.5,
+            "base": 2.5,
+            "high": 4
+          },
+          "billing_role": "Account/project management",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 135,
+            "high": 165
+          },
+          "fee_usd": {
+            "low": 165.0,
+            "base": 337.5,
+            "high": 660
+          }
+        },
+        {
+          "role_or_workstream": "Copywriting and editing",
+          "hours": {
+            "low": 2,
+            "base": 4,
+            "high": 6
+          },
+          "billing_role": "Copywriting/editorial",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 130,
+            "high": 150
+          },
+          "fee_usd": {
+            "low": 220,
+            "base": 520,
+            "high": 900
+          }
+        },
+        {
+          "role_or_workstream": "Design within existing system",
+          "hours": {
+            "low": 2,
+            "base": 3.5,
+            "high": 6
+          },
+          "billing_role": "Design/UX",
+          "client_hourly_rate_usd": {
+            "low": 115,
+            "base": 140,
+            "high": 170
+          },
+          "fee_usd": {
+            "low": 230,
+            "base": 490.0,
+            "high": 1020
+          }
+        },
+        {
+          "role_or_workstream": "Development and CMS implementation",
+          "hours": {
+            "low": 3,
+            "base": 5,
+            "high": 9
+          },
+          "billing_role": "Web developer",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 150,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 375,
+            "base": 750,
+            "high": 1620
+          }
+        },
+        {
+          "role_or_workstream": "QA and release",
+          "hours": {
+            "low": 1.5,
+            "base": 3,
+            "high": 5
+          },
+          "billing_role": "Production/community/QA operations",
+          "client_hourly_rate_usd": {
+            "low": 90,
+            "base": 100,
+            "high": 125
+          },
+          "fee_usd": {
+            "low": 135.0,
+            "base": 300,
+            "high": 625
+          }
+        }
+      ],
+      "hours": {
+        "low": 10.0,
+        "base": 18.0,
+        "high": 30
+      },
+      "fee_usd": {
+        "low": 1125.0,
+        "base": 2397.5,
+        "high": 4825
+      }
+    },
+    "gbp_analytics_setup": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Discovery and measurement specification",
+          "hours": {
+            "low": 2,
+            "base": 3,
+            "high": 5
+          },
+          "billing_role": "Strategy/director",
+          "client_hourly_rate_usd": {
+            "low": 150,
+            "base": 175,
+            "high": 210
+          },
+          "fee_usd": {
+            "low": 300,
+            "base": 525,
+            "high": 1050
+          }
+        },
+        {
+          "role_or_workstream": "Local-search specialist: GBP and linking",
+          "hours": {
+            "low": 3,
+            "base": 5,
+            "high": 8
+          },
+          "billing_role": "Paid media/SEO/analytics specialist",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 145,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 375,
+            "base": 725,
+            "high": 1440
+          }
+        },
+        {
+          "role_or_workstream": "Analytics specialist/developer: implementation",
+          "hours": {
+            "low": 3,
+            "base": 6,
+            "high": 10
+          },
+          "billing_role": "Paid media/SEO/analytics specialist",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 145,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 375,
+            "base": 870,
+            "high": 1800
+          }
+        },
+        {
+          "role_or_workstream": "QA and verification checks",
+          "hours": {
+            "low": 1,
+            "base": 2,
+            "high": 4
+          },
+          "billing_role": "Production/community/QA operations",
+          "client_hourly_rate_usd": {
+            "low": 90,
+            "base": 100,
+            "high": 125
+          },
+          "fee_usd": {
+            "low": 90,
+            "base": 200,
+            "high": 500
+          }
+        },
+        {
+          "role_or_workstream": "Project management and handover",
+          "hours": {
+            "low": 1,
+            "base": 2,
+            "high": 3
+          },
+          "billing_role": "Account/project management",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 135,
+            "high": 165
+          },
+          "fee_usd": {
+            "low": 110,
+            "base": 270,
+            "high": 495
+          }
+        }
+      ],
+      "hours": {
+        "low": 10,
+        "base": 18,
+        "high": 30
+      },
+      "fee_usd": {
+        "low": 1250,
+        "base": 2590,
+        "high": 5285
+      }
+    },
+    "social_onboarding": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Strategy: voice, audiences and editorial system",
+          "hours": {
+            "low": 3,
+            "base": 5,
+            "high": 8
+          },
+          "billing_role": "Strategy/director",
+          "client_hourly_rate_usd": {
+            "low": 150,
+            "base": 175,
+            "high": 210
+          },
+          "fee_usd": {
+            "low": 450,
+            "base": 875,
+            "high": 1680
+          }
+        },
+        {
+          "role_or_workstream": "Design: reusable templates",
+          "hours": {
+            "low": 3,
+            "base": 6,
+            "high": 9
+          },
+          "billing_role": "Design/UX",
+          "client_hourly_rate_usd": {
+            "low": 115,
+            "base": 140,
+            "high": 170
+          },
+          "fee_usd": {
+            "low": 345,
+            "base": 840,
+            "high": 1530
+          }
+        },
+        {
+          "role_or_workstream": "Operations: access and scheduling setup",
+          "hours": {
+            "low": 2,
+            "base": 3,
+            "high": 5
+          },
+          "billing_role": "Production/community/QA operations",
+          "client_hourly_rate_usd": {
+            "low": 90,
+            "base": 100,
+            "high": 125
+          },
+          "fee_usd": {
+            "low": 180,
+            "base": 300,
+            "high": 625
+          }
+        }
+      ],
+      "hours": {
+        "low": 8,
+        "base": 14,
+        "high": 22
+      },
+      "fee_usd": {
+        "low": 975,
+        "base": 2015,
+        "high": 3835
+      }
+    },
+    "community_onboarding": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Strategy: response and escalation rules",
+          "hours": {
+            "low": 2,
+            "base": 3,
+            "high": 5
+          },
+          "billing_role": "Strategy/director",
+          "client_hourly_rate_usd": {
+            "low": 150,
+            "base": 175,
+            "high": 210
+          },
+          "fee_usd": {
+            "low": 300,
+            "base": 525,
+            "high": 1050
+          }
+        },
+        {
+          "role_or_workstream": "Community operations: lists and workflow",
+          "hours": {
+            "low": 1,
+            "base": 2,
+            "high": 3
+          },
+          "billing_role": "Production/community/QA operations",
+          "client_hourly_rate_usd": {
+            "low": 90,
+            "base": 100,
+            "high": 125
+          },
+          "fee_usd": {
+            "low": 90,
+            "base": 200,
+            "high": 375
+          }
+        }
+      ],
+      "hours": {
+        "low": 3,
+        "base": 5,
+        "high": 8
+      },
+      "fee_usd": {
+        "low": 390,
+        "base": 725,
+        "high": 1425
+      }
+    },
+    "meta_onboarding": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Paid specialist: audit, build and initial tests",
+          "hours": {
+            "low": 6,
+            "base": 10,
+            "high": 17
+          },
+          "billing_role": "Paid media/SEO/analytics specialist",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 145,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 750,
+            "base": 1450,
+            "high": 3060
+          }
+        },
+        {
+          "role_or_workstream": "Analytics specialist: event and attribution QA",
+          "hours": {
+            "low": 3,
+            "base": 6,
+            "high": 10
+          },
+          "billing_role": "Paid media/SEO/analytics specialist",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 145,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 375,
+            "base": 870,
+            "high": 1800
+          }
+        },
+        {
+          "role_or_workstream": "Delivery coordination",
+          "hours": {
+            "low": 1,
+            "base": 2,
+            "high": 3
+          },
+          "billing_role": "Account/project management",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 135,
+            "high": 165
+          },
+          "fee_usd": {
+            "low": 110,
+            "base": 270,
+            "high": 495
+          }
+        }
+      ],
+      "hours": {
+        "low": 10,
+        "base": 18,
+        "high": 30
+      },
+      "fee_usd": {
+        "low": 1235,
+        "base": 2590,
+        "high": 5355
+      }
+    },
+    "google_onboarding": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Paid-search specialist: keywords and campaign build",
+          "hours": {
+            "low": 7,
+            "base": 12,
+            "high": 20
+          },
+          "billing_role": "Paid media/SEO/analytics specialist",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 145,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 875,
+            "base": 1740,
+            "high": 3600
+          }
+        },
+        {
+          "role_or_workstream": "Analytics specialist: conversion and attribution QA",
+          "hours": {
+            "low": 4,
+            "base": 6,
+            "high": 11
+          },
+          "billing_role": "Paid media/SEO/analytics specialist",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 145,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 500,
+            "base": 870,
+            "high": 1980
+          }
+        },
+        {
+          "role_or_workstream": "Delivery coordination",
+          "hours": {
+            "low": 1,
+            "base": 2,
+            "high": 3
+          },
+          "billing_role": "Account/project management",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 135,
+            "high": 165
+          },
+          "fee_usd": {
+            "low": 110,
+            "base": 270,
+            "high": 495
+          }
+        }
+      ],
+      "hours": {
+        "low": 12,
+        "base": 20,
+        "high": 34
+      },
+      "fee_usd": {
+        "low": 1485,
+        "base": 2880,
+        "high": 6075
+      }
+    },
+    "seo_onboarding": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "SEO strategist: baseline, intent and content plan",
+          "hours": {
+            "low": 3,
+            "base": 5,
+            "high": 9
+          },
+          "billing_role": "Paid media/SEO/analytics specialist",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 145,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 375,
+            "base": 725,
+            "high": 1620
+          }
+        },
+        {
+          "role_or_workstream": "Publisher: access and publishing workflow",
+          "hours": {
+            "low": 1,
+            "base": 2,
+            "high": 3
+          },
+          "billing_role": "Production/community/QA operations",
+          "client_hourly_rate_usd": {
+            "low": 90,
+            "base": 100,
+            "high": 125
+          },
+          "fee_usd": {
+            "low": 90,
+            "base": 200,
+            "high": 375
+          }
+        },
+        {
+          "role_or_workstream": "Delivery coordination",
+          "hours": {
+            "low": 1,
+            "base": 2,
+            "high": 3
+          },
+          "billing_role": "Account/project management",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 135,
+            "high": 165
+          },
+          "fee_usd": {
+            "low": 110,
+            "base": 270,
+            "high": 495
+          }
+        }
+      ],
+      "hours": {
+        "low": 5,
+        "base": 9,
+        "high": 15
+      },
+      "fee_usd": {
+        "low": 575,
+        "base": 1195,
+        "high": 2490
+      }
+    },
+    "email_onboarding": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Email strategist: audience, acquisition and measurement",
+          "hours": {
+            "low": 2,
+            "base": 4,
+            "high": 6
+          },
+          "billing_role": "Strategy/director",
+          "client_hourly_rate_usd": {
+            "low": 150,
+            "base": 175,
+            "high": 210
+          },
+          "fee_usd": {
+            "low": 300,
+            "base": 700,
+            "high": 1260
+          }
+        },
+        {
+          "role_or_workstream": "Designer: reusable responsive template",
+          "hours": {
+            "low": 3,
+            "base": 5,
+            "high": 8
+          },
+          "billing_role": "Design/UX",
+          "client_hourly_rate_usd": {
+            "low": 115,
+            "base": 140,
+            "high": 170
+          },
+          "fee_usd": {
+            "low": 345,
+            "base": 700,
+            "high": 1360
+          }
+        },
+        {
+          "role_or_workstream": "Email operations: platform, list, signup and authentication QA",
+          "hours": {
+            "low": 4,
+            "base": 7,
+            "high": 12
+          },
+          "billing_role": "Production/community/QA operations",
+          "client_hourly_rate_usd": {
+            "low": 90,
+            "base": 100,
+            "high": 125
+          },
+          "fee_usd": {
+            "low": 360,
+            "base": 700,
+            "high": 1500
+          }
+        },
+        {
+          "role_or_workstream": "Delivery coordination and QA",
+          "hours": {
+            "low": 1,
+            "base": 2,
+            "high": 4
+          },
+          "billing_role": "Account/project management",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 135,
+            "high": 165
+          },
+          "fee_usd": {
+            "low": 110,
+            "base": 270,
+            "high": 660
+          }
+        }
+      ],
+      "hours": {
+        "low": 10,
+        "base": 18,
+        "high": 30
+      },
+      "fee_usd": {
+        "low": 1115,
+        "base": 2370,
+        "high": 4780
+      }
+    },
+    "maintenance_onboarding": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Developer: inventory, baseline, backups and staging",
+          "hours": {
+            "low": 4,
+            "base": 8,
+            "high": 15
+          },
+          "billing_role": "Web developer",
+          "client_hourly_rate_usd": {
+            "low": 125,
+            "base": 150,
+            "high": 180
+          },
+          "fee_usd": {
+            "low": 500,
+            "base": 1200,
+            "high": 2700
+          }
+        },
+        {
+          "role_or_workstream": "QA: baseline smoke tests",
+          "hours": {
+            "low": 1,
+            "base": 2,
+            "high": 4
+          },
+          "billing_role": "Production/community/QA operations",
+          "client_hourly_rate_usd": {
+            "low": 90,
+            "base": 100,
+            "high": 125
+          },
+          "fee_usd": {
+            "low": 90,
+            "base": 200,
+            "high": 500
+          }
+        },
+        {
+          "role_or_workstream": "Delivery lead: support workflow and documentation",
+          "hours": {
+            "low": 1,
+            "base": 2,
+            "high": 3
+          },
+          "billing_role": "Account/project management",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 135,
+            "high": 165
+          },
+          "fee_usd": {
+            "low": 110,
+            "base": 270,
+            "high": 495
+          }
+        }
+      ],
+      "hours": {
+        "low": 6,
+        "base": 12,
+        "high": 22
+      },
+      "fee_usd": {
+        "low": 700,
+        "base": 1670,
+        "high": 3695
+      }
+    },
+    "program_onboarding": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Account/project lead: common kickoff and workflow",
+          "hours": {
+            "low": 3,
+            "base": 5,
+            "high": 8
+          },
+          "billing_role": "Account/project management",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 135,
+            "high": 165
+          },
+          "fee_usd": {
+            "low": 330,
+            "base": 675,
+            "high": 1320
+          }
+        },
+        {
+          "role_or_workstream": "Strategist: shared business, audience and brand brief",
+          "hours": {
+            "low": 3,
+            "base": 5,
+            "high": 8
+          },
+          "billing_role": "Strategy/director",
+          "client_hourly_rate_usd": {
+            "low": 150,
+            "base": 175,
+            "high": 210
+          },
+          "fee_usd": {
+            "low": 450,
+            "base": 875,
+            "high": 1680
+          }
+        }
+      ],
+      "hours": {
+        "low": 6,
+        "base": 10,
+        "high": 16
+      },
+      "fee_usd": {
+        "low": 780,
+        "base": 1550,
+        "high": 3000
+      }
+    },
+    "program_monthly": {
+      "role_breakdown": [
+        {
+          "role_or_workstream": "Account/project lead: consolidated meeting and dependencies",
+          "hours": {
+            "low": 2,
+            "base": 4,
+            "high": 7
+          },
+          "billing_role": "Account/project management",
+          "client_hourly_rate_usd": {
+            "low": 110,
+            "base": 135,
+            "high": 165
+          },
+          "fee_usd": {
+            "low": 220,
+            "base": 540,
+            "high": 1155
+          }
+        }
+      ],
+      "hours": {
+        "low": 2,
+        "base": 4,
+        "high": 7
+      },
+      "fee_usd": {
+        "low": 220,
+        "base": 540,
+        "high": 1155
+      }
+    }
+  },
+  "services": [
+    {
+      "id": "social",
+      "title": "20 original social posts",
+      "cadence": "monthly",
+      "enterprise": {
+        "id": "social",
+        "title": "20 original social posts",
+        "cadence": "monthly",
+        "channel_only": {
+          "hours": {
+            "low": 32,
+            "base": 48,
+            "high": 72
+          },
+          "fee_usd": {
+            "low": 4530,
+            "base": 8745,
+            "high": 16180
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 4500,
+            "base": 8700,
+            "high": 16200
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 141.56,
+            "base": 182.19,
+            "high": 224.72
+          },
+          "parts": [
+            {
+              "unit": "social_monthly",
+              "quantity": 1
+            }
+          ]
+        },
+        "standalone": {
+          "hours": {
+            "low": 34,
+            "base": 52,
+            "high": 79
+          },
+          "fee_usd": {
+            "low": 4810,
+            "base": 9465,
+            "high": 17720
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 4800,
+            "base": 9500,
+            "high": 17700
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 141.47,
+            "base": 182.02,
+            "high": 224.3
+          },
+          "parts": [
+            {
+              "unit": "social_monthly",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 1
+            }
+          ]
+        },
+        "combined_all_seven_allocation": {
+          "hours": {
+            "low": 32.285714285714285,
+            "base": 48.57142857142857,
+            "high": 73.0
+          },
+          "fee_usd": {
+            "low": 4570.0,
+            "base": 8847.857142857143,
+            "high": 16400.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 4600,
+            "base": 8800,
+            "high": 16400
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 141.55,
+            "base": 182.16,
+            "high": 224.66
+          },
+          "parts": [
+            {
+              "unit": "social_monthly",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 0.14285714285714285
+            }
+          ]
+        },
+        "onboarding_channel_only": {
+          "hours": {
+            "low": 8,
+            "base": 14,
+            "high": 22
+          },
+          "fee_usd": {
+            "low": 1180,
+            "base": 2670,
+            "high": 5170
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1200,
+            "base": 2700,
+            "high": 5200
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 147.5,
+            "base": 190.71,
+            "high": 235.0
+          },
+          "parts": [
+            {
+              "unit": "social_onboarding",
+              "quantity": 1
+            }
+          ]
+        },
+        "onboarding_standalone": {
+          "hours": {
+            "low": 14,
+            "base": 24,
+            "high": 38
+          },
+          "fee_usd": {
+            "low": 2125,
+            "base": 4695,
+            "high": 9130
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2100,
+            "base": 4700,
+            "high": 9100
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 151.79,
+            "base": 195.62,
+            "high": 240.26
+          },
+          "parts": [
+            {
+              "unit": "social_onboarding",
+              "quantity": 1
+            },
+            {
+              "unit": "program_onboarding",
+              "quantity": 1
+            }
+          ]
+        }
+      },
+      "smb": {
+        "standalone": {
+          "parts": [
+            {
+              "unit": "social_monthly",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 34,
+            "base": 52,
+            "high": 79
+          },
+          "fee_usd": {
+            "low": 3880,
+            "base": 7095,
+            "high": 13020
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 3900,
+            "base": 7100,
+            "high": 13000
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 114.12,
+            "base": 136.44,
+            "high": 164.81
+          }
+        },
+        "channel_only": {
+          "parts": [
+            {
+              "unit": "social_monthly",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 32,
+            "base": 48,
+            "high": 72
+          },
+          "fee_usd": {
+            "low": 3660,
+            "base": 6555,
+            "high": 11865
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 3700,
+            "base": 6600,
+            "high": 11900
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 114.38,
+            "base": 136.56,
+            "high": 164.79
+          }
+        },
+        "combined_all_seven_allocation": {
+          "parts": [
+            {
+              "unit": "social_monthly",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 0.14285714285714285
+            }
+          ],
+          "hours": {
+            "low": 32.285714285714285,
+            "base": 48.57142857142857,
+            "high": 73.0
+          },
+          "fee_usd": {
+            "low": 3691.4285714285716,
+            "base": 6632.142857142857,
+            "high": 12030.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 3700,
+            "base": 6600,
+            "high": 12000
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 114.34,
+            "base": 136.54,
+            "high": 164.79
+          }
+        },
+        "onboarding_channel_only": {
+          "parts": [
+            {
+              "unit": "social_onboarding",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 8,
+            "base": 14,
+            "high": 22
+          },
+          "fee_usd": {
+            "low": 975,
+            "base": 2015,
+            "high": 3835
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1000,
+            "base": 2000,
+            "high": 3800
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 121.88,
+            "base": 143.93,
+            "high": 174.32
+          }
+        },
+        "onboarding_standalone": {
+          "parts": [
+            {
+              "unit": "social_onboarding",
+              "quantity": 1
+            },
+            {
+              "unit": "program_onboarding",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 14,
+            "base": 24,
+            "high": 38
+          },
+          "fee_usd": {
+            "low": 1755,
+            "base": 3565,
+            "high": 6835
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1800,
+            "base": 3600,
+            "high": 6800
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 125.36,
+            "base": 148.54,
+            "high": 179.87
+          }
+        }
+      }
+    },
+    {
+      "id": "community",
+      "title": "Community engagement",
+      "cadence": "monthly",
+      "enterprise": {
+        "id": "community",
+        "title": "Community engagement",
+        "cadence": "monthly",
+        "channel_only": {
+          "hours": {
+            "low": 15,
+            "base": 26,
+            "high": 43
+          },
+          "fee_usd": {
+            "low": 1840,
+            "base": 4115,
+            "high": 8415
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1800,
+            "base": 4100,
+            "high": 8400
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 122.67,
+            "base": 158.27,
+            "high": 195.7
+          },
+          "parts": [
+            {
+              "unit": "community_monthly",
+              "quantity": 1
+            }
+          ]
+        },
+        "standalone": {
+          "hours": {
+            "low": 17,
+            "base": 30,
+            "high": 50
+          },
+          "fee_usd": {
+            "low": 2120,
+            "base": 4835,
+            "high": 9955
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2100,
+            "base": 4800,
+            "high": 10000
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 124.71,
+            "base": 161.17,
+            "high": 199.1
+          },
+          "parts": [
+            {
+              "unit": "community_monthly",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 1
+            }
+          ]
+        },
+        "combined_all_seven_allocation": {
+          "hours": {
+            "low": 15.285714285714286,
+            "base": 26.571428571428573,
+            "high": 44.0
+          },
+          "fee_usd": {
+            "low": 1880.0,
+            "base": 4217.857142857143,
+            "high": 8635.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1900,
+            "base": 4200,
+            "high": 8600
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 122.99,
+            "base": 158.74,
+            "high": 196.25
+          },
+          "parts": [
+            {
+              "unit": "community_monthly",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 0.14285714285714285
+            }
+          ]
+        },
+        "onboarding_channel_only": {
+          "hours": {
+            "low": 3,
+            "base": 5,
+            "high": 8
+          },
+          "fee_usd": {
+            "low": 460,
+            "base": 965,
+            "high": 1915
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 500,
+            "base": 1000,
+            "high": 1900
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 153.33,
+            "base": 193.0,
+            "high": 239.38
+          },
+          "parts": [
+            {
+              "unit": "community_onboarding",
+              "quantity": 1
+            }
+          ]
+        },
+        "onboarding_standalone": {
+          "hours": {
+            "low": 9,
+            "base": 15,
+            "high": 24
+          },
+          "fee_usd": {
+            "low": 1405,
+            "base": 2990,
+            "high": 5875
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1400,
+            "base": 3000,
+            "high": 5900
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 156.11,
+            "base": 199.33,
+            "high": 244.79
+          },
+          "parts": [
+            {
+              "unit": "community_onboarding",
+              "quantity": 1
+            },
+            {
+              "unit": "program_onboarding",
+              "quantity": 1
+            }
+          ]
+        }
+      },
+      "smb": {
+        "standalone": {
+          "parts": [
+            {
+              "unit": "community_monthly",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 17,
+            "base": 30,
+            "high": 50
+          },
+          "fee_usd": {
+            "low": 1730,
+            "base": 3470,
+            "high": 7155
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1700,
+            "base": 3500,
+            "high": 7200
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 101.76,
+            "base": 115.67,
+            "high": 143.1
+          }
+        },
+        "channel_only": {
+          "parts": [
+            {
+              "unit": "community_monthly",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 15,
+            "base": 26,
+            "high": 43
+          },
+          "fee_usd": {
+            "low": 1510,
+            "base": 2930,
+            "high": 6000
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1500,
+            "base": 2900,
+            "high": 6000
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 100.67,
+            "base": 112.69,
+            "high": 139.53
+          }
+        },
+        "combined_all_seven_allocation": {
+          "parts": [
+            {
+              "unit": "community_monthly",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 0.14285714285714285
+            }
+          ],
+          "hours": {
+            "low": 15.285714285714286,
+            "base": 26.571428571428573,
+            "high": 44.0
+          },
+          "fee_usd": {
+            "low": 1541.4285714285713,
+            "base": 3007.1428571428573,
+            "high": 6165.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1500,
+            "base": 3000,
+            "high": 6200
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 100.84,
+            "base": 113.17,
+            "high": 140.11
+          }
+        },
+        "onboarding_channel_only": {
+          "parts": [
+            {
+              "unit": "community_onboarding",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 3,
+            "base": 5,
+            "high": 8
+          },
+          "fee_usd": {
+            "low": 390,
+            "base": 725,
+            "high": 1425
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 400,
+            "base": 700,
+            "high": 1400
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 130.0,
+            "base": 145.0,
+            "high": 178.12
+          }
+        },
+        "onboarding_standalone": {
+          "parts": [
+            {
+              "unit": "community_onboarding",
+              "quantity": 1
+            },
+            {
+              "unit": "program_onboarding",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 9,
+            "base": 15,
+            "high": 24
+          },
+          "fee_usd": {
+            "low": 1170,
+            "base": 2275,
+            "high": 4425
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1200,
+            "base": 2300,
+            "high": 4400
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 130.0,
+            "base": 151.67,
+            "high": 184.38
+          }
+        }
+      }
+    },
+    {
+      "id": "meta",
+      "title": "Meta Ads management",
+      "cadence": "monthly",
+      "enterprise": {
+        "id": "meta",
+        "title": "Meta Ads management",
+        "cadence": "monthly",
+        "channel_only": {
+          "hours": {
+            "low": 16,
+            "base": 26,
+            "high": 42
+          },
+          "fee_usd": {
+            "low": 2440,
+            "base": 5005,
+            "high": 9935
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2400,
+            "base": 5000,
+            "high": 9900
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 152.5,
+            "base": 192.5,
+            "high": 236.55
+          },
+          "parts": [
+            {
+              "unit": "meta_monthly",
+              "quantity": 1
+            }
+          ]
+        },
+        "standalone": {
+          "hours": {
+            "low": 18,
+            "base": 30,
+            "high": 49
+          },
+          "fee_usd": {
+            "low": 2720,
+            "base": 5725,
+            "high": 11475
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2700,
+            "base": 5700,
+            "high": 11500
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 151.11,
+            "base": 190.83,
+            "high": 234.18
+          },
+          "parts": [
+            {
+              "unit": "meta_monthly",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 1
+            }
+          ]
+        },
+        "combined_all_seven_allocation": {
+          "hours": {
+            "low": 16.285714285714285,
+            "base": 26.571428571428573,
+            "high": 43.0
+          },
+          "fee_usd": {
+            "low": 2480.0,
+            "base": 5107.857142857143,
+            "high": 10155.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2500,
+            "base": 5100,
+            "high": 10200
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 152.28,
+            "base": 192.23,
+            "high": 236.16
+          },
+          "parts": [
+            {
+              "unit": "meta_monthly",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 0.14285714285714285
+            }
+          ]
+        },
+        "onboarding_channel_only": {
+          "hours": {
+            "low": 10,
+            "base": 18,
+            "high": 30
+          },
+          "fee_usd": {
+            "low": 1580,
+            "base": 3560,
+            "high": 7275
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1600,
+            "base": 3600,
+            "high": 7300
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 158.0,
+            "base": 197.78,
+            "high": 242.5
+          },
+          "parts": [
+            {
+              "unit": "meta_onboarding",
+              "quantity": 1
+            }
+          ]
+        },
+        "onboarding_standalone": {
+          "hours": {
+            "low": 16,
+            "base": 28,
+            "high": 46
+          },
+          "fee_usd": {
+            "low": 2525,
+            "base": 5585,
+            "high": 11235
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2500,
+            "base": 5600,
+            "high": 11200
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 157.81,
+            "base": 199.46,
+            "high": 244.24
+          },
+          "parts": [
+            {
+              "unit": "meta_onboarding",
+              "quantity": 1
+            },
+            {
+              "unit": "program_onboarding",
+              "quantity": 1
+            }
+          ]
+        }
+      },
+      "smb": {
+        "standalone": {
+          "parts": [
+            {
+              "unit": "meta_monthly",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 18,
+            "base": 30,
+            "high": 49
+          },
+          "fee_usd": {
+            "low": 2140,
+            "base": 4215,
+            "high": 8435
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2100,
+            "base": 4200,
+            "high": 8400
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 118.89,
+            "base": 140.5,
+            "high": 172.14
+          }
+        },
+        "channel_only": {
+          "parts": [
+            {
+              "unit": "meta_monthly",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 16,
+            "base": 26,
+            "high": 42
+          },
+          "fee_usd": {
+            "low": 1920,
+            "base": 3675,
+            "high": 7280
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1900,
+            "base": 3700,
+            "high": 7300
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 120.0,
+            "base": 141.35,
+            "high": 173.33
+          }
+        },
+        "combined_all_seven_allocation": {
+          "parts": [
+            {
+              "unit": "meta_monthly",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 0.14285714285714285
+            }
+          ],
+          "hours": {
+            "low": 16.285714285714285,
+            "base": 26.571428571428573,
+            "high": 43.0
+          },
+          "fee_usd": {
+            "low": 1951.4285714285713,
+            "base": 3752.1428571428573,
+            "high": 7445.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2000,
+            "base": 3800,
+            "high": 7400
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 119.82,
+            "base": 141.21,
+            "high": 173.14
+          }
+        },
+        "onboarding_channel_only": {
+          "parts": [
+            {
+              "unit": "meta_onboarding",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 10,
+            "base": 18,
+            "high": 30
+          },
+          "fee_usd": {
+            "low": 1235,
+            "base": 2590,
+            "high": 5355
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1200,
+            "base": 2600,
+            "high": 5400
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 123.5,
+            "base": 143.89,
+            "high": 178.5
+          }
+        },
+        "onboarding_standalone": {
+          "parts": [
+            {
+              "unit": "meta_onboarding",
+              "quantity": 1
+            },
+            {
+              "unit": "program_onboarding",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 16,
+            "base": 28,
+            "high": 46
+          },
+          "fee_usd": {
+            "low": 2015,
+            "base": 4140,
+            "high": 8355
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2000,
+            "base": 4100,
+            "high": 8400
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 125.94,
+            "base": 147.86,
+            "high": 181.63
+          }
+        }
+      }
+    },
+    {
+      "id": "google",
+      "title": "Google Ads management",
+      "cadence": "monthly",
+      "enterprise": {
+        "id": "google",
+        "title": "Google Ads management",
+        "cadence": "monthly",
+        "channel_only": {
+          "hours": {
+            "low": 14,
+            "base": 24,
+            "high": 40
+          },
+          "fee_usd": {
+            "low": 2150,
+            "base": 4640,
+            "high": 9465
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2200,
+            "base": 4600,
+            "high": 9500
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 153.57,
+            "base": 193.33,
+            "high": 236.62
+          },
+          "parts": [
+            {
+              "unit": "google_monthly",
+              "quantity": 1
+            }
+          ]
+        },
+        "standalone": {
+          "hours": {
+            "low": 16,
+            "base": 28,
+            "high": 47
+          },
+          "fee_usd": {
+            "low": 2430,
+            "base": 5360,
+            "high": 11005
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2400,
+            "base": 5400,
+            "high": 11000
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 151.88,
+            "base": 191.43,
+            "high": 234.15
+          },
+          "parts": [
+            {
+              "unit": "google_monthly",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 1
+            }
+          ]
+        },
+        "combined_all_seven_allocation": {
+          "hours": {
+            "low": 14.285714285714286,
+            "base": 24.571428571428573,
+            "high": 41.0
+          },
+          "fee_usd": {
+            "low": 2190.0,
+            "base": 4742.857142857143,
+            "high": 9685.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2200,
+            "base": 4700,
+            "high": 9700
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 153.3,
+            "base": 193.02,
+            "high": 236.22
+          },
+          "parts": [
+            {
+              "unit": "google_monthly",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 0.14285714285714285
+            }
+          ]
+        },
+        "onboarding_channel_only": {
+          "hours": {
+            "low": 12,
+            "base": 20,
+            "high": 34
+          },
+          "fee_usd": {
+            "low": 1900,
+            "base": 3960,
+            "high": 8255
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1900,
+            "base": 4000,
+            "high": 8300
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 158.33,
+            "base": 198.0,
+            "high": 242.79
+          },
+          "parts": [
+            {
+              "unit": "google_onboarding",
+              "quantity": 1
+            }
+          ]
+        },
+        "onboarding_standalone": {
+          "hours": {
+            "low": 18,
+            "base": 30,
+            "high": 50
+          },
+          "fee_usd": {
+            "low": 2845,
+            "base": 5985,
+            "high": 12215
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2800,
+            "base": 6000,
+            "high": 12200
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 158.06,
+            "base": 199.5,
+            "high": 244.3
+          },
+          "parts": [
+            {
+              "unit": "google_onboarding",
+              "quantity": 1
+            },
+            {
+              "unit": "program_onboarding",
+              "quantity": 1
+            }
+          ]
+        }
+      },
+      "smb": {
+        "standalone": {
+          "parts": [
+            {
+              "unit": "google_monthly",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 16,
+            "base": 28,
+            "high": 47
+          },
+          "fee_usd": {
+            "low": 1910,
+            "base": 3930,
+            "high": 8070
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1900,
+            "base": 3900,
+            "high": 8100
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 119.38,
+            "base": 140.36,
+            "high": 171.7
+          }
+        },
+        "channel_only": {
+          "parts": [
+            {
+              "unit": "google_monthly",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 14,
+            "base": 24,
+            "high": 40
+          },
+          "fee_usd": {
+            "low": 1690,
+            "base": 3390,
+            "high": 6915
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1700,
+            "base": 3400,
+            "high": 6900
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 120.71,
+            "base": 141.25,
+            "high": 172.88
+          }
+        },
+        "combined_all_seven_allocation": {
+          "parts": [
+            {
+              "unit": "google_monthly",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 0.14285714285714285
+            }
+          ],
+          "hours": {
+            "low": 14.285714285714286,
+            "base": 24.571428571428573,
+            "high": 41.0
+          },
+          "fee_usd": {
+            "low": 1721.4285714285713,
+            "base": 3467.1428571428573,
+            "high": 7080.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1700,
+            "base": 3500,
+            "high": 7100
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 120.5,
+            "base": 141.1,
+            "high": 172.68
+          }
+        },
+        "onboarding_channel_only": {
+          "parts": [
+            {
+              "unit": "google_onboarding",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 12,
+            "base": 20,
+            "high": 34
+          },
+          "fee_usd": {
+            "low": 1485,
+            "base": 2880,
+            "high": 6075
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1500,
+            "base": 2900,
+            "high": 6100
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 123.75,
+            "base": 144.0,
+            "high": 178.68
+          }
+        },
+        "onboarding_standalone": {
+          "parts": [
+            {
+              "unit": "google_onboarding",
+              "quantity": 1
+            },
+            {
+              "unit": "program_onboarding",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 18,
+            "base": 30,
+            "high": 50
+          },
+          "fee_usd": {
+            "low": 2265,
+            "base": 4430,
+            "high": 9075
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2300,
+            "base": 4400,
+            "high": 9100
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 125.83,
+            "base": 147.67,
+            "high": 181.5
+          }
+        }
+      }
+    },
+    {
+      "id": "seo_2",
+      "title": "SEO: 2 articles",
+      "cadence": "monthly",
+      "enterprise": {
+        "id": "seo_2",
+        "title": "SEO: 2 articles",
+        "cadence": "monthly",
+        "channel_only": {
+          "hours": {
+            "low": 16.0,
+            "base": 25.0,
+            "high": 39.0
+          },
+          "fee_usd": {
+            "low": 2170.0,
+            "base": 4365.0,
+            "high": 8370.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2200,
+            "base": 4400,
+            "high": 8400
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 135.62,
+            "base": 174.6,
+            "high": 214.62
+          },
+          "parts": [
+            {
+              "unit": "seo_per_article",
+              "quantity": 2
+            },
+            {
+              "unit": "seo_monthly_shared",
+              "quantity": 1
+            }
+          ]
+        },
+        "standalone": {
+          "hours": {
+            "low": 18.0,
+            "base": 29.0,
+            "high": 46.0
+          },
+          "fee_usd": {
+            "low": 2450.0,
+            "base": 5085.0,
+            "high": 9910.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2500,
+            "base": 5100,
+            "high": 9900
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 136.11,
+            "base": 175.34,
+            "high": 215.43
+          },
+          "parts": [
+            {
+              "unit": "seo_per_article",
+              "quantity": 2
+            },
+            {
+              "unit": "seo_monthly_shared",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 1
+            }
+          ]
+        },
+        "combined_all_seven_allocation": {
+          "hours": {
+            "low": 16.285714285714285,
+            "base": 25.571428571428573,
+            "high": 40.0
+          },
+          "fee_usd": {
+            "low": 2210.0,
+            "base": 4467.857142857143,
+            "high": 8590.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2200,
+            "base": 4500,
+            "high": 8600
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 135.7,
+            "base": 174.72,
+            "high": 214.75
+          },
+          "parts": [
+            {
+              "unit": "seo_per_article",
+              "quantity": 2
+            },
+            {
+              "unit": "seo_monthly_shared",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 0.14285714285714285
+            }
+          ]
+        },
+        "onboarding_channel_only": {
+          "hours": {
+            "low": 5,
+            "base": 9,
+            "high": 15
+          },
+          "fee_usd": {
+            "low": 730,
+            "base": 1650,
+            "high": 3405
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 700,
+            "base": 1700,
+            "high": 3400
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 146.0,
+            "base": 183.33,
+            "high": 227.0
+          },
+          "parts": [
+            {
+              "unit": "seo_onboarding",
+              "quantity": 1
+            }
+          ]
+        },
+        "onboarding_standalone": {
+          "hours": {
+            "low": 11,
+            "base": 19,
+            "high": 31
+          },
+          "fee_usd": {
+            "low": 1675,
+            "base": 3675,
+            "high": 7365
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1700,
+            "base": 3700,
+            "high": 7400
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 152.27,
+            "base": 193.42,
+            "high": 237.58
+          },
+          "parts": [
+            {
+              "unit": "seo_onboarding",
+              "quantity": 1
+            },
+            {
+              "unit": "program_onboarding",
+              "quantity": 1
+            }
+          ]
+        }
+      },
+      "smb": {
+        "standalone": {
+          "parts": [
+            {
+              "unit": "seo_per_article",
+              "quantity": 2
+            },
+            {
+              "unit": "seo_monthly_shared",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 18.0,
+            "base": 29.0,
+            "high": 46.0
+          },
+          "fee_usd": {
+            "low": 1965.0,
+            "base": 3730.0,
+            "high": 7120.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2000,
+            "base": 3700,
+            "high": 7100
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 109.17,
+            "base": 128.62,
+            "high": 154.78
+          }
+        },
+        "channel_only": {
+          "parts": [
+            {
+              "unit": "seo_per_article",
+              "quantity": 2
+            },
+            {
+              "unit": "seo_monthly_shared",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 16.0,
+            "base": 25.0,
+            "high": 39.0
+          },
+          "fee_usd": {
+            "low": 1745.0,
+            "base": 3190.0,
+            "high": 5965.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1700,
+            "base": 3200,
+            "high": 6000
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 109.06,
+            "base": 127.6,
+            "high": 152.95
+          }
+        },
+        "combined_all_seven_allocation": {
+          "parts": [
+            {
+              "unit": "seo_per_article",
+              "quantity": 2
+            },
+            {
+              "unit": "seo_monthly_shared",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 0.14285714285714285
+            }
+          ],
+          "hours": {
+            "low": 16.285714285714285,
+            "base": 25.571428571428573,
+            "high": 40.0
+          },
+          "fee_usd": {
+            "low": 1776.4285714285713,
+            "base": 3267.1428571428573,
+            "high": 6130.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1800,
+            "base": 3300,
+            "high": 6100
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 109.08,
+            "base": 127.77,
+            "high": 153.25
+          }
+        },
+        "onboarding_channel_only": {
+          "parts": [
+            {
+              "unit": "seo_onboarding",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 5,
+            "base": 9,
+            "high": 15
+          },
+          "fee_usd": {
+            "low": 575,
+            "base": 1195,
+            "high": 2490
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 600,
+            "base": 1200,
+            "high": 2500
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 115.0,
+            "base": 132.78,
+            "high": 166.0
+          }
+        },
+        "onboarding_standalone": {
+          "parts": [
+            {
+              "unit": "seo_onboarding",
+              "quantity": 1
+            },
+            {
+              "unit": "program_onboarding",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 11,
+            "base": 19,
+            "high": 31
+          },
+          "fee_usd": {
+            "low": 1355,
+            "base": 2745,
+            "high": 5490
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1400,
+            "base": 2700,
+            "high": 5500
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 123.18,
+            "base": 144.47,
+            "high": 177.1
+          }
+        }
+      }
+    },
+    {
+      "id": "seo_4",
+      "title": "SEO: 4 articles",
+      "cadence": "monthly",
+      "enterprise": {
+        "id": "seo_4",
+        "title": "SEO: 4 articles",
+        "cadence": "monthly",
+        "channel_only": {
+          "hours": {
+            "low": 30.0,
+            "base": 47.0,
+            "high": 73.0
+          },
+          "fee_usd": {
+            "low": 4040.0,
+            "base": 8150.0,
+            "high": 15565.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 4000,
+            "base": 8200,
+            "high": 15600
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 134.67,
+            "base": 173.4,
+            "high": 213.22
+          },
+          "parts": [
+            {
+              "unit": "seo_per_article",
+              "quantity": 4
+            },
+            {
+              "unit": "seo_monthly_shared",
+              "quantity": 1
+            }
+          ]
+        },
+        "standalone": {
+          "hours": {
+            "low": 32.0,
+            "base": 51.0,
+            "high": 80.0
+          },
+          "fee_usd": {
+            "low": 4320.0,
+            "base": 8870.0,
+            "high": 17105.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 4300,
+            "base": 8900,
+            "high": 17100
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 135.0,
+            "base": 173.92,
+            "high": 213.81
+          },
+          "parts": [
+            {
+              "unit": "seo_per_article",
+              "quantity": 4
+            },
+            {
+              "unit": "seo_monthly_shared",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 1
+            }
+          ]
+        },
+        "combined_all_seven_allocation": {
+          "hours": {
+            "low": 30.285714285714285,
+            "base": 47.57142857142857,
+            "high": 74.0
+          },
+          "fee_usd": {
+            "low": 4080.0,
+            "base": 8252.857142857143,
+            "high": 15785.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 4100,
+            "base": 8300,
+            "high": 15800
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 134.72,
+            "base": 173.48,
+            "high": 213.31
+          },
+          "parts": [
+            {
+              "unit": "seo_per_article",
+              "quantity": 4
+            },
+            {
+              "unit": "seo_monthly_shared",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 0.14285714285714285
+            }
+          ]
+        },
+        "onboarding_channel_only": {
+          "hours": {
+            "low": 5,
+            "base": 9,
+            "high": 15
+          },
+          "fee_usd": {
+            "low": 730,
+            "base": 1650,
+            "high": 3405
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 700,
+            "base": 1700,
+            "high": 3400
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 146.0,
+            "base": 183.33,
+            "high": 227.0
+          },
+          "parts": [
+            {
+              "unit": "seo_onboarding",
+              "quantity": 1
+            }
+          ]
+        },
+        "onboarding_standalone": {
+          "hours": {
+            "low": 11,
+            "base": 19,
+            "high": 31
+          },
+          "fee_usd": {
+            "low": 1675,
+            "base": 3675,
+            "high": 7365
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1700,
+            "base": 3700,
+            "high": 7400
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 152.27,
+            "base": 193.42,
+            "high": 237.58
+          },
+          "parts": [
+            {
+              "unit": "seo_onboarding",
+              "quantity": 1
+            },
+            {
+              "unit": "program_onboarding",
+              "quantity": 1
+            }
+          ]
+        }
+      },
+      "smb": {
+        "standalone": {
+          "parts": [
+            {
+              "unit": "seo_per_article",
+              "quantity": 4
+            },
+            {
+              "unit": "seo_monthly_shared",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 32.0,
+            "base": 51.0,
+            "high": 80.0
+          },
+          "fee_usd": {
+            "low": 3475.0,
+            "base": 6495.0,
+            "high": 12215.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 3500,
+            "base": 6500,
+            "high": 12200
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 108.59,
+            "base": 127.35,
+            "high": 152.69
+          }
+        },
+        "channel_only": {
+          "parts": [
+            {
+              "unit": "seo_per_article",
+              "quantity": 4
+            },
+            {
+              "unit": "seo_monthly_shared",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 30.0,
+            "base": 47.0,
+            "high": 73.0
+          },
+          "fee_usd": {
+            "low": 3255.0,
+            "base": 5955.0,
+            "high": 11060.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 3300,
+            "base": 6000,
+            "high": 11100
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 108.5,
+            "base": 126.7,
+            "high": 151.51
+          }
+        },
+        "combined_all_seven_allocation": {
+          "parts": [
+            {
+              "unit": "seo_per_article",
+              "quantity": 4
+            },
+            {
+              "unit": "seo_monthly_shared",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 0.14285714285714285
+            }
+          ],
+          "hours": {
+            "low": 30.285714285714285,
+            "base": 47.57142857142857,
+            "high": 74.0
+          },
+          "fee_usd": {
+            "low": 3286.4285714285716,
+            "base": 6032.142857142857,
+            "high": 11225.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 3300,
+            "base": 6000,
+            "high": 11200
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 108.51,
+            "base": 126.8,
+            "high": 151.69
+          }
+        },
+        "onboarding_channel_only": {
+          "parts": [
+            {
+              "unit": "seo_onboarding",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 5,
+            "base": 9,
+            "high": 15
+          },
+          "fee_usd": {
+            "low": 575,
+            "base": 1195,
+            "high": 2490
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 600,
+            "base": 1200,
+            "high": 2500
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 115.0,
+            "base": 132.78,
+            "high": 166.0
+          }
+        },
+        "onboarding_standalone": {
+          "parts": [
+            {
+              "unit": "seo_onboarding",
+              "quantity": 1
+            },
+            {
+              "unit": "program_onboarding",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 11,
+            "base": 19,
+            "high": 31
+          },
+          "fee_usd": {
+            "low": 1355,
+            "base": 2745,
+            "high": 5490
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1400,
+            "base": 2700,
+            "high": 5500
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 123.18,
+            "base": 144.47,
+            "high": 177.1
+          }
+        }
+      }
+    },
+    {
+      "id": "email_2",
+      "title": "Email: 2 issues + active list building",
+      "cadence": "monthly",
+      "enterprise": {
+        "id": "email_2",
+        "title": "Email: 2 issues + active list building",
+        "cadence": "monthly",
+        "channel_only": {
+          "hours": {
+            "low": 20.0,
+            "base": 32,
+            "high": 52.0
+          },
+          "fee_usd": {
+            "low": 2695.0,
+            "base": 5580,
+            "high": 11080.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2700,
+            "base": 5600,
+            "high": 11100
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 134.75,
+            "base": 174.38,
+            "high": 213.08
+          },
+          "parts": [
+            {
+              "unit": "email_per_issue",
+              "quantity": 2
+            },
+            {
+              "unit": "email_monthly_list_building",
+              "quantity": 1
+            },
+            {
+              "unit": "email_monthly_shared",
+              "quantity": 1
+            }
+          ]
+        },
+        "standalone": {
+          "hours": {
+            "low": 22.0,
+            "base": 36,
+            "high": 59.0
+          },
+          "fee_usd": {
+            "low": 2975.0,
+            "base": 6300,
+            "high": 12620.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 3000,
+            "base": 6300,
+            "high": 12600
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 135.23,
+            "base": 175.0,
+            "high": 213.9
+          },
+          "parts": [
+            {
+              "unit": "email_per_issue",
+              "quantity": 2
+            },
+            {
+              "unit": "email_monthly_list_building",
+              "quantity": 1
+            },
+            {
+              "unit": "email_monthly_shared",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 1
+            }
+          ]
+        },
+        "combined_all_seven_allocation": {
+          "hours": {
+            "low": 20.285714285714285,
+            "base": 32.57142857142857,
+            "high": 53.0
+          },
+          "fee_usd": {
+            "low": 2735.0,
+            "base": 5682.857142857143,
+            "high": 11300.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2700,
+            "base": 5700,
+            "high": 11300
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 134.82,
+            "base": 174.47,
+            "high": 213.21
+          },
+          "parts": [
+            {
+              "unit": "email_per_issue",
+              "quantity": 2
+            },
+            {
+              "unit": "email_monthly_list_building",
+              "quantity": 1
+            },
+            {
+              "unit": "email_monthly_shared",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 0.14285714285714285
+            }
+          ]
+        },
+        "onboarding_channel_only": {
+          "hours": {
+            "low": 10,
+            "base": 18,
+            "high": 30
+          },
+          "fee_usd": {
+            "low": 1365,
+            "base": 3200,
+            "high": 6530
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1400,
+            "base": 3200,
+            "high": 6500
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 136.5,
+            "base": 177.78,
+            "high": 217.67
+          },
+          "parts": [
+            {
+              "unit": "email_onboarding",
+              "quantity": 1
+            }
+          ]
+        },
+        "onboarding_standalone": {
+          "hours": {
+            "low": 16,
+            "base": 28,
+            "high": 46
+          },
+          "fee_usd": {
+            "low": 2310,
+            "base": 5225,
+            "high": 10490
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2300,
+            "base": 5200,
+            "high": 10500
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 144.38,
+            "base": 186.61,
+            "high": 228.04
+          },
+          "parts": [
+            {
+              "unit": "email_onboarding",
+              "quantity": 1
+            },
+            {
+              "unit": "program_onboarding",
+              "quantity": 1
+            }
+          ]
+        }
+      },
+      "smb": {
+        "standalone": {
+          "parts": [
+            {
+              "unit": "email_per_issue",
+              "quantity": 2
+            },
+            {
+              "unit": "email_monthly_list_building",
+              "quantity": 1
+            },
+            {
+              "unit": "email_monthly_shared",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 22.0,
+            "base": 36,
+            "high": 59.0
+          },
+          "fee_usd": {
+            "low": 2405.0,
+            "base": 4625,
+            "high": 9145.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2400,
+            "base": 4600,
+            "high": 9100
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 109.32,
+            "base": 128.47,
+            "high": 155.0
+          }
+        },
+        "channel_only": {
+          "parts": [
+            {
+              "unit": "email_per_issue",
+              "quantity": 2
+            },
+            {
+              "unit": "email_monthly_list_building",
+              "quantity": 1
+            },
+            {
+              "unit": "email_monthly_shared",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 20.0,
+            "base": 32,
+            "high": 52.0
+          },
+          "fee_usd": {
+            "low": 2185.0,
+            "base": 4085,
+            "high": 7990.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2200,
+            "base": 4100,
+            "high": 8000
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 109.25,
+            "base": 127.66,
+            "high": 153.65
+          }
+        },
+        "combined_all_seven_allocation": {
+          "parts": [
+            {
+              "unit": "email_per_issue",
+              "quantity": 2
+            },
+            {
+              "unit": "email_monthly_list_building",
+              "quantity": 1
+            },
+            {
+              "unit": "email_monthly_shared",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 0.14285714285714285
+            }
+          ],
+          "hours": {
+            "low": 20.285714285714285,
+            "base": 32.57142857142857,
+            "high": 53.0
+          },
+          "fee_usd": {
+            "low": 2216.4285714285716,
+            "base": 4162.142857142857,
+            "high": 8155.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2200,
+            "base": 4200,
+            "high": 8200
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 109.26,
+            "base": 127.79,
+            "high": 153.87
+          }
+        },
+        "onboarding_channel_only": {
+          "parts": [
+            {
+              "unit": "email_onboarding",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 10,
+            "base": 18,
+            "high": 30
+          },
+          "fee_usd": {
+            "low": 1115,
+            "base": 2370,
+            "high": 4780
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1100,
+            "base": 2400,
+            "high": 4800
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 111.5,
+            "base": 131.67,
+            "high": 159.33
+          }
+        },
+        "onboarding_standalone": {
+          "parts": [
+            {
+              "unit": "email_onboarding",
+              "quantity": 1
+            },
+            {
+              "unit": "program_onboarding",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 16,
+            "base": 28,
+            "high": 46
+          },
+          "fee_usd": {
+            "low": 1895,
+            "base": 3920,
+            "high": 7780
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1900,
+            "base": 3900,
+            "high": 7800
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 118.44,
+            "base": 140.0,
+            "high": 169.13
+          }
+        }
+      }
+    },
+    {
+      "id": "email_4",
+      "title": "Email: 4 issues + active list building",
+      "cadence": "monthly",
+      "enterprise": {
+        "id": "email_4",
+        "title": "Email: 4 issues + active list building",
+        "cadence": "monthly",
+        "channel_only": {
+          "hours": {
+            "low": 32.0,
+            "base": 50,
+            "high": 80.0
+          },
+          "fee_usd": {
+            "low": 4250.0,
+            "base": 8600,
+            "high": 16855.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 4300,
+            "base": 8600,
+            "high": 16900
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 132.81,
+            "base": 172.0,
+            "high": 210.69
+          },
+          "parts": [
+            {
+              "unit": "email_per_issue",
+              "quantity": 4
+            },
+            {
+              "unit": "email_monthly_list_building",
+              "quantity": 1
+            },
+            {
+              "unit": "email_monthly_shared",
+              "quantity": 1
+            }
+          ]
+        },
+        "standalone": {
+          "hours": {
+            "low": 34.0,
+            "base": 54,
+            "high": 87.0
+          },
+          "fee_usd": {
+            "low": 4530.0,
+            "base": 9320,
+            "high": 18395.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 4500,
+            "base": 9300,
+            "high": 18400
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 133.24,
+            "base": 172.59,
+            "high": 211.44
+          },
+          "parts": [
+            {
+              "unit": "email_per_issue",
+              "quantity": 4
+            },
+            {
+              "unit": "email_monthly_list_building",
+              "quantity": 1
+            },
+            {
+              "unit": "email_monthly_shared",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 1
+            }
+          ]
+        },
+        "combined_all_seven_allocation": {
+          "hours": {
+            "low": 32.285714285714285,
+            "base": 50.57142857142857,
+            "high": 81.0
+          },
+          "fee_usd": {
+            "low": 4290.0,
+            "base": 8702.857142857143,
+            "high": 17075.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 4300,
+            "base": 8700,
+            "high": 17100
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 132.88,
+            "base": 172.09,
+            "high": 210.8
+          },
+          "parts": [
+            {
+              "unit": "email_per_issue",
+              "quantity": 4
+            },
+            {
+              "unit": "email_monthly_list_building",
+              "quantity": 1
+            },
+            {
+              "unit": "email_monthly_shared",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 0.14285714285714285
+            }
+          ]
+        },
+        "onboarding_channel_only": {
+          "hours": {
+            "low": 10,
+            "base": 18,
+            "high": 30
+          },
+          "fee_usd": {
+            "low": 1365,
+            "base": 3200,
+            "high": 6530
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1400,
+            "base": 3200,
+            "high": 6500
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 136.5,
+            "base": 177.78,
+            "high": 217.67
+          },
+          "parts": [
+            {
+              "unit": "email_onboarding",
+              "quantity": 1
+            }
+          ]
+        },
+        "onboarding_standalone": {
+          "hours": {
+            "low": 16,
+            "base": 28,
+            "high": 46
+          },
+          "fee_usd": {
+            "low": 2310,
+            "base": 5225,
+            "high": 10490
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 2300,
+            "base": 5200,
+            "high": 10500
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 144.38,
+            "base": 186.61,
+            "high": 228.04
+          },
+          "parts": [
+            {
+              "unit": "email_onboarding",
+              "quantity": 1
+            },
+            {
+              "unit": "program_onboarding",
+              "quantity": 1
+            }
+          ]
+        }
+      },
+      "smb": {
+        "standalone": {
+          "parts": [
+            {
+              "unit": "email_per_issue",
+              "quantity": 4
+            },
+            {
+              "unit": "email_monthly_list_building",
+              "quantity": 1
+            },
+            {
+              "unit": "email_monthly_shared",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 34.0,
+            "base": 54,
+            "high": 87.0
+          },
+          "fee_usd": {
+            "low": 3660.0,
+            "base": 6835,
+            "high": 13260.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 3700,
+            "base": 6800,
+            "high": 13300
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 107.65,
+            "base": 126.57,
+            "high": 152.41
+          }
+        },
+        "channel_only": {
+          "parts": [
+            {
+              "unit": "email_per_issue",
+              "quantity": 4
+            },
+            {
+              "unit": "email_monthly_list_building",
+              "quantity": 1
+            },
+            {
+              "unit": "email_monthly_shared",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 32.0,
+            "base": 50,
+            "high": 80.0
+          },
+          "fee_usd": {
+            "low": 3440.0,
+            "base": 6295,
+            "high": 12105.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 3400,
+            "base": 6300,
+            "high": 12100
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 107.5,
+            "base": 125.9,
+            "high": 151.31
+          }
+        },
+        "combined_all_seven_allocation": {
+          "parts": [
+            {
+              "unit": "email_per_issue",
+              "quantity": 4
+            },
+            {
+              "unit": "email_monthly_list_building",
+              "quantity": 1
+            },
+            {
+              "unit": "email_monthly_shared",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 0.14285714285714285
+            }
+          ],
+          "hours": {
+            "low": 32.285714285714285,
+            "base": 50.57142857142857,
+            "high": 81.0
+          },
+          "fee_usd": {
+            "low": 3471.4285714285716,
+            "base": 6372.142857142857,
+            "high": 12270.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 3500,
+            "base": 6400,
+            "high": 12300
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 107.52,
+            "base": 126.0,
+            "high": 151.48
+          }
+        },
+        "onboarding_channel_only": {
+          "parts": [
+            {
+              "unit": "email_onboarding",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 10,
+            "base": 18,
+            "high": 30
+          },
+          "fee_usd": {
+            "low": 1115,
+            "base": 2370,
+            "high": 4780
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1100,
+            "base": 2400,
+            "high": 4800
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 111.5,
+            "base": 131.67,
+            "high": 159.33
+          }
+        },
+        "onboarding_standalone": {
+          "parts": [
+            {
+              "unit": "email_onboarding",
+              "quantity": 1
+            },
+            {
+              "unit": "program_onboarding",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 16,
+            "base": 28,
+            "high": 46
+          },
+          "fee_usd": {
+            "low": 1895,
+            "base": 3920,
+            "high": 7780
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1900,
+            "base": 3900,
+            "high": 7800
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 118.44,
+            "base": 140.0,
+            "high": 169.13
+          }
+        }
+      }
+    },
+    {
+      "id": "maintenance",
+      "title": "Website maintenance/support",
+      "cadence": "monthly",
+      "enterprise": {
+        "id": "maintenance",
+        "title": "Website maintenance/support",
+        "cadence": "monthly",
+        "channel_only": {
+          "hours": {
+            "low": 9.0,
+            "base": 16.0,
+            "high": 28
+          },
+          "fee_usd": {
+            "low": 1195.0,
+            "base": 2750.0,
+            "high": 5985
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1200,
+            "base": 2800,
+            "high": 6000
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 132.78,
+            "base": 171.88,
+            "high": 213.75
+          },
+          "parts": [
+            {
+              "unit": "maintenance_monthly",
+              "quantity": 1
+            }
+          ]
+        },
+        "standalone": {
+          "hours": {
+            "low": 11.0,
+            "base": 20.0,
+            "high": 35
+          },
+          "fee_usd": {
+            "low": 1475.0,
+            "base": 3470.0,
+            "high": 7525
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1500,
+            "base": 3500,
+            "high": 7500
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 134.09,
+            "base": 173.5,
+            "high": 215.0
+          },
+          "parts": [
+            {
+              "unit": "maintenance_monthly",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 1
+            }
+          ]
+        },
+        "combined_all_seven_allocation": {
+          "hours": {
+            "low": 9.285714285714286,
+            "base": 16.571428571428573,
+            "high": 29.0
+          },
+          "fee_usd": {
+            "low": 1235.0,
+            "base": 2852.8571428571427,
+            "high": 6205.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1200,
+            "base": 2900,
+            "high": 6200
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 133.0,
+            "base": 172.16,
+            "high": 213.97
+          },
+          "parts": [
+            {
+              "unit": "maintenance_monthly",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 0.14285714285714285
+            }
+          ]
+        },
+        "onboarding_channel_only": {
+          "hours": {
+            "low": 6,
+            "base": 12,
+            "high": 22
+          },
+          "fee_usd": {
+            "low": 850,
+            "base": 2170,
+            "high": 4905
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 900,
+            "base": 2200,
+            "high": 4900
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 141.67,
+            "base": 180.83,
+            "high": 222.95
+          },
+          "parts": [
+            {
+              "unit": "maintenance_onboarding",
+              "quantity": 1
+            }
+          ]
+        },
+        "onboarding_standalone": {
+          "hours": {
+            "low": 12,
+            "base": 22,
+            "high": 38
+          },
+          "fee_usd": {
+            "low": 1795,
+            "base": 4195,
+            "high": 8865
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1800,
+            "base": 4200,
+            "high": 8900
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 149.58,
+            "base": 190.68,
+            "high": 233.29
+          },
+          "parts": [
+            {
+              "unit": "maintenance_onboarding",
+              "quantity": 1
+            },
+            {
+              "unit": "program_onboarding",
+              "quantity": 1
+            }
+          ]
+        }
+      },
+      "smb": {
+        "standalone": {
+          "parts": [
+            {
+              "unit": "maintenance_monthly",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 11.0,
+            "base": 20.0,
+            "high": 35
+          },
+          "fee_usd": {
+            "low": 1200.0,
+            "base": 2610.0,
+            "high": 5600
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1200,
+            "base": 2600,
+            "high": 5600
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 109.09,
+            "base": 130.5,
+            "high": 160.0
+          }
+        },
+        "channel_only": {
+          "parts": [
+            {
+              "unit": "maintenance_monthly",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 9.0,
+            "base": 16.0,
+            "high": 28
+          },
+          "fee_usd": {
+            "low": 980.0,
+            "base": 2070.0,
+            "high": 4445
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1000,
+            "base": 2100,
+            "high": 4400
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 108.89,
+            "base": 129.38,
+            "high": 158.75
+          }
+        },
+        "combined_all_seven_allocation": {
+          "parts": [
+            {
+              "unit": "maintenance_monthly",
+              "quantity": 1
+            },
+            {
+              "unit": "program_monthly",
+              "quantity": 0.14285714285714285
+            }
+          ],
+          "hours": {
+            "low": 9.285714285714286,
+            "base": 16.571428571428573,
+            "high": 29.0
+          },
+          "fee_usd": {
+            "low": 1011.4285714285714,
+            "base": 2147.1428571428573,
+            "high": 4610.0
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1000,
+            "base": 2100,
+            "high": 4600
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 108.92,
+            "base": 129.57,
+            "high": 158.97
+          }
+        },
+        "onboarding_channel_only": {
+          "parts": [
+            {
+              "unit": "maintenance_onboarding",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 6,
+            "base": 12,
+            "high": 22
+          },
+          "fee_usd": {
+            "low": 700,
+            "base": 1670,
+            "high": 3695
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 700,
+            "base": 1700,
+            "high": 3700
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 116.67,
+            "base": 139.17,
+            "high": 167.95
+          }
+        },
+        "onboarding_standalone": {
+          "parts": [
+            {
+              "unit": "maintenance_onboarding",
+              "quantity": 1
+            },
+            {
+              "unit": "program_onboarding",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 12,
+            "base": 22,
+            "high": 38
+          },
+          "fee_usd": {
+            "low": 1480,
+            "base": 3220,
+            "high": 6695
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1500,
+            "base": 3200,
+            "high": 6700
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 123.33,
+            "base": 146.36,
+            "high": 176.18
+          }
+        }
+      }
+    },
+    {
+      "id": "landing_page",
+      "title": "Complete responsive landing page",
+      "cadence": "one_time",
+      "enterprise": {
+        "id": "landing_page",
+        "title": "Complete responsive landing page",
+        "cadence": "one_time",
+        "channel_only": {
+          "hours": {
+            "low": 32,
+            "base": 52,
+            "high": 84
+          },
+          "fee_usd": {
+            "low": 4650,
+            "base": 9660,
+            "high": 19215
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 4700,
+            "base": 9700,
+            "high": 19200
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 145.31,
+            "base": 185.77,
+            "high": 228.75
+          },
+          "parts": [
+            {
+              "unit": "landing_page",
+              "quantity": 1
+            }
+          ]
+        },
+        "standalone": {
+          "hours": {
+            "low": 32,
+            "base": 52,
+            "high": 84
+          },
+          "fee_usd": {
+            "low": 4650,
+            "base": 9660,
+            "high": 19215
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 4700,
+            "base": 9700,
+            "high": 19200
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 145.31,
+            "base": 185.77,
+            "high": 228.75
+          },
+          "parts": [
+            {
+              "unit": "landing_page",
+              "quantity": 1
+            }
+          ]
+        },
+        "combined_all_seven_allocation": null
+      },
+      "smb": {
+        "standalone": {
+          "parts": [
+            {
+              "unit": "landing_page",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 32,
+            "base": 52,
+            "high": 84
+          },
+          "fee_usd": {
+            "low": 3830,
+            "base": 7360,
+            "high": 14250
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 3800,
+            "base": 7400,
+            "high": 14300
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 119.69,
+            "base": 141.54,
+            "high": 169.64
+          }
+        },
+        "channel_only": {
+          "parts": [
+            {
+              "unit": "landing_page",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 32,
+            "base": 52,
+            "high": 84
+          },
+          "fee_usd": {
+            "low": 3830,
+            "base": 7360,
+            "high": 14250
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 3800,
+            "base": 7400,
+            "high": 14300
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 119.69,
+            "base": 141.54,
+            "high": 169.64
+          }
+        }
+      }
+    },
+    {
+      "id": "homepage",
+      "title": "Small-business homepage",
+      "cadence": "one_time",
+      "enterprise": {
+        "id": "homepage",
+        "title": "Small-business homepage",
+        "cadence": "one_time",
+        "channel_only": {
+          "hours": {
+            "low": 38,
+            "base": 62,
+            "high": 98
+          },
+          "fee_usd": {
+            "low": 5510,
+            "base": 11540,
+            "high": 22485
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 5500,
+            "base": 11500,
+            "high": 22500
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 145.0,
+            "base": 186.13,
+            "high": 229.44
+          },
+          "parts": [
+            {
+              "unit": "homepage",
+              "quantity": 1
+            }
+          ]
+        },
+        "standalone": {
+          "hours": {
+            "low": 38,
+            "base": 62,
+            "high": 98
+          },
+          "fee_usd": {
+            "low": 5510,
+            "base": 11540,
+            "high": 22485
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 5500,
+            "base": 11500,
+            "high": 22500
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 145.0,
+            "base": 186.13,
+            "high": 229.44
+          },
+          "parts": [
+            {
+              "unit": "homepage",
+              "quantity": 1
+            }
+          ]
+        },
+        "combined_all_seven_allocation": null
+      },
+      "smb": {
+        "standalone": {
+          "parts": [
+            {
+              "unit": "homepage",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 38,
+            "base": 62,
+            "high": 98
+          },
+          "fee_usd": {
+            "low": 4535,
+            "base": 8790,
+            "high": 16665
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 4500,
+            "base": 8800,
+            "high": 16700
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 119.34,
+            "base": 141.77,
+            "high": 170.05
+          }
+        },
+        "channel_only": {
+          "parts": [
+            {
+              "unit": "homepage",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 38,
+            "base": 62,
+            "high": 98
+          },
+          "fee_usd": {
+            "low": 4535,
+            "base": 8790,
+            "high": 16665
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 4500,
+            "base": 8800,
+            "high": 16700
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 119.34,
+            "base": 141.77,
+            "high": 170.05
+          }
+        }
+      }
+    },
+    {
+      "id": "additional_page",
+      "title": "Additional existing-system page",
+      "cadence": "one_time",
+      "enterprise": {
+        "id": "additional_page",
+        "title": "Additional existing-system page",
+        "cadence": "one_time",
+        "channel_only": {
+          "hours": {
+            "low": 10.0,
+            "base": 18.0,
+            "high": 30
+          },
+          "fee_usd": {
+            "low": 1385.0,
+            "base": 3182.5,
+            "high": 6565
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1400,
+            "base": 3200,
+            "high": 6600
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 138.5,
+            "base": 176.81,
+            "high": 218.83
+          },
+          "parts": [
+            {
+              "unit": "additional_page",
+              "quantity": 1
+            }
+          ]
+        },
+        "standalone": {
+          "hours": {
+            "low": 10.0,
+            "base": 18.0,
+            "high": 30
+          },
+          "fee_usd": {
+            "low": 1385.0,
+            "base": 3182.5,
+            "high": 6565
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1400,
+            "base": 3200,
+            "high": 6600
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 138.5,
+            "base": 176.81,
+            "high": 218.83
+          },
+          "parts": [
+            {
+              "unit": "additional_page",
+              "quantity": 1
+            }
+          ]
+        },
+        "combined_all_seven_allocation": null
+      },
+      "smb": {
+        "standalone": {
+          "parts": [
+            {
+              "unit": "additional_page",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 10.0,
+            "base": 18.0,
+            "high": 30
+          },
+          "fee_usd": {
+            "low": 1125.0,
+            "base": 2397.5,
+            "high": 4825
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1100,
+            "base": 2400,
+            "high": 4800
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 112.5,
+            "base": 133.19,
+            "high": 160.83
+          }
+        },
+        "channel_only": {
+          "parts": [
+            {
+              "unit": "additional_page",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 10.0,
+            "base": 18.0,
+            "high": 30
+          },
+          "fee_usd": {
+            "low": 1125.0,
+            "base": 2397.5,
+            "high": 4825
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1100,
+            "base": 2400,
+            "high": 4800
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 112.5,
+            "base": 133.19,
+            "high": 160.83
+          }
+        }
+      }
+    },
+    {
+      "id": "gbp_analytics_setup",
+      "title": "One-location GBP + website analytics",
+      "cadence": "one_time",
+      "enterprise": {
+        "id": "gbp_analytics_setup",
+        "title": "One-location GBP + website analytics",
+        "cadence": "one_time",
+        "channel_only": {
+          "hours": {
+            "low": 10,
+            "base": 18,
+            "high": 30
+          },
+          "fee_usd": {
+            "low": 1560,
+            "base": 3525,
+            "high": 7165
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1600,
+            "base": 3500,
+            "high": 7200
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 156.0,
+            "base": 195.83,
+            "high": 238.83
+          },
+          "parts": [
+            {
+              "unit": "gbp_analytics_setup",
+              "quantity": 1
+            }
+          ]
+        },
+        "standalone": {
+          "hours": {
+            "low": 10,
+            "base": 18,
+            "high": 30
+          },
+          "fee_usd": {
+            "low": 1560,
+            "base": 3525,
+            "high": 7165
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1600,
+            "base": 3500,
+            "high": 7200
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 156.0,
+            "base": 195.83,
+            "high": 238.83
+          },
+          "parts": [
+            {
+              "unit": "gbp_analytics_setup",
+              "quantity": 1
+            }
+          ]
+        },
+        "combined_all_seven_allocation": null
+      },
+      "smb": {
+        "standalone": {
+          "parts": [
+            {
+              "unit": "gbp_analytics_setup",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 10,
+            "base": 18,
+            "high": 30
+          },
+          "fee_usd": {
+            "low": 1250,
+            "base": 2590,
+            "high": 5285
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1300,
+            "base": 2600,
+            "high": 5300
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 125.0,
+            "base": 143.89,
+            "high": 176.17
+          }
+        },
+        "channel_only": {
+          "parts": [
+            {
+              "unit": "gbp_analytics_setup",
+              "quantity": 1
+            }
+          ],
+          "hours": {
+            "low": 10,
+            "base": 18,
+            "high": 30
+          },
+          "fee_usd": {
+            "low": 1250,
+            "base": 2590,
+            "high": 5285
+          },
+          "rounded_catalog_fee_usd": {
+            "low": 1300,
+            "base": 2600,
+            "high": 5300
+          },
+          "effective_blended_usd_per_hour": {
+            "low": 125.0,
+            "base": 143.89,
+            "high": 176.17
+          }
+        }
+      }
+    }
+  ],
+  "programs": {
+    "monthly_2_seo_2_email": {
+      "enterprise": {
+        "hours": {
+          "low": 124.0,
+          "base": 201.0,
+          "high": 323.0
+        },
+        "fee_usd": {
+          "low": 17300.0,
+          "base": 35920.0,
+          "high": 70970.0
+        },
+        "rounded_catalog_fee_usd": {
+          "low": 17300,
+          "base": 35900,
+          "high": 71000
+        },
+        "effective_blended_usd_per_hour": {
+          "low": 139.52,
+          "base": 178.71,
+          "high": 219.72
+        },
+        "parts": [
+          {
+            "unit": "social_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "community_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "meta_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "google_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "maintenance_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "program_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "seo_monthly_shared",
+            "quantity": 1
+          },
+          {
+            "unit": "email_monthly_list_building",
+            "quantity": 1
+          },
+          {
+            "unit": "email_monthly_shared",
+            "quantity": 1
+          },
+          {
+            "unit": "seo_per_article",
+            "quantity": 2
+          },
+          {
+            "unit": "email_per_issue",
+            "quantity": 2
+          }
+        ]
+      },
+      "smb": {
+        "parts": [
+          {
+            "unit": "social_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "community_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "meta_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "google_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "maintenance_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "program_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "seo_monthly_shared",
+            "quantity": 1
+          },
+          {
+            "unit": "email_monthly_list_building",
+            "quantity": 1
+          },
+          {
+            "unit": "email_monthly_shared",
+            "quantity": 1
+          },
+          {
+            "unit": "seo_per_article",
+            "quantity": 2
+          },
+          {
+            "unit": "email_per_issue",
+            "quantity": 2
+          }
+        ],
+        "hours": {
+          "low": 124.0,
+          "base": 201.0,
+          "high": 323.0
+        },
+        "fee_usd": {
+          "low": 13910.0,
+          "base": 26435.0,
+          "high": 51615.0
+        },
+        "rounded_catalog_fee_usd": {
+          "low": 13900,
+          "base": 26400,
+          "high": 51600
+        },
+        "effective_blended_usd_per_hour": {
+          "low": 112.18,
+          "base": 131.52,
+          "high": 159.8
+        }
+      }
+    },
+    "monthly_4_seo_4_email": {
+      "enterprise": {
+        "hours": {
+          "low": 150.0,
+          "base": 241.0,
+          "high": 385.0
+        },
+        "fee_usd": {
+          "low": 20725.0,
+          "base": 42725.0,
+          "high": 83940.0
+        },
+        "rounded_catalog_fee_usd": {
+          "low": 20700,
+          "base": 42700,
+          "high": 83900
+        },
+        "effective_blended_usd_per_hour": {
+          "low": 138.17,
+          "base": 177.28,
+          "high": 218.03
+        },
+        "parts": [
+          {
+            "unit": "social_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "community_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "meta_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "google_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "maintenance_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "program_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "seo_monthly_shared",
+            "quantity": 1
+          },
+          {
+            "unit": "email_monthly_list_building",
+            "quantity": 1
+          },
+          {
+            "unit": "email_monthly_shared",
+            "quantity": 1
+          },
+          {
+            "unit": "seo_per_article",
+            "quantity": 4
+          },
+          {
+            "unit": "email_per_issue",
+            "quantity": 4
+          }
+        ]
+      },
+      "smb": {
+        "parts": [
+          {
+            "unit": "social_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "community_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "meta_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "google_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "maintenance_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "program_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "seo_monthly_shared",
+            "quantity": 1
+          },
+          {
+            "unit": "email_monthly_list_building",
+            "quantity": 1
+          },
+          {
+            "unit": "email_monthly_shared",
+            "quantity": 1
+          },
+          {
+            "unit": "seo_per_article",
+            "quantity": 4
+          },
+          {
+            "unit": "email_per_issue",
+            "quantity": 4
+          }
+        ],
+        "hours": {
+          "low": 150.0,
+          "base": 241.0,
+          "high": 385.0
+        },
+        "fee_usd": {
+          "low": 16675.0,
+          "base": 31410.0,
+          "high": 60825.0
+        },
+        "rounded_catalog_fee_usd": {
+          "low": 16700,
+          "base": 31400,
+          "high": 60800
+        },
+        "effective_blended_usd_per_hour": {
+          "low": 111.17,
+          "base": 130.33,
+          "high": 157.99
+        }
+      }
+    },
+    "onboarding_all_seven": {
+      "enterprise": {
+        "hours": {
+          "low": 60,
+          "base": 106,
+          "high": 177
+        },
+        "fee_usd": {
+          "low": 9010,
+          "base": 20200,
+          "high": 41415
+        },
+        "rounded_catalog_fee_usd": {
+          "low": 9000,
+          "base": 20200,
+          "high": 41400
+        },
+        "effective_blended_usd_per_hour": {
+          "low": 150.17,
+          "base": 190.57,
+          "high": 233.98
+        },
+        "parts": [
+          {
+            "unit": "social_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "community_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "meta_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "google_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "seo_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "email_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "maintenance_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "program_onboarding",
+            "quantity": 1
+          }
+        ]
+      },
+      "smb": {
+        "parts": [
+          {
+            "unit": "social_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "community_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "meta_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "google_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "seo_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "email_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "maintenance_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "program_onboarding",
+            "quantity": 1
+          }
+        ],
+        "hours": {
+          "low": 60,
+          "base": 106,
+          "high": 177
+        },
+        "fee_usd": {
+          "low": 7255,
+          "base": 14995,
+          "high": 30655
+        },
+        "rounded_catalog_fee_usd": {
+          "low": 7300,
+          "base": 15000,
+          "high": 30700
+        },
+        "effective_blended_usd_per_hour": {
+          "low": 120.92,
+          "base": 141.46,
+          "high": 173.19
+        }
+      }
+    },
+    "first_month_2_seo_2_email": {
+      "enterprise": {
+        "hours": {
+          "low": 184.0,
+          "base": 307.0,
+          "high": 500.0
+        },
+        "fee_usd": {
+          "low": 26310.0,
+          "base": 56120.0,
+          "high": 112385.0
+        },
+        "rounded_catalog_fee_usd": {
+          "low": 26300,
+          "base": 56100,
+          "high": 112400
+        },
+        "effective_blended_usd_per_hour": {
+          "low": 142.99,
+          "base": 182.8,
+          "high": 224.77
+        },
+        "parts": [
+          {
+            "unit": "social_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "community_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "meta_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "google_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "maintenance_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "program_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "seo_monthly_shared",
+            "quantity": 1
+          },
+          {
+            "unit": "email_monthly_list_building",
+            "quantity": 1
+          },
+          {
+            "unit": "email_monthly_shared",
+            "quantity": 1
+          },
+          {
+            "unit": "seo_per_article",
+            "quantity": 2
+          },
+          {
+            "unit": "email_per_issue",
+            "quantity": 2
+          },
+          {
+            "unit": "social_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "community_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "meta_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "google_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "seo_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "email_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "maintenance_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "program_onboarding",
+            "quantity": 1
+          }
+        ]
+      },
+      "smb": {
+        "parts": [
+          {
+            "unit": "social_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "community_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "meta_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "google_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "maintenance_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "program_monthly",
+            "quantity": 1
+          },
+          {
+            "unit": "seo_monthly_shared",
+            "quantity": 1
+          },
+          {
+            "unit": "email_monthly_list_building",
+            "quantity": 1
+          },
+          {
+            "unit": "email_monthly_shared",
+            "quantity": 1
+          },
+          {
+            "unit": "seo_per_article",
+            "quantity": 2
+          },
+          {
+            "unit": "email_per_issue",
+            "quantity": 2
+          },
+          {
+            "unit": "social_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "community_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "meta_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "google_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "seo_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "email_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "maintenance_onboarding",
+            "quantity": 1
+          },
+          {
+            "unit": "program_onboarding",
+            "quantity": 1
+          }
+        ],
+        "hours": {
+          "low": 184.0,
+          "base": 307.0,
+          "high": 500.0
+        },
+        "fee_usd": {
+          "low": 21165.0,
+          "base": 41430.0,
+          "high": 82270.0
+        },
+        "rounded_catalog_fee_usd": {
+          "low": 21200,
+          "base": 41400,
+          "high": 82300
+        },
+        "effective_blended_usd_per_hour": {
+          "low": 115.03,
+          "base": 134.95,
+          "high": 164.54
+        }
+      }
+    }
+  },
+  "sources": [
+    {
+      "url": "https://prometheanresearch.com/digital-agency-industry-report/",
+      "finding": "2026 edition: 29% of agencies charge $175-199/hour; broad digital-agency research, not a role-level enterprise rate card."
+    },
+    {
+      "url": "https://clutch.co/agencies/digital-marketing/pricing",
+      "finding": "2026 US digital marketing band $100-149/hour; broader mix than the modeled enterprise-service scenario."
+    }
+  ]
+}

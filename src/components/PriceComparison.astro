@@ -1,7 +1,8 @@
 ---
 import { agencyBenchmarks } from '../lib/agency-benchmarks';
 import { services } from '../lib/service-catalog';
-import { asset, href } from '../lib/site';
+import { href } from '../lib/site';
+import ComparisonMethodology from './ComparisonMethodology.astro';
 ---
 
 <section
@@ -22,10 +23,9 @@ import { asset, href } from '../lib/site';
           new home.
         </p>
         <p class="comparison-small">
-          Agency estimates combine published pricing with scope-based effort assumptions; open each <span
-            class="info-inline"
-            aria-label="information">i</span
-          > for the short explanation.
+          Modeled comparable-service SMB-to-enterprise fees for the scopes shown; actual quotes
+          vary.{' '}
+          <a href="#comparison-methodology">Methodology and scope</a>.
         </p>
       </div>
     </div>
@@ -54,13 +54,11 @@ import { asset, href } from '../lib/site';
         {
           agencyBenchmarks.map((benchmark, index) => {
             const service = services.find((item) => item.slug === benchmark.slug)!;
-            const pending = benchmark.status === 'pending';
             return (
               <div
                 class="comparison-row"
                 role="row"
                 data-comparison-row
-                data-comparison-pending={pending || undefined}
                 data-service={service.slug}
                 data-state="static"
                 data-cadence={service.category}
@@ -74,40 +72,33 @@ import { asset, href } from '../lib/site';
                     <a href={href(`/services/${service.slug}`)}>{service.title}</a>
                   </h3>
                   <p>{service.benefit}</p>
+                  {benchmark.scenarioLabel && (
+                    <p class="comparison-scenario" data-comparison-scenario>
+                      {benchmark.scenarioLabel}
+                    </p>
+                  )}
                   <a class="comparison-scope-link" href={href(`/services/${service.slug}`)}>
                     See FM scope <span aria-hidden="true">↗</span>
                   </a>
                 </div>
                 <div class="comparison-price-track" role="presentation" data-price-track>
-                  <div
-                    class="comparison-agency"
-                    role="cell"
-                    aria-label={pending ? 'Agency estimate pending scope' : 'Other Agencies'}
-                  >
+                  <div class="comparison-agency" role="cell" aria-label="Other Agencies">
                     <div class="comparison-number-block">
                       <div class="comparison-number-line">
-                        <strong
-                          class:list={[
-                            'comparison-source-number',
-                            { 'comparison-pending-label': pending },
-                          ]}
-                          data-source-number
-                        >
+                        <strong class="comparison-source-number" data-source-number>
                           {benchmark.price}
                         </strong>
                         <details class="comparison-source-info" data-source-info>
                           <summary
-                            aria-label={`About the ${service.shortTitle.toLowerCase()} ${pending ? 'pending scope' : 'agency estimate'}`}
-                            title={
-                              pending ? 'About this pending scope' : 'About this agency estimate'
-                            }
+                            aria-label={`About the ${service.shortTitle.toLowerCase()} agency estimate`}
+                            title="About this agency estimate"
                           >
                             <span aria-hidden="true">i</span>
                           </summary>
                           <div
                             class="comparison-evidence"
                             role="region"
-                            aria-label={`${service.shortTitle}: ${pending ? 'pending scope' : 'agency estimate'}`}
+                            aria-label={`${service.shortTitle}: agency estimate`}
                           >
                             <p data-comparison-summary>{benchmark.tooltipSummary}</p>
                             <button
@@ -146,30 +137,7 @@ import { asset, href } from '../lib/site';
         }
       </div>
     </div>
-    <aside class="comparison-method" aria-label="How to read these comparisons">
-      <h3>The details stay in the picture.</h3>
-      <p>
-        <strong
-          >These are reasoned agency cost estimates, not measured market medians or quotes.</strong
-        >
-        SEO content, newsletters and website support need scope confirmation before an estimate is shown.
-      </p>
-      <p>
-        <a href={asset('/research/agency-cost-estimates-2026-10-18.json')}>
-          Research assumptions and sources
-        </a>
-      </p>
-      <p>
-        The animation illustrates FM's fee; it is not a savings calculation or a claim of equal
-        deliverables. Each service has its own agreement. Recurring services are $400 per month,
-        month-to-month; projects are $400 one time. Apart from 20 social posts per month, proposed
-        limits still need review and agreement.
-      </p>
-      <p>
-        Advertising spend, software, hosting, domains and other third-party costs are separate where
-        needed and disclosed before agreement. This preview accepts no payment.
-      </p>
-    </aside>
+    <ComparisonMethodology />
   </div>
 </section>
 
@@ -204,17 +172,6 @@ import { asset, href } from '../lib/site';
   .comparison-small {
     font-size: 13px;
     line-height: 1.7;
-  }
-  .info-inline {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid currentColor;
-    border-radius: 50%;
-    width: 17px;
-    height: 17px;
-    font-size: 11px;
-    font-weight: 600;
   }
   .comparison-toolbar {
     display: flex;
@@ -251,7 +208,7 @@ import { asset, href } from '../lib/site';
   }
   .comparison-table-head {
     display: grid;
-    grid-template-columns: 38% 32% 30%;
+    grid-template-columns: 35% 42% 23%;
     border-radius: 11px 11px 0 0;
     color: #fff;
     background: var(--navy);
@@ -267,7 +224,7 @@ import { asset, href } from '../lib/site';
   }
   .comparison-row {
     display: grid;
-    grid-template-columns: 38% 62%;
+    grid-template-columns: 35% 65%;
     position: relative;
     min-height: 230px;
     border-top: 1px solid #c8d5df;
@@ -308,6 +265,13 @@ import { asset, href } from '../lib/site';
     line-height: 1.65;
     margin: 0;
   }
+  .comparison-service > .comparison-scenario {
+    color: #43576a;
+    font-size: 12px;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #e0e8ef;
+  }
   .comparison-scope-link {
     display: inline-flex;
     align-items: center;
@@ -319,7 +283,7 @@ import { asset, href } from '../lib/site';
   }
   .comparison-price-track {
     display: grid;
-    grid-template-columns: 32fr 30fr;
+    grid-template-columns: 42fr 23fr;
     position: relative;
     min-width: 0;
   }
@@ -390,19 +354,11 @@ import { asset, href } from '../lib/site';
   .comparison-source-number,
   .comparison-target-number {
     display: inline-block;
-    font-size: clamp(30px, 3.4vw, 48px);
+    font-size: clamp(20px, 2.3vw, 30px);
     line-height: 1.3;
     font-weight: 600;
     color: var(--blue);
     white-space: nowrap;
-  }
-  .comparison-source-number.comparison-pending-label {
-    font-size: 14px;
-    line-height: 1.5;
-    white-space: normal;
-    color: #43576a;
-    max-width: 6em;
-    min-width: 0;
   }
   .comparison-period {
     display: block;
@@ -466,24 +422,6 @@ import { asset, href } from '../lib/site';
     background: transparent;
     color: var(--blue);
   }
-  .comparison-method {
-    padding: 28px;
-    margin-top: 24px;
-    background: #fff;
-    border-left: 4px solid var(--coral);
-  }
-  .comparison-method h3 {
-    font-size: 20px;
-    margin: 0 0 12px;
-  }
-  .comparison-method p {
-    font-size: 13px;
-    line-height: 1.8;
-    margin: 0 0 10px;
-  }
-  .comparison-method p:last-child {
-    margin-bottom: 0;
-  }
   [hidden] {
     display: none !important;
   }
@@ -498,7 +436,26 @@ import { asset, href } from '../lib/site';
       gap: 8px;
     }
     .comparison-service {
-      padding: 20px 14px;
+      padding: 20px;
+    }
+    .comparison-table-head {
+      grid-template-columns: 2fr 1fr;
+    }
+    .comparison-table-head > div:first-child {
+      grid-column: 1 / -1;
+      padding-bottom: 0;
+    }
+    .comparison-row {
+      grid-template-columns: 1fr;
+      min-height: 0;
+    }
+    .comparison-price-track {
+      grid-template-columns: 2fr 1fr;
+      min-height: 130px;
+      border-top: 1px solid #e0e8ef;
+    }
+    .comparison-agency {
+      border-left: 0;
     }
     .comparison-service h3 {
       font-size: 18px;
@@ -508,7 +465,7 @@ import { asset, href } from '../lib/site';
       padding: 17px 12px;
     }
     .comparison-source-number {
-      font-size: clamp(16px, 5vw, 32px);
+      font-size: clamp(16px, 5.4vw, 28px);
     }
     .comparison-target-number {
       font-size: 38px;
@@ -525,22 +482,19 @@ import { asset, href } from '../lib/site';
       font-size: 11px;
     }
     .comparison-evidence {
-      left: -61.3%;
+      left: 0;
     }
   }
   @media (max-width: 479px) {
-    .comparison-row {
-      min-height: 270px;
-    }
     .comparison-service {
-      padding: 18px 10px;
+      padding: 18px;
     }
     .comparison-service h3 {
-      font-size: 15px;
+      font-size: 18px;
       line-height: 1.4;
     }
     .comparison-service > p {
-      font-size: 11px;
+      font-size: 13px;
       line-height: 1.75;
     }
     .comparison-index {
@@ -548,7 +502,7 @@ import { asset, href } from '../lib/site';
       letter-spacing: 0;
     }
     .comparison-scope-link {
-      font-size: 10px;
+      font-size: 12px;
       gap: 3px;
     }
     .comparison-table-head > div {
@@ -560,7 +514,7 @@ import { asset, href } from '../lib/site';
       padding: 16px 5px;
     }
     .comparison-source-number {
-      font-size: clamp(16px, 5vw, 24px);
+      font-size: clamp(16px, 5.1vw, 24px);
     }
     .comparison-target-number {
       font-size: 31px;
@@ -570,9 +524,6 @@ import { asset, href } from '../lib/site';
     }
     .comparison-evidence {
       padding: 18px;
-    }
-    .comparison-method {
-      padding: 22px;
     }
   }
   @media (prefers-reduced-motion: reduce) {
