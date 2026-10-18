@@ -24,11 +24,11 @@ export function initPriceComparisons() {
     const stop = section.querySelector<HTMLButtonElement>('[data-stop-comparisons]')!;
     const replay = section.querySelector<HTMLButtonElement>('[data-replay-comparisons]')!;
     const status = section.querySelector<HTMLElement>('[data-comparison-status]')!;
-    const HOLD = 2000,
-      BURST = 480,
-      SWIRL = 3000,
-      FORM = 1700,
-      SETTLE = 450;
+    const HOLD = 1000,
+      BURST = 240,
+      SWIRL = 1500,
+      FORM = 850,
+      SETTLE = 225;
     let active: RowPlayer | undefined;
     let enabled = !reduced.matches;
     let ready = false;
