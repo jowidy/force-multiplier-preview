@@ -24,16 +24,18 @@ export function initPriceComparisons() {
     const stop = section.querySelector<HTMLButtonElement>('[data-stop-comparisons]')!;
     const replay = section.querySelector<HTMLButtonElement>('[data-replay-comparisons]')!;
     const status = section.querySelector<HTMLElement>('[data-comparison-status]')!;
-    const HOLD = 1000,
-      BURST = 240,
-      SWIRL = 1500,
-      FORM = 850,
-      SETTLE = 225;
+    const HOLD = 0,
+      BURST = 120,
+      SWIRL = 750,
+      FORM = 425,
+      SETTLE = 112.5;
     let active: RowPlayer | undefined;
     let enabled = !reduced.matches;
     let ready = false;
     let seed = 19;
     let cycle = 0;
+    let viewportFrame = 0;
+    let previousViewport: { top: number; bottom: number } | undefined;
     const random = () => {
       seed = (seed * 16807) % 2147483647;
       return (seed - 1) / 2147483646;
@@ -79,7 +81,7 @@ export function initPriceComparisons() {
         player.played = completed;
         row.dataset.state = completed ? 'complete' : 'waiting';
         if (active === player) active = undefined;
-        requestAnimationFrame(pump);
+        scheduleViewportSync();
       }
       function reset() {
         finish(false);
@@ -174,7 +176,8 @@ export function initPriceComparisons() {
         row.dataset.burstMs = String(BURST);
         row.dataset.swirlMs = String(SWIRL);
         row.dataset.formMs = String(FORM);
-        row.dataset.state = 'holding';
+        row.dataset.settleMs = String(SETTLE);
+        row.dataset.state = HOLD > 0 ? 'holding' : 'bursting';
         row.classList.add('is-running');
         row.classList.remove('is-complete', 'has-shadow');
         running = true;
@@ -235,7 +238,7 @@ export function initPriceComparisons() {
           if (time < BURST + SWIRL + FORM + SETTLE) frame = requestAnimationFrame(draw);
           else finish();
         };
-        frame = requestAnimationFrame(draw);
+        draw(began);
       }
       new ResizeObserver(() => {
         if (running) finish();
@@ -272,21 +275,39 @@ export function initPriceComparisons() {
         });
     });
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          const item = rows.find((candidate) => candidate.row === entry.target);
-          if (!item) continue;
-          item.visible = entry.isIntersecting && entry.intersectionRatio >= 0.45;
-          if (active === item && !item.visible && item.row.dataset.state === 'holding')
-            item.finish(false);
-          else if (active === item && !entry.isIntersecting) item.finish();
-        }
-        pump();
-      },
-      { threshold: [0, 0.45], rootMargin: '-80px 0px -5% 0px' },
-    );
+    function syncViewport() {
+      cancelAnimationFrame(viewportFrame);
+      viewportFrame = 0;
+      if (!enabled || reduced.matches || document.hidden) return;
+      const viewport = {
+        top: window.scrollY + Math.min(80, window.innerHeight * 0.25),
+        bottom: window.scrollY + window.innerHeight * 0.95,
+      };
+      const sweptTop = Math.min(previousViewport?.top ?? viewport.top, viewport.top);
+      const sweptBottom = Math.max(previousViewport?.bottom ?? viewport.bottom, viewport.bottom);
+      for (const item of rows) {
+        const bounds = item.row.getBoundingClientRect();
+        const top = bounds.top + window.scrollY;
+        const bottom = bounds.bottom + window.scrollY;
+        item.visible = bottom > viewport.top && top < viewport.bottom;
+        // A single scroll jump can skip IntersectionObserver's visible states entirely.
+        // Resolve every crossed offscreen row so returning never reveals an untouched price.
+        const crossed = previousViewport
+          ? bottom >= sweptTop && top <= sweptBottom
+          : bottom <= viewport.top;
+        if (!item.visible && !item.played && (crossed || active === item)) item.finish();
+      }
+      previousViewport = viewport;
+      pump();
+    }
+    function scheduleViewportSync() {
+      if (!viewportFrame) viewportFrame = requestAnimationFrame(syncViewport);
+    }
+    // IO also wakes reconciliation after layout changes; its cached entries never set state.
+    const observer = new IntersectionObserver(scheduleViewportSync, { threshold: 0 });
     rows.forEach((item) => observer.observe(item.row));
+    window.addEventListener('scroll', scheduleViewportSync, { passive: true });
+    window.addEventListener('resize', scheduleViewportSync);
 
     const showStatic = () => {
       enabled = false;
@@ -303,17 +324,19 @@ export function initPriceComparisons() {
     replay.addEventListener('click', () => {
       enabled = !reduced.matches;
       rows.forEach((item) => item.reset());
+      previousViewport = undefined;
       stop.hidden = false;
       replay.hidden = true;
       stop.focus();
       status.textContent =
         'Each visible row plays once, in order. No click needed. All prices in USD.';
-      pump();
+      syncViewport();
     });
     const syncMotion = () => {
       const focusedMotionControl = controls.contains(document.activeElement);
       enabled = !reduced.matches;
       rows.forEach((item) => item.reset());
+      previousViewport = undefined;
       controls.hidden = reduced.matches;
       stop.hidden = false;
       replay.hidden = true;
@@ -325,18 +348,18 @@ export function initPriceComparisons() {
         heading?.setAttribute('tabindex', '-1');
         heading?.focus({ preventScroll: true });
       }
-      pump();
+      syncViewport();
     };
     reduced.addEventListener('change', syncMotion);
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
-        if (active) active.finish(false);
-      } else pump();
+        if (active) active.finish();
+      } else syncViewport();
     });
     syncMotion();
     void document.fonts.ready.then(() => {
       ready = true;
-      pump();
+      syncViewport();
     });
   });
 }
