@@ -182,7 +182,8 @@ export function initPriceComparisons() {
         player.running = true;
         const began = performance.now();
         const draw = (now: number) => {
-          const elapsed = now - began;
+          // A frame timestamp can precede rows initialized later in that same frame.
+          const elapsed = Math.max(0, now - began);
           context!.clearRect(0, 0, width, height);
           if (elapsed < HOLD) {
             row.dataset.state = 'holding';
