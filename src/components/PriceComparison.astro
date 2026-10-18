@@ -43,13 +43,11 @@ import { asset, href } from '../lib/site';
     <div
       class="comparison-table"
       role="table"
-      aria-label="Eleven services: estimated typical agency costs and Force Multiplier fees"
+      aria-label="Eleven services: Other Agencies and Force Multiplier fees"
     >
       <div class="comparison-table-head" role="row">
         <div role="columnheader">Offering / description</div>
-        <div role="columnheader">
-          Estimated typical agency cost<span aria-hidden="true">*</span>
-        </div>
+        <div role="columnheader">Other Agencies</div>
         <div role="columnheader">Force Multiplier</div>
       </div>
       <div role="rowgroup">
@@ -84,9 +82,7 @@ import { asset, href } from '../lib/site';
                   <div
                     class="comparison-agency"
                     role="cell"
-                    aria-label={
-                      pending ? 'Agency estimate pending scope' : 'Estimated typical agency cost'
-                    }
+                    aria-label={pending ? 'Agency estimate pending scope' : 'Other Agencies'}
                   >
                     <div class="comparison-number-block">
                       <div class="comparison-number-line">
@@ -154,7 +150,7 @@ import { asset, href } from '../lib/site';
       <h3>The details stay in the picture.</h3>
       <p>
         <strong
-          >*These are reasoned agency cost estimates, not measured market medians or quotes.</strong
+          >These are reasoned agency cost estimates, not measured market medians or quotes.</strong
         >
         SEO content, newsletters and website support need scope confirmation before an estimate is shown.
       </p>
