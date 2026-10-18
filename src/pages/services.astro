@@ -2,7 +2,7 @@
 import SiteLayout from '../layouts/SiteLayout.astro';
 import EditorialArt from '../components/EditorialArt.astro';
 import Icon from '../components/Icon.astro';
-import PricePowder from '../components/PricePowder.astro';
+import PriceComparison from '../components/PriceComparison.astro';
 import { services } from '../lib/service-catalog';
 import { href } from '../lib/site';
 ---
@@ -24,8 +24,10 @@ import { href } from '../lib/site';
           Your accounts stay yours
         </li>
       </ul>
+      <a class="text-link" href="#price-comparison">See all 11 price comparisons <Icon /></a>
     </div><EditorialArt kind="clear-path" priority />
   </section>
+  <PriceComparison />
   <section class="section cream-section">
     <div class="wrap">
       <nav class="catalog-controls" aria-label="Service categories">
@@ -123,7 +125,12 @@ import { href } from '../lib/site';
           We identify those costs before you agree to anything. This review preview cannot take
           payment or start a contract.
         </p>
-      </div><PricePowder />
+      </div><div class="price-powder">
+        <p class="eyebrow">One service. One agreement.</p>
+        <p class="price-static">$400</p>
+        <p>Per month for ongoing help, or one time for a focused project.</p>
+        <a class="text-link" href="#price-comparison">Back to all 11 comparisons <Icon /></a>
+      </div>
     </div>
   </section>
 </SiteLayout>

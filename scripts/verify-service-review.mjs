@@ -57,6 +57,38 @@ check(
   $('#monthly .service-card').length === 7 && $('#one-time .service-card').length === 4,
   'Catalog cadence mismatch',
 );
+check($('[data-price-comparison]').length === 1, 'Missing all-services price comparison');
+check(
+  $('[data-comparison-row]').length === 11,
+  'Comparison must cover all eleven original services',
+);
+for (const slug of expected) {
+  const row = $(`[data-comparison-row][data-service="${slug}"]`);
+  check(row.length === 1, `${slug}: missing or duplicate comparison`);
+  check(row.find('[data-source-number]').text().includes('$'), `${slug}: missing published amount`);
+  check(row.find('[data-target-number]').text() === '$400', `${slug}: wrong FM fee`);
+  check(
+    row.find('.comparison-citations a[href^="https://"]').length > 0,
+    `${slug}: missing source attribution`,
+  );
+  check(
+    row.find('.comparison-evidence').text().length > 100,
+    `${slug}: missing scope qualification`,
+  );
+  check(
+    row.find('[data-price-canvas][aria-hidden="true"]').length === 1,
+    `${slug}: decorative canvas exposed`,
+  );
+  check(
+    row.find('[data-row-controls][hidden]').length === 1,
+    `${slug}: no-JS animation controls visible`,
+  );
+}
+check(
+  $('[data-comparison-row][data-cadence="monthly"]').length === 7 &&
+    $('[data-comparison-row][data-cadence="once"]').length === 4,
+  'Comparison cadence mismatch',
+);
 const contact = load(
   await fs.readFile(new URL('../dist/contact/index.html', import.meta.url), 'utf8'),
 );
