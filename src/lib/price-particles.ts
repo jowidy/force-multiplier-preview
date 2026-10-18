@@ -11,6 +11,7 @@ type RowPlayer = {
   row: HTMLElement;
   visible: boolean;
   played: boolean;
+  running: boolean;
   start: () => void;
   finish: (completed?: boolean) => void;
   reset: () => void;
@@ -29,7 +30,6 @@ export function initPriceComparisons() {
       SWIRL = 750,
       FORM = 425,
       SETTLE = 112.5;
-    let active: RowPlayer | undefined;
     let enabled = !reduced.matches;
     let ready = false;
     let seed = 19;
@@ -52,13 +52,9 @@ export function initPriceComparisons() {
       }
       return items;
     };
-    const pump = () => {
-      if (!ready || !enabled || reduced.matches || document.hidden || active) return;
-      const next = rows.find((item) => item.visible && !item.played);
-      if (next) {
-        active = next;
-        next.start();
-      }
+    const startVisibleRows = () => {
+      if (!ready || !enabled || reduced.matches || document.hidden) return;
+      for (const item of rows) if (item.visible && !item.played && !item.running) item.start();
     };
     const rows: RowPlayer[] = Array.from(
       section.querySelectorAll<HTMLElement>('[data-comparison-row]'),
@@ -69,18 +65,24 @@ export function initPriceComparisons() {
       const canvas = row.querySelector<HTMLCanvasElement>('[data-price-canvas]')!;
       const context = canvas.getContext('2d');
       let frame = 0;
-      let running = false;
-      const player: RowPlayer = { row, visible: false, played: false, start, finish, reset };
+      const player: RowPlayer = {
+        row,
+        visible: false,
+        played: false,
+        running: false,
+        start,
+        finish,
+        reset,
+      };
       function finish(completed = true) {
         cancelAnimationFrame(frame);
-        running = false;
+        player.running = false;
         context?.clearRect(0, 0, canvas.width, canvas.height);
         row.classList.remove('is-running');
         row.classList.toggle('is-complete', completed);
         row.classList.toggle('has-shadow', completed);
         player.played = completed;
         row.dataset.state = completed ? 'complete' : 'waiting';
-        if (active === player) active = undefined;
         scheduleViewportSync();
       }
       function reset() {
@@ -119,10 +121,7 @@ export function initPriceComparisons() {
         return points;
       }
       function start() {
-        if (!context || running || !enabled || reduced.matches) {
-          if (active === player) active = undefined;
-          return;
-        }
+        if (!context || player.running || !enabled || reduced.matches) return;
         row.classList.remove('is-complete', 'has-shadow');
         const particleColor = getComputedStyle(source).color;
         const { width, height } = track.getBoundingClientRect();
@@ -180,7 +179,7 @@ export function initPriceComparisons() {
         row.dataset.state = HOLD > 0 ? 'holding' : 'bursting';
         row.classList.add('is-running');
         row.classList.remove('is-complete', 'has-shadow');
-        running = true;
+        player.running = true;
         const began = performance.now();
         const draw = (now: number) => {
           const elapsed = now - began;
@@ -241,7 +240,7 @@ export function initPriceComparisons() {
         draw(began);
       }
       new ResizeObserver(() => {
-        if (running) finish();
+        if (player.running) finish();
       }).observe(track);
       return player;
     });
@@ -295,10 +294,10 @@ export function initPriceComparisons() {
         const crossed = previousViewport
           ? bottom >= sweptTop && top <= sweptBottom
           : bottom <= viewport.top;
-        if (!item.visible && !item.played && (crossed || active === item)) item.finish();
+        if (!item.visible && !item.played && (crossed || item.running)) item.finish();
       }
       previousViewport = viewport;
-      pump();
+      startVisibleRows();
     }
     function scheduleViewportSync() {
       if (!viewportFrame) viewportFrame = requestAnimationFrame(syncViewport);
@@ -329,7 +328,7 @@ export function initPriceComparisons() {
       replay.hidden = true;
       stop.focus();
       status.textContent =
-        'Each visible row plays once, in order. No click needed. All prices in USD.';
+        'Each visible row plays once, independently. No click needed. All prices in USD.';
       syncViewport();
     });
     const syncMotion = () => {
@@ -342,7 +341,7 @@ export function initPriceComparisons() {
       replay.hidden = true;
       status.textContent = reduced.matches
         ? 'Reduced motion: all agency examples and FM prices are shown without animation.'
-        : 'Each visible row plays once, in order. No click needed. All prices in USD.';
+        : 'Each visible row plays once, independently. No click needed. All prices in USD.';
       if (reduced.matches && focusedMotionControl) {
         const heading = section.querySelector<HTMLElement>('#comparison-title');
         heading?.setAttribute('tabindex', '-1');
@@ -353,7 +352,7 @@ export function initPriceComparisons() {
     reduced.addEventListener('change', syncMotion);
     document.addEventListener('visibilitychange', () => {
       if (document.hidden) {
-        if (active) active.finish();
+        for (const item of rows) if (item.running) item.finish();
       } else syncViewport();
     });
     syncMotion();
