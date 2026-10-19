@@ -35,7 +35,7 @@ const monthlyTerms = [
   {
     question: 'Will I need to make time for regular meetings?',
     answer:
-      'No standing meetings are required. Share your business details once, then use written updates and clear approval requests. We ask for your input when facts, decisions or access need your attention.',
+      'Start with a call to confirm the service, scope and account access. We agree how to stay in touch, using written updates and clear approval requests where useful. We ask for your input when facts, decisions or access need your attention.',
   },
   {
     question: 'Who owns the accounts and finished work?',
@@ -53,7 +53,7 @@ const projectTerms = [
   {
     question: 'How will we work together?',
     answer:
-      'Start with a short written brief and the relevant business facts and assets. We agree the scope, review process and timing before work begins, then share work for your feedback. No standing meetings are required.',
+      'Start with a call about your goals and the relevant business facts. We agree the scope, review process, access plan and billing terms in a signed contract. Then we collect the required inputs and appropriate access before the agreed start, and share work for your feedback.',
   },
   {
     question: 'Who owns the finished work?',

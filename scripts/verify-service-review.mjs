@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import { load } from 'cheerio';
+import { conversationBookingUrl } from '../src/lib/service-request.mjs';
 const expected = [
   'social-posts',
   'community-engagement',
@@ -56,15 +57,28 @@ for (const slug of expected) {
     `${slug}: missing price or scope disclosure`,
   );
   check(
-    main.includes('Nothing is sent, saved, charged, agreed or booked') &&
-      main.includes('Payment is simulated'),
+    main.includes('Nothing is sent or saved') &&
+      main.includes('Choose a time on our work calendar') &&
+      main.includes('QuickBooks'),
     `${slug}: unclear demonstration status`,
   );
   check(
     form.find('[data-step-review][hidden]').length === 1 &&
-      form.find('[data-step-onboarding][hidden]').length === 1 &&
-      form.find('[data-preview-next][type="button"]').length === 1,
-    `${slug}: missing safe review and onboarding stages`,
+      form.find('[data-step-onboarding],[data-preview-next]').length === 0 &&
+      $('[data-schedule-pending]').length === 0 &&
+      $('[data-schedule-link]').attr('href') === conversationBookingUrl &&
+      $('a[href="mailto:john.dye@forcemultiplier.work"]').length >= 1,
+    `${slug}: missing safe conversation or verified scheduling destination`,
+  );
+  check(
+    !/simulate payment|payment is simulated|no sales call|pay now|pay and start onboarding/i.test(
+      main,
+    ),
+    `${slug}: superseded storefront copy remains`,
+  );
+  check(
+    $('.service-hero a.button').text().trim().startsWith('Schedule a call'),
+    `${slug}: primary CTA must schedule a call`,
   );
   if (slug === 'seo-content')
     check(

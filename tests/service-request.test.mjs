@@ -3,6 +3,8 @@ import test from 'node:test';
 import {
   buildRequestPreview,
   needsAdSpend,
+  validateConversationBrief,
+  conversationBookingUrl,
   validateServiceRequest,
 } from '../src/lib/service-request.mjs';
 
@@ -59,7 +61,7 @@ const validInput = {
 const validate = (overrides = {}, allowUndecided = false) =>
   validateServiceRequest({ ...validInput, ...overrides }, catalog, allowUndecided);
 
-test('monthly preview uses the service fee and cadence, current scope and tailored onboarding', () => {
+test('monthly brief preserves price and scope and puts signed agreement and access before billing', () => {
   const validation = validate();
   assert.equal(validation.valid, true);
   assert.equal(validation.request.name, 'Sample Owner');
@@ -73,8 +75,15 @@ test('monthly preview uses the service fee and cadence, current scope and tailor
   assert.deepEqual(preview.included, catalog[0].deliverables);
   assert.deepEqual(preview.preparation, catalog[0].preparation);
   assert.ok(preview.outsideCosts.startsWith(catalog[0].costs));
-  assert.match(preview.nextStep, /separate service agreement, then pay and start onboarding/);
-  assert.match(preview.onboardingNote, /Payment was simulated only/);
+  assert.match(preview.nextStep, /Schedule a call/);
+  assert.match(preview.nextStep, /sign a separate service agreement/);
+  assert.match(
+    preview.nextStep,
+    /Required inputs and appropriate access come before the agreed service and billing start/,
+  );
+  assert.match(preview.nextStep, /QuickBooks billing/);
+  assert.match(preview.conversationNote, /Nothing has been sent, booked or agreed/);
+  assert.doesNotMatch(JSON.stringify(preview), /simulat|then pay|No sales call/);
   assert.equal(preview.requiresFitReview, false);
 });
 
@@ -91,20 +100,18 @@ test('help-choose is permitted only where offered and stays on the fit-review pa
   const preview = buildRequestPreview(validate({ service: 'help-choose' }, true));
   assert.equal(preview.requiresFitReview, true);
   assert.match(preview.summary, /No service has been selected/);
-  assert.match(preview.nextStep, /fit review before payment/);
-  assert.doesNotMatch(preview.onboardingNote, /Payment was simulated/);
+  assert.match(preview.nextStep, /Choose a service before confirming fit/);
+  assert.match(preview.nextStep, /Schedule a call/);
   assert.equal(validate({ service: 'not-in-catalog' }, true).valid, false);
 });
 
-test('outside-offer requests stop at a fit-review checklist without implying payment', () => {
+test('scope questions stay in the conversation brief without implying acceptance', () => {
   const preview = buildRequestPreview(validate({ needsReview: 'on' }));
   assert.equal(preview.requiresFitReview, true);
-  assert.equal(preview.onboardingTitle, 'Your fit-review checklist');
-  assert.match(preview.onboardingNote, /Nothing has been sent, agreed, paid or booked/);
-  assert.match(
-    preview.nextStep,
-    /sales call is only needed if work outside the offer requires one/,
-  );
+  assert.equal(preview.conversationTitle, 'Your conversation brief');
+  assert.match(preview.conversationNote, /Nothing has been sent, booked or agreed/);
+  assert.match(preview.nextStep, /Confirm the work you flagged/);
+  assert.match(preview.nextStep, /Schedule a call/);
 });
 
 test('ad-spend estimate is required only for Meta and Google, with an unsure route', () => {
@@ -116,7 +123,7 @@ test('ad-spend estimate is required only for Meta and Google, with an unsure rou
     assert.match(preview.context.join(' '), /Estimated ad spend: Not sure yet/);
     assert.match(preview.context.join(' '), /does not authorize spending/);
     assert.equal(preview.requiresFitReview, true);
-    assert.match(preview.nextStep, /Confirm an advertising budget/);
+    assert.match(preview.nextStep, /Discuss an advertising budget/);
     assert.ok(preview.outsideCosts.startsWith(catalog.find((item) => item.slug === service).costs));
     assert.equal(
       buildRequestPreview(validate({ service, adSpend: '500-999' })).requiresFitReview,
@@ -193,7 +200,7 @@ test('no website for content, support or an additional page prompts fit confirma
   }
 });
 
-test('invalid requests cannot advance to a payment preview', () => {
+test('invalid requests cannot produce a conversation brief', () => {
   assert.throws(() => buildRequestPreview(validate({ name: '' })), /valid request is required/);
 });
 
@@ -234,14 +241,44 @@ test('private sample details are processed without touching network, storage or 
       }),
     );
     assert.ok(preview.summary);
-    assert.doesNotMatch(
-      JSON.stringify(preview),
-      /private@example.com|Private Sample|Private business plan/,
-    );
+    assert.doesNotMatch(JSON.stringify(preview), /private@example.com|Private Sample/);
+    assert.equal(preview.goals, 'Private business plan');
   } finally {
     for (const [key, descriptor] of previous) {
       if (descriptor) Object.defineProperty(globalThis, key, descriptor);
       else delete globalThis[key];
     }
   }
+});
+
+test('optional conversation brief needs no personal details, website or spending estimate', () => {
+  const validation = validateConversationBrief({ service: 'google-ads' }, catalog);
+  assert.equal(validation.valid, true);
+  assert.deepEqual(validation.errors, {});
+  const preview = buildRequestPreview(validation);
+  assert.match(preview.summary, /your business/);
+  assert.deepEqual(preview.context, []);
+  assert.equal(validateServiceRequest({ service: 'google-ads' }, catalog).valid, false);
+});
+
+test('optional brief still rejects unsafe supplied values and retains undecided rules', () => {
+  assert.equal(
+    validateConversationBrief({ service: 'google-ads', website: 'javascript:alert(1)' }, catalog)
+      .valid,
+    false,
+  );
+  assert.equal(
+    validateConversationBrief({ service: 'google-ads', adSpend: 'fake' }, catalog).valid,
+    false,
+  );
+  assert.equal(
+    validateConversationBrief({ service: 'google-ads', details: 'x'.repeat(2001) }, catalog).valid,
+    false,
+  );
+  assert.equal(validateConversationBrief({ service: 'help-choose' }, catalog).valid, false);
+  assert.equal(validateConversationBrief({ service: 'help-choose' }, catalog, true).valid, true);
+});
+
+test('calendar destination is the existing verified public FM booking link', () => {
+  assert.equal(conversationBookingUrl, 'https://calendar.app.google/a9J3NNFrFbxtoeQK7');
 });

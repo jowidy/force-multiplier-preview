@@ -417,8 +417,8 @@ function verifyContact($, file, visibleText) {
       `${file}: demo submit must start disabled`,
     );
     check(
-      /Nothing is sent, saved, charged, agreed or booked/.test(visibleText) &&
-        visibleText.includes('Payment is simulated'),
+      visibleText.includes('Nothing is sent or saved') &&
+        visibleText.includes('Choose a time on our work calendar'),
       `${file}: demo status must be explicit`,
     );
     return;
@@ -635,8 +635,8 @@ for (const file of sourceFiles.filter((file) => file.endsWith('.md'))) {
   }
 }
 check(
-  publishedCount === 18,
-  `Expected 18 published structured entries, found ${publishedCount}. Update the release contract deliberately if content scope changes.`,
+  publishedCount === 19,
+  `Expected 19 renderable structured entries including the authorized technology article, found ${publishedCount}. Update the release contract deliberately if content scope changes.`,
 );
 check(
   fileSet.has('fonts/OFL.txt') || [...fileSet].some((file) => /(?:^|\/)OFL\.txt$/i.test(file)),

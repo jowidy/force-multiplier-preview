@@ -32,11 +32,11 @@ const monthly = service.category === 'monthly';
               }</small
             ></span
           >
-        </div><a class="button" href="#request">Choose this service <Icon /></a><p
+        </div><a class="button" href="#request">Schedule a call <Icon /></a><p
           class="hero-fineprint"
         >
           Ad spend, software and other third-party costs are separate where needed. Scope agreed
-          first. No charge in this review preview.
+          together, before the agreement and the start of work.
         </p>
       </div>
       <div class="service-art">
@@ -75,15 +75,16 @@ const monthly = service.category === 'monthly';
       <p class="eyebrow">Made to fit your business</p><h2>
         A clear start.<br />Less back-and-forth.
       </h2><p>
-        Share what you have through a short written brief. We prepare the work and keep decisions
-        together, so you can review when it suits you.
+        Start with a conversation about your goals and what is already in place. We'll agree the
+        scope and access plan, sign a separate contract, then arrange the inputs needed to begin.
       </p>
     </div><div>
       <h3>What we’ll need from you</h3><ul class="plain-list">
         {service.preparation.map((item) => <li>{item}</li>)}
       </ul><p class="ownership-note">
         You keep control of your accounts and approved deliverables. We’ll agree access and
-        approvals without asking for passwords in this form.
+        approvals together. Required inputs and appropriate access come before the agreed service
+        and billing start. Never share passwords in this preview.
       </p>
     </div>
   </section>
@@ -91,7 +92,7 @@ const monthly = service.category === 'monthly';
     <div class="wrap scope-grid">
       <div>
         <p class="eyebrow">Before we agree the work</p><h2>Small print,<br />in plain sight.</h2><p>
-          These draft boundaries need review before the service is sold. The $400 price is public;
+          These draft boundaries need review before we sign an agreement. The $400 price is public;
           the specific work belongs in your agreement.
         </p>
       </div><div class="scope-review">
@@ -99,7 +100,7 @@ const monthly = service.category === 'monthly';
           class="small"
         >
           Review note: the included work is listed above. Details marked for confirmation remain
-          draft decisions and will be settled before purchase.
+          draft decisions and will be settled in your agreement.
         </p><h3>Costs outside the $400 fee</h3><p>{service.costs}</p>
       </div>
     </div>
@@ -117,8 +118,9 @@ const monthly = service.category === 'monthly';
     }<details>
       <summary>Am I committing to a package of services?</summary><p>
         No. Each service is separately contracted for $400. Pick the work you need. Monthly services
-        are month-to-month, and one-time projects have a one-time payment. We agree scope and any
-        third-party costs before you approve.
+        are month-to-month, and one-time projects have their own billing terms. We agree scope,
+        third-party costs, required inputs and account access before work starts. Recurring billing
+        is handled through QuickBooks from the agreed start.
       </p>
     </details>
   </section>

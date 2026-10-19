@@ -224,6 +224,11 @@
       "path": "/ad-concepts",
       "target": "/ad-concepts",
       "origin": "new"
+    },
+    {
+      "path": "/how-we-use-technology",
+      "target": "/how-we-use-technology",
+      "origin": "new"
     }
   ]
 }

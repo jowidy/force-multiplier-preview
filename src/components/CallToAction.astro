@@ -7,13 +7,13 @@ interface Props {
 }
 const {
   title = 'What feels stuck right now?',
-  text = 'A short note is enough. Tell us what you do, what you are trying to change, and where you could use a hand.',
+  text = "Let's talk about your business, the work that would help and what it takes to get started.",
 } = Astro.props;
 ---
 
 <section class="contact-band">
   <div class="wrap contact-band-inner">
     <div><h2>{title}</h2><p>{text}</p></div>
-    <a class="button button-white" href={href('/contact')}>Start a conversation <Icon /></a>
+    <a class="button button-white" href={href('/contact') + '#request'}>Schedule a call <Icon /></a>
   </div>
 </section>

@@ -1,6 +1,10 @@
 /** @typedef {{slug: string, title: string, category: 'monthly' | 'once', costs: string, deliverables: string[], preparation: string[], scopeReview: string[]}} RequestService */
 /** @typedef {Record<string, unknown>} RequestInput */
 
+// Existing FM work-calendar public link verified read-only on October 19, 2026.
+// This draft uses the existing schedule; it does not create or alter availability.
+export const conversationBookingUrl = 'https://calendar.app.google/a9J3NNFrFbxtoeQK7';
+
 export const startOptions = [
   ['soon', 'As soon as the scope and setup are ready'],
   ['this-month', 'This month'],
@@ -120,16 +124,42 @@ export function validateServiceRequest(input, services, allowUndecided = false) 
   }
   if (request.details.length > 2000) errors.details = 'Use 2,000 characters or fewer.';
   if (!request.acknowledge)
-    errors.acknowledge = 'Confirm that you understand this is a preview with no order or charge.';
+    errors.acknowledge = 'Confirm that you understand this is a preview with no request sent.';
   return { valid: Object.keys(errors).length === 0, errors, request, selected };
 }
 
 /**
- * Plain-text review and onboarding content; consumers must render with textContent.
+ * Optional local call preparation. Booking never depends on completing this brief.
+ * The stricter intake validator above remains unchanged for its separate consumers.
+ * @param {RequestInput} input
+ * @param {RequestService[]} services
+ * @param {boolean} [allowUndecided]
+ */
+export function validateConversationBrief(input, services, allowUndecided = false) {
+  const validation = validateServiceRequest(input, services, allowUndecided);
+  for (const field of [
+    'name',
+    'email',
+    'business',
+    'website',
+    'location',
+    'timeZone',
+    'startTiming',
+    'adSpend',
+  ]) {
+    if (!text(input[field])) delete validation.errors[field];
+  }
+  delete validation.errors.acknowledge;
+  return { ...validation, valid: Object.keys(validation.errors).length === 0 };
+}
+
+/**
+ * Plain-text conversation content; consumers must render with textContent.
  * @param {ReturnType<typeof validateServiceRequest>} validation
  */
 export function buildRequestPreview(validation) {
-  if (!validation.valid) throw new Error('A valid request is required before previewing payment.');
+  if (!validation.valid)
+    throw new Error('A valid request is required before preparing a conversation brief.');
   const { request, selected } = validation;
   const fitQuestions = [
     ...(!selected ? ['Choose a service before confirming fit.'] : []),
@@ -137,7 +167,7 @@ export function buildRequestPreview(validation) {
       ? ['Confirm the work you flagged as outside the service or uncertain.']
       : []),
     ...(needsAdSpend(request.service) && request.adSpend === 'unsure'
-      ? ['Confirm an advertising budget before a live payment or campaign setup.']
+      ? ['Discuss an advertising budget separately from the management fee.']
       : []),
     ...(request.noWebsite &&
     ['seo-content', 'website-support', 'website-page'].includes(request.service)
@@ -153,12 +183,23 @@ export function buildRequestPreview(validation) {
   return {
     requiresFitReview,
     summary: selected
-      ? `${selected.title} for ${request.business}: ${fee}.`
-      : `Help choosing a service for ${request.business}. ${fee}. No service has been selected.`,
+      ? `${selected.title} for ${request.business || 'your business'}: ${fee}.`
+      : `Help choosing a service for ${request.business || 'your business'}. ${fee}. No service has been selected.`,
     context: [
-      request.noWebsite ? 'Website: no website yet.' : `Website: ${request.website}`,
-      `Location: ${request.location}. Time zone: ${optionLabel(timeZoneOptions, request.timeZone)}.`,
-      `Preferred start: ${optionLabel(startOptions, request.startTiming)}. Timing is not confirmed.`,
+      ...(request.noWebsite
+        ? ['Website: no website yet.']
+        : request.website
+          ? [`Website: ${request.website}`]
+          : []),
+      ...(request.location ? [`Location: ${request.location}.`] : []),
+      ...(request.timeZone
+        ? [`Time zone: ${optionLabel(timeZoneOptions, request.timeZone)}.`]
+        : []),
+      ...(request.startTiming
+        ? [
+            `Preferred start: ${optionLabel(startOptions, request.startTiming)}. Timing is not confirmed.`,
+          ]
+        : []),
       ...(request.adSpend
         ? [
             `Estimated ad spend: ${optionLabel(adSpendOptions, request.adSpend)}. This is separate from the $400 management fee and does not authorize spending.`,
@@ -166,19 +207,17 @@ export function buildRequestPreview(validation) {
         : []),
     ],
     outsideCosts: selected
-      ? `${selected.costs} Confirm the exact scope before payment. No extra cost is authorized by this preview.`
-      : 'Ad spend, software, hosting, domains and other third-party costs are separate where needed. Confirm those costs and the exact scope before payment. No extra cost is authorized by this preview.',
+      ? `${selected.costs} Confirm the exact scope and costs in the service agreement. This brief authorizes no spending.`
+      : 'Ad spend, software, hosting, domains and other third-party costs are separate where needed. Confirm those costs and the exact scope in the service agreement. This brief authorizes no spending.',
     included: selected ? [...selected.deliverables] : [],
     scope: selected
       ? [...selected.scopeReview]
       : ['Choose a service and confirm its scope, cadence and outside costs.'],
-    nextStep: requiresFitReview
-      ? `${fitQuestions.join(' ')} This request needs a fit review before payment. A sales call is only needed if work outside the offer requires one. This preview does not contact anyone or book a call.`
-      : 'For the live path: confirm fit and scope, review the separate service agreement, then pay and start onboarding. No sales call is required for work within the confirmed offer.',
-    onboardingTitle: requiresFitReview ? 'Your fit-review checklist' : 'Your onboarding preview',
-    onboardingNote: requiresFitReview
-      ? 'Nothing has been sent, agreed, paid or booked. Confirm the service and any work outside the offer before moving to an agreement, payment and onboarding.'
-      : 'Payment was simulated only. No order, charge or agreement exists. After a real payment for the confirmed scope, onboarding would collect these items through the agreed process.',
+    nextStep: `${fitQuestions.join(' ')}${fitQuestions.length ? ' ' : ''}Schedule a call to discuss your goals, confirm fit and scope, and plan account access. Then review and sign a separate service agreement. Required inputs and appropriate access come before the agreed service and billing start. Recurring services use QuickBooks billing on the agreed month-to-month terms.`,
+    conversationTitle: 'Your conversation brief',
+    conversationNote:
+      'Prepared here for you to review. Nothing has been sent, booked or agreed. Bring these notes to your conversation; do not include passwords or account credentials.',
+    goals: request.details,
     preparation: selected
       ? [...selected.preparation]
       : [

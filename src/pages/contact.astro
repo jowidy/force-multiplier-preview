@@ -1,34 +1,32 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
-import InquiryForm from '../components/InquiryForm.astro';
 import ServiceInquiry from '../components/ServiceInquiry.astro';
-import { site, hasServerForm } from '../lib/site';
+import { site } from '../lib/site';
 ---
 
 <SiteLayout
   title="Contact"
-  description="Choose a $400 service and tell Force Multiplier about your small business. Review the scope and separate costs before deciding."
+  description="Schedule a call with Force Multiplier about your small business, the $400 service that fits, scope and the access needed to get started."
   path="/contact"
 >
   <section class="page-intro contact-intro wrap">
     <h1>Let’s talk<br />about the work.</h1><p class="lead">
-      Tell us what you do, what you are trying to change and where you could use a hand. A short
-      note is enough.
+      Schedule a time to talk about your business, what you want to change and where you could use a
+      hand. You don't need to complete a brief before the call.
     </p>
   </section>
   <section class="wrap contact-grid section-bottom">
     <div>
-      {hasServerForm ? <InquiryForm /> : <ServiceInquiry allowUndecided />}
+      <ServiceInquiry allowUndecided />
     </div><aside class="contact-side">
       <h2>Prefer to reach out directly?</h2><a class="email" href={`mailto:${site.email}`}
         >{site.email}</a
-      ><hr /><h2>A useful first note</h2><ul>
+      ><hr /><h2>A useful first conversation</h2><ul>
         <li>What your business does</li><li>Where things are getting stuck</li><li>
           What a better result would look like
         </li><li>Any timing or constraints that matter</li>
       </ul><hr /><h2>Local roots. National reach.</h2><p class="small">
-        Based in Monroe, Louisiana. We work remotely with small businesses nationwide. Contact and
-        business-number integration are being reviewed before launch.
+        Based in Monroe, Louisiana. We work remotely with small businesses nationwide.
       </p>
     </aside>
   </section>
@@ -42,8 +40,10 @@ import { site, hasServerForm } from '../lib/site';
       </details><details>
         <summary>How is the work priced?</summary><p>
           Each catalog service is $400 under a separate agreement. Recurring services are
-          month-to-month; one-time projects are paid once. We confirm scope and separate
-          advertising, software and other third-party costs before you approve.
+          month-to-month; one-time projects have their own billing terms. We confirm scope and
+          separate advertising, software and other third-party costs in the contract. Appropriate
+          onboarding, required inputs and account access come before the agreed service and billing
+          start. Recurring billing is handled through QuickBooks.
         </p>
       </details><details>
         <summary>Can you work with our current tools or website?</summary><p>
