@@ -14,7 +14,7 @@ import { href } from '../lib/site';
     <div class="comparison-intro">
       <div>
         <p class="eyebrow">A little help. A clear price.</p>
-        <h2 id="comparison-title">Eleven useful services.<br />$400 each.</h2>
+        <h2 id="comparison-title">Useful services.<br />$400 each.</h2>
       </div>
       <div class="comparison-explanation">
         <p>
@@ -29,7 +29,7 @@ import { href } from '../lib/site';
     </div>
     <div class="comparison-toolbar">
       <p class="comparison-small" data-comparison-status aria-live="polite">
-        Seven monthly services. Four one-time projects. All prices in USD.
+        Monthly services and one-time projects. All prices in USD.
       </p>
       <div class="comparison-controls" hidden data-comparison-controls>
         <button type="button" data-stop-comparisons>Show all prices now</button>
@@ -41,7 +41,7 @@ import { href } from '../lib/site';
     <div
       class="comparison-table"
       role="table"
-      aria-label="Eleven services: Other Agencies and Force Multiplier fees"
+      aria-label="Our services: Other Agencies and Force Multiplier fees"
     >
       <div class="comparison-table-head" role="row">
         <div role="columnheader">Offering / description</div>
@@ -50,7 +50,7 @@ import { href } from '../lib/site';
       </div>
       <div role="rowgroup">
         {
-          agencyBenchmarks.map((benchmark, index) => {
+          agencyBenchmarks.map((benchmark) => {
             const service = services.find((item) => item.slug === benchmark.slug)!;
             return (
               <div
@@ -63,7 +63,6 @@ import { href } from '../lib/site';
               >
                 <div class="comparison-service" role="rowheader">
                   <span class="comparison-index">
-                    {String(index + 1).padStart(2, '0')} /{' '}
                     {service.category === 'monthly' ? 'MONTHLY' : 'ONE TIME'}
                   </span>
                   <h3>

@@ -4,7 +4,7 @@ export const hasServerForm = buildTarget === 'staging' || isProduction;
 export const site = {
   name: 'Force Multiplier',
   domain: 'https://www.forcemultiplier.work',
-  email: 'contact@forcemultiplier.work',
+  email: 'john.dye@forcemultiplier.work',
   address: '1220 N 18th St, Suite 200, Monroe, LA 71201',
 };
 

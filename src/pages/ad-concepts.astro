@@ -10,8 +10,9 @@ const sets = [
 
 <SiteLayout
   title="National Google Ads concepts for review"
-  description="Review Force Multiplier's draft Google Search ad copy alongside the eleven $400 service pages. These are concepts, with no ads launched or budget committed."
+  description="Review Force Multiplier's draft Google Search ad copy alongside our $400 service pages. These are concepts, with no ads launched or budget committed."
   path="/ad-concepts"
+  noindex={true}
 >
   <section class="page-intro wrap">
     <p class="eyebrow">Monday review · National Search</p><h1>
@@ -25,6 +26,29 @@ const sets = [
       The proposed first test focuses on Google Ads management; the other concepts are options for later
       review.
     </p>
+  </section>
+  <section class="campaign-review wrap" aria-labelledby="campaign-review-title">
+    <p class="eyebrow">Decisions for review</p>
+    <h2 id="campaign-review-title">Before this becomes a campaign.</h2>
+    <ol>
+      <li>
+        <strong>Choose one starting offer.</strong> Review <a href={href('/services/google-ads')}>
+          Google Ads management for $400/month
+        </a> first. Social posts are a possible fallback after demand and cost checks; a landing-page
+        offer can be considered later. These are alternatives, not an approved bundle or launch list.
+      </li>
+      <li>
+        <strong>Agree the scope and spending limit.</strong> Confirm the work, response expectations,
+        separate media budget and test dates. Review current search demand and likely click costs before
+        choosing an amount.
+      </li>
+      <li>
+        <strong>Test the whole buying path.</strong> Service selection, a short fit check, agreement
+        review, payment and onboarding need to work before traffic is sent. Calls are for requests outside
+        the offer. Count real accepted inquiries and paid orders; preview submissions are not conversions.
+      </li>
+    </ol>
+    <p>Approval of this copy is separate from approval of a budget or campaign launch.</p>
   </section>
   <section class="wrap section-bottom">
     <div class="ads-review-grid">
@@ -91,6 +115,32 @@ const sets = [
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 28px;
+  }
+  .campaign-review {
+    margin-bottom: 48px;
+    padding-top: 28px;
+    padding-bottom: 28px;
+    border-block: 1px solid #bfc8d0;
+  }
+  .campaign-review h2 {
+    font-size: clamp(25px, 4vw, 34px);
+  }
+  .campaign-review ol {
+    max-width: 950px;
+    padding-left: 24px;
+  }
+  .campaign-review li {
+    margin-block: 18px;
+    padding-left: 6px;
+  }
+  .campaign-review a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .campaign-review > p:last-child {
+    margin-bottom: 0;
+    font-size: 15px;
+    font-weight: 600;
   }
   .ad-review-card {
     padding: 28px;

@@ -45,7 +45,10 @@ for (const slug of expected) {
   check(form.find('option[selected]').val() === slug, `${slug}: wrong preselected service`);
   check(form.find('[data-demo-fields][disabled]').length === 1, `${slug}: unsafe no-JS controls`);
   check(!form.attr('action') && !form.attr('data-netlify'), `${slug}: live endpoint on demo`);
-  check(form.find('option').length === 12, `${slug}: unexpected service catalog`);
+  check(
+    form.find('select[name="service"] option').length === 12,
+    `${slug}: unexpected service catalog`,
+  );
   check(
     main.includes('$400') &&
       main.includes('Costs outside the $400 fee') &&
@@ -53,9 +56,33 @@ for (const slug of expected) {
     `${slug}: missing price or scope disclosure`,
   );
   check(
-    main.includes('Nothing is sent, saved, charged or booked'),
+    main.includes('Nothing is sent, saved, charged, agreed or booked') &&
+      main.includes('Payment is simulated'),
     `${slug}: unclear demonstration status`,
   );
+  check(
+    form.find('[data-step-review][hidden]').length === 1 &&
+      form.find('[data-step-onboarding][hidden]').length === 1 &&
+      form.find('[data-preview-next][type="button"]').length === 1,
+    `${slug}: missing safe review and onboarding stages`,
+  );
+  if (slug === 'seo-content')
+    check(
+      main.includes('Two onsite SEO articles per month'),
+      'SEO: approved article quantity missing',
+    );
+  if (slug === 'newsletters')
+    check(
+      main.includes('Two newsletters per month') && main.includes('list-building work'),
+      'Newsletters: approved quantity or active list building missing',
+    );
+  if (slug === 'website-support')
+    check(
+      !/\b(?:60 minutes|\d+[- ]hours?|hour allowance|hour limits?|hourly commitments)\b/i.test(
+        main,
+      ),
+      'Maintenance: unapproved hourly commitment or internal guidance leaked',
+    );
   check(
     !/(?:tel:|sms:|318.{0,4}376.{0,4}6914|googletagmanager\.com|google-analytics\.com)/i.test(text),
     `${slug}: personal phone or tracker leaked`,
@@ -68,6 +95,22 @@ for (const slug of expected) {
     check($(`label[for="${$(input).attr('id')}"]`).length === 1, `${slug}: unlabeled control`);
 }
 const $ = load(await fs.readFile(new URL('../dist/services/index.html', import.meta.url), 'utf8'));
+const overviewCopy = [
+  $('body').clone().find('script,style').remove().end().text(),
+  $('title').text(),
+  ...$('meta[content]')
+    .map((_, el) => $(el).attr('content'))
+    .get(),
+  ...$('[aria-label],[alt],[title]')
+    .map((_, el) =>
+      [$(el).attr('aria-label'), $(el).attr('alt'), $(el).attr('title')].filter(Boolean).join(' '),
+    )
+    .get(),
+].join(' ');
+check(
+  !/\beleven\b|\b11(?![\d,])\b/i.test(overviewCopy),
+  'Overview must use count-independent wording, including metadata and accessibility text',
+);
 check($('.service-card').length === 11, 'Overview must show exactly11 services');
 check(
   $('#monthly .service-card').length === 7 && $('#one-time .service-card').length === 4,

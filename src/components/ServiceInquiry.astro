@@ -1,45 +1,66 @@
 ---
 import { services } from '../lib/service-catalog';
+import { adSpendOptions, startOptions, timeZoneOptions } from '../lib/service-request.mjs';
 interface Props {
   selected?: string;
   allowUndecided?: boolean;
 }
 const { selected = '', allowUndecided = false } = Astro.props;
+const requestServices = services.map((service) => ({
+  slug: service.slug,
+  title: service.shortTitle,
+  category: service.category,
+  costs: service.costs,
+  deliverables: service.deliverables,
+  preparation: service.preparation,
+  scopeReview: service.scopeReview,
+}));
 ---
 
 <section class="request-panel" id="request" aria-labelledby="request-heading">
   <div class="request-intro">
     <p class="eyebrow">A small first step</p>
-    <h2 id="request-heading">Let’s get your<br />next move ready.</h2>
+    <h2 id="request-heading">Let's get your<br />next move ready.</h2>
     <p>
-      Choose one service. Tell us a little about your business. We’ll confirm the work and any
-      outside costs before you decide.
+      Choose your service, check that it fits, then move toward payment and onboarding. No sales
+      call is needed for work within the confirmed offer.
     </p>
     <ol class="simple-steps">
-      <li>Choose your $400 service.</li><li>Review a separate, written agreement.</li><li>
-        Approve the scope before payment or work begins.
-      </li>
+      <li>Choose a service and answer a few fit questions.</li>
+      <li>Review its scope, separate agreement and outside costs before payment.</li>
+      <li>Pay and start onboarding once the offer is confirmed.</li>
     </ol>
     <p class="preview-note">
-      <strong>Review preview:</strong> this form is a working demonstration. Nothing is sent, saved,
-      charged or booked. Use sample details to test it.
+      <strong>Review preview:</strong> try all three steps with sample details. Nothing is sent, saved,
+      charged, agreed or booked. Payment is simulated.
     </p>
   </div>
-  <form class="service-inquiry" data-demo-inquiry>
+  <form
+    class="service-inquiry"
+    data-demo-inquiry
+    data-services={JSON.stringify(requestServices)}
+    data-allow-undecided={String(allowUndecided)}
+  >
     <fieldset disabled data-demo-fields>
+      <p class="eyebrow">1. Choose your service and check fit</p>
       <div class="field">
-        <label for="service-choice">Your service</label><select
-          id="service-choice"
-          name="service"
-          required
-          ><option value="">Choose a service</option>{
-            services.map((s) => (
-              <option value={s.slug} selected={selected === s.slug} data-frequency={s.category}>
-                {s.shortTitle} · $400 {s.category === 'monthly' ? 'per month' : 'one time'}
+        <label for="service-choice">Your service</label>
+        <select id="service-choice" name="service" required>
+          <option value="">Choose a service</option>
+          {
+            services.map((service) => (
+              <option
+                value={service.slug}
+                selected={selected === service.slug}
+                data-frequency={service.category}
+              >
+                {service.shortTitle} - $400{' '}
+                {service.category === 'monthly' ? 'per month' : 'one time'}
               </option>
             ))
-          }{allowUndecided && <option value="help-choose">Help me choose a service</option>}</select
-        >
+          }
+          {allowUndecided && <option value="help-choose">Help me choose a service</option>}
+        </select>
       </div>
       <div class="field-pair">
         <div class="field">
@@ -50,7 +71,8 @@ const { selected = '', allowUndecided = false } = Astro.props;
             required
             maxlength="100"
           />
-        </div><div class="field">
+        </div>
+        <div class="field">
           <label for="request-email">Email</label><input
             id="request-email"
             name="email"
@@ -71,65 +93,312 @@ const { selected = '', allowUndecided = false } = Astro.props;
         />
       </div>
       <div class="field">
+        <label for="request-website">Website</label>
+        <input
+          id="request-website"
+          name="website"
+          type="url"
+          autocomplete="url"
+          placeholder="https://example.com"
+          aria-describedby="website-hint"
+          required
+          maxlength="500"
+        />
+        <small id="website-hint">Include https://, or choose the option below.</small>
+      </div>
+      <label class="check-field"
+        ><input type="checkbox" name="noWebsite" /><span>I don't have a website yet.</span></label
+      >
+      <div class="field-pair">
+        <div class="field">
+          <label for="request-location">State or territory</label><input
+            id="request-location"
+            name="location"
+            autocomplete="address-level1"
+            required
+            maxlength="100"
+          />
+        </div>
+        <div class="field">
+          <label for="request-time-zone">Your time zone</label><select
+            id="request-time-zone"
+            name="timeZone"
+            required
+            ><option value="">Choose a time zone</option>{
+              timeZoneOptions.map(([value, label]) => <option value={value}>{label}</option>)
+            }</select
+          >
+        </div>
+      </div>
+      <div class="field">
+        <label for="request-start">When would you like to start?</label><select
+          id="request-start"
+          name="startTiming"
+          required
+          ><option value="">Choose a preference</option>{
+            startOptions.map(([value, label]) => <option value={value}>{label}</option>)
+          }</select
+        >
+      </div>
+      <div class="field" data-ad-fields hidden>
+        <label for="request-ad-spend">Estimated monthly ad spend</label>
+        <select id="request-ad-spend" name="adSpend" disabled aria-describedby="ad-spend-hint"
+          ><option value="">Choose a range</option>{
+            adSpendOptions.map(([value, label]) => <option value={value}>{label}</option>)
+          }</select
+        >
+        <small id="ad-spend-hint"
+          >Separate from the $400 management fee. A planning estimate only; choosing a range does
+          not authorize spending.</small
+        >
+      </div>
+      <div class="field">
         <label for="request-details">What would you like help with? <span>(optional)</span></label
         ><textarea id="request-details" name="details" rows="3" maxlength="2000"></textarea>
       </div>
+      <label class="check-field"
+        ><input type="checkbox" name="needsReview" /><span
+          >I need work beyond the service described, or help confirming it fits.</span
+        ></label
+      >
       <div class="before-payment">
-        <strong>Before you buy</strong><p>
+        <strong>Before you buy</strong>
+        <p>
           Each service has its own $400 agreement. Monthly work is month-to-month; one-time work is
           paid once. Advertising spend, software, hosting, domains and other third-party costs are
           separate where needed and must be agreed first. Your accounts stay yours.
         </p>
       </div>
       <label class="check-field"
-        ><input type="checkbox" name="acknowledge" required />
-        <span
+        ><input type="checkbox" name="acknowledge" required /><span
           >I understand the separate service fee and outside costs, and that this preview does not
-          place an order.</span
+          place an order or accept an agreement.</span
         ></label
       >
       <button class="button" type="submit" disabled data-demo-submit
-        >Preview my request <span aria-hidden="true">↗</span></button
+        >Review my request <span aria-hidden="true">→</span></button
       >
     </fieldset>
     <noscript
       ><p>
-        This safe demonstration needs JavaScript to prepare an on-page summary. No information has
-        been sent. You can review all service details without JavaScript.
+        This safe demonstration needs JavaScript to prepare an on-page review and onboarding
+        checklist. No information has been sent. You can review all service details without
+        JavaScript.
       </p></noscript
     >
-    <div class="request-result" tabindex="-1" hidden aria-labelledby="result-heading">
-      <h3 id="result-heading">Your request is ready to review.</h3><p data-request-summary></p><p>
-        <strong>Demo complete.</strong> Nothing was sent or purchased. On the future live site, the next
-        step will be scope confirmation and a separate agreement.
-      </p><button type="button" class="text-link" data-edit-request>Edit my request</button>
+    <div
+      class="request-result"
+      tabindex="-1"
+      hidden
+      aria-labelledby="result-heading"
+      data-step-review
+    >
+      <p class="eyebrow">2. Review before payment</p>
+      <h3 id="result-heading">Review your service.</h3>
+      <p data-request-summary></p>
+      <ul data-request-included></ul>
+      <ul data-request-context></ul>
+      <div class="before-payment">
+        <strong>Confirm the scope first</strong><p>
+          The items below need confirmation for your business. Proposed limits are not approved
+          commitments. This preview is not a final agreement.
+        </p><ul data-request-scope></ul>
+      </div>
+      <p data-outside-costs></p>
+      <p data-next-step></p>
+      <p>
+        <strong>Demo only:</strong> the next button simulates a step. Nothing is sent, paid, ordered
+        or agreed.
+      </p>
+      <button class="button" type="button" data-preview-next
+        >Simulate payment and see onboarding</button
+      >
+      <button type="button" class="text-link" data-edit-request>Edit my request</button>
+    </div>
+    <div
+      class="request-result"
+      tabindex="-1"
+      hidden
+      aria-labelledby="onboarding-heading"
+      data-step-onboarding
+    >
+      <p class="eyebrow" data-onboarding-step>3. Onboarding preview</p>
+      <h3 id="onboarding-heading" data-onboarding-title>Your onboarding preview</h3>
+      <p data-onboarding-note></p>
+      <ul data-onboarding-items></ul>
+      <p>
+        Use sample details here. Do not enter passwords, payment information or account credentials.
+        No uploads or account access are requested in this preview.
+      </p>
+      <button type="button" class="text-link" data-back-review>Back to review</button>
+      <button type="button" class="text-link" data-edit-request>Edit my request</button>
     </div>
   </form>
 </section>
+<style>
+  .service-inquiry [hidden] {
+    display: none;
+  }
+  .service-inquiry small {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+  .service-inquiry .eyebrow {
+    color: var(--blue);
+  }
+  .request-result ul {
+    padding-left: 20px;
+    font-size: 14px;
+    line-height: 1.7;
+  }
+  .request-result li + li {
+    margin-top: 8px;
+  }
+  .request-result .button {
+    font-size: 14px;
+    margin-block: 12px;
+  }
+  .request-result .text-link {
+    display: block;
+  }
+  [data-demo-fields],
+  .request-result {
+    scroll-margin-block-start: 16px;
+  }
+</style>
 <script>
+  import {
+    buildRequestPreview,
+    needsAdSpend,
+    validateServiceRequest,
+  } from '../lib/service-request.mjs';
+  import type { RequestService } from '../lib/service-request.mjs';
+
   document.querySelectorAll<HTMLFormElement>('[data-demo-inquiry]').forEach((form) => {
+    const fields = form.querySelector<HTMLFieldSetElement>('[data-demo-fields]');
     const submit = form.querySelector<HTMLButtonElement>('[data-demo-submit]');
-    const result = form.querySelector<HTMLElement>('.request-result');
-    const summary = form.querySelector<HTMLElement>('[data-request-summary]');
-    if (!submit || !result || !summary) return;
+    const review = form.querySelector<HTMLElement>('[data-step-review]');
+    const onboarding = form.querySelector<HTMLElement>('[data-step-onboarding]');
+    const choice = form.querySelector<HTMLSelectElement>('[name="service"]');
+    const website = form.querySelector<HTMLInputElement>('[name="website"]');
+    const noWebsite = form.querySelector<HTMLInputElement>('[name="noWebsite"]');
+    const adFields = form.querySelector<HTMLElement>('[data-ad-fields]');
+    const adSpend = form.querySelector<HTMLSelectElement>('[name="adSpend"]');
+    const next = form.querySelector<HTMLButtonElement>('[data-preview-next]');
+    if (
+      !fields ||
+      !submit ||
+      !review ||
+      !onboarding ||
+      !choice ||
+      !website ||
+      !noWebsite ||
+      !adFields ||
+      !adSpend ||
+      !next
+    )
+      return;
+    let catalog: RequestService[];
+    try {
+      catalog = JSON.parse(form.dataset.services || '[]');
+    } catch {
+      return;
+    }
+    let preview: ReturnType<typeof buildRequestPreview> | undefined;
+    const controls = form.querySelectorAll<
+      HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement
+    >('input, select, textarea');
+    const syncConditionalFields = () => {
+      website.disabled = noWebsite.checked;
+      website.required = !noWebsite.checked;
+      const showAdSpend = needsAdSpend(choice.value);
+      adFields.hidden = !showAdSpend;
+      adSpend.disabled = !showAdSpend;
+      adSpend.required = showAdSpend;
+    };
+    const validate = () => {
+      syncConditionalFields();
+      const validation = validateServiceRequest(
+        Object.fromEntries(new FormData(form)),
+        catalog,
+        form.dataset.allowUndecided === 'true',
+      );
+      controls.forEach((control) =>
+        control.setCustomValidity(control.disabled ? '' : validation.errors[control.name] || ''),
+      );
+      return validation;
+    };
+    const setText = (selector: string, value: string) => {
+      const element = form.querySelector<HTMLElement>(selector);
+      if (element) element.textContent = value;
+    };
+    const setList = (selector: string, values: string[]) => {
+      const list = form.querySelector<HTMLElement>(selector);
+      if (!list) return;
+      list.replaceChildren(
+        ...values.map((value) => {
+          const item = document.createElement('li');
+          item.textContent = value;
+          return item;
+        }),
+      );
+    };
+    const focusStep = (target: HTMLElement, scrollTarget: HTMLElement = target) => {
+      target.focus({ preventScroll: true });
+      requestAnimationFrame(() => {
+        scrollTarget.scrollIntoView({ block: 'start', behavior: 'instant' });
+      });
+    };
+    form.addEventListener('input', validate);
+    form.addEventListener('change', validate);
     form.addEventListener('submit', (event) => {
       event.preventDefault();
-      if (!form.reportValidity()) return;
-      const choice = form.querySelector<HTMLSelectElement>('select')!;
-      const business = form.querySelector<HTMLInputElement>('[name="business"]')!;
-      summary.textContent =
-        choice.value === 'help-choose'
-          ? `Help choosing a service for ${business.value.trim()}. No service has been selected. Each catalog service is separately contracted for $400; scope, cadence and outside costs need confirmation first.`
-          : `${choice.selectedOptions[0].textContent} for ${business.value.trim()}. Scope and outside costs still need your approval.`;
-      result.hidden = false;
-      result.focus();
+      const validation = validate();
+      if (!form.reportValidity() || !validation.valid) return;
+      preview = buildRequestPreview(validation);
+      setText('[data-request-summary]', preview.summary);
+      setList('[data-request-included]', preview.included);
+      setList('[data-request-context]', preview.context);
+      setList('[data-request-scope]', preview.scope);
+      setText('[data-outside-costs]', preview.outsideCosts);
+      setText('[data-next-step]', preview.nextStep);
+      next.textContent = preview.requiresFitReview
+        ? 'Preview my fit-review checklist'
+        : 'Simulate payment and see onboarding';
+      fields.hidden = true;
+      onboarding.hidden = true;
+      review.hidden = false;
+      focusStep(review);
     });
-    form.querySelector('[data-edit-request]')?.addEventListener('click', () => {
-      result.hidden = true;
-      form.querySelector('select')?.focus();
+    next.addEventListener('click', () => {
+      if (!preview) return;
+      setText(
+        '[data-onboarding-step]',
+        preview.requiresFitReview ? 'Next: confirm fit' : '3. Onboarding preview',
+      );
+      setText('[data-onboarding-title]', preview.onboardingTitle);
+      setText('[data-onboarding-note]', preview.onboardingNote);
+      setList('[data-onboarding-items]', preview.preparation);
+      review.hidden = true;
+      onboarding.hidden = false;
+      focusStep(onboarding);
     });
-    const fields = form.querySelector<HTMLFieldSetElement>('[data-demo-fields]');
-    if (fields) fields.disabled = false;
+    form.querySelector('[data-back-review]')?.addEventListener('click', () => {
+      onboarding.hidden = true;
+      review.hidden = false;
+      focusStep(review);
+    });
+    form.querySelectorAll('[data-edit-request]').forEach((button) =>
+      button.addEventListener('click', () => {
+        review.hidden = true;
+        onboarding.hidden = true;
+        fields.hidden = false;
+        preview = undefined;
+        focusStep(choice, fields);
+      }),
+    );
+    fields.disabled = false;
     submit.disabled = false;
+    syncConditionalFields();
   });
 </script>

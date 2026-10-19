@@ -226,7 +226,9 @@ for (const [file, $] of documents) {
   );
   const robots = ($('meta[name="robots"]').attr('content') || '').toLowerCase().split(/[\s,]+/);
   const excluded =
-    !isProduction || ['/404', '/thank-you'].includes(route) || rule?.path !== rule?.target;
+    !isProduction ||
+    ['/404', '/thank-you', '/ad-concepts'].includes(route) ||
+    rule?.path !== rule?.target;
   check(
     excluded
       ? robots.includes('noindex') && robots.includes('nofollow')
@@ -415,7 +417,8 @@ function verifyContact($, file, visibleText) {
       `${file}: demo submit must start disabled`,
     );
     check(
-      /Nothing is sent, saved, charged or booked/.test(visibleText),
+      /Nothing is sent, saved, charged, agreed or booked/.test(visibleText) &&
+        visibleText.includes('Payment is simulated'),
       `${file}: demo status must be explicit`,
     );
     return;
@@ -650,7 +653,10 @@ const sitemapUrls = sitemap('loc')
   .map((el) => sitemap(el).text());
 const expectedSitemap = isProduction
   ? manifest.routes
-      .filter((item) => item.path === item.target && !['/404', '/thank-you'].includes(item.path))
+      .filter(
+        (item) =>
+          item.path === item.target && !['/404', '/thank-you', '/ad-concepts'].includes(item.path),
+      )
       .map((item) => canonical(item.path))
   : [];
 check(

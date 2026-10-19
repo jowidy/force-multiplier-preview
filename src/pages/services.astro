@@ -8,8 +8,8 @@ import { href } from '../lib/site';
 ---
 
 <SiteLayout
-  title="11 useful services. $400 each."
-  description="Pick practical marketing and website help for your small business. Seven month-to-month services and four one-time projects, each separately contracted for $400."
+  title="Useful services. $400 each."
+  description="Pick practical marketing and website help for your small business. Month-to-month services and one-time projects, each separately contracted for $400."
   path="/services"
 >
   <section class="page-intro wrap illustrated-intro catalog-hero">
@@ -17,23 +17,21 @@ import { href } from '../lib/site';
       <p class="eyebrow">Small-business marketing, made simpler</p><h1>
         Pick the help.<br />Know the price.
       </h1><p class="lead">
-        Eleven useful services. <strong>$400 each.</strong> Choose the work your business needs, with
-        a separate agreement for every service.
+        Useful services. <strong>$400 each.</strong> Choose the work your business needs, with a separate
+        agreement for every service.
       </p><ul class="catalog-summary">
-        <li>7 month-to-month services</li><li>4 one-time projects</li><li>
-          Your accounts stay yours
-        </li>
+        <li>Month-to-month services</li><li>One-time projects</li><li>Your accounts stay yours</li>
       </ul>
-      <a class="text-link" href="#price-comparison">See all 11 price comparisons <Icon /></a>
+      <a class="text-link" href="#price-comparison">Compare our service prices <Icon /></a>
     </div><EditorialArt kind="clear-path" priority />
   </section>
   <PriceComparison />
   <section class="section cream-section">
     <div class="wrap">
       <nav class="catalog-controls" aria-label="Service categories">
-        <a href="#monthly">Monthly support · 7 services ↓</a><a href="#one-time"
-          >One-time projects · 4 services ↓</a
-        ><a href="#how-it-works">How it works ↓</a>
+        <a href="#monthly">Monthly support ↓</a><a href="#one-time">One-time projects ↓</a><a
+          href="#how-it-works">How it works ↓</a
+        >
       </nav>
       {
         [
@@ -63,13 +61,10 @@ import { href } from '../lib/site';
               <div class="catalog-grid">
                 {services
                   .filter((s) => s.category === group.key)
-                  .map((s, index) => (
+                  .map((s) => (
                     <article class="service-card">
                       <div class="card-number">
-                        <span>
-                          {String(index + 1).padStart(2, '0')} /{' '}
-                          {group.key === 'monthly' ? 'MONTHLY' : 'ONE TIME'}
-                        </span>
+                        <span>{group.key === 'monthly' ? 'MONTHLY' : 'ONE TIME'}</span>
                         <span aria-hidden="true">✦</span>
                       </div>
                       <h3>{s.shortTitle}</h3>
@@ -100,17 +95,17 @@ import { href } from '../lib/site';
     </div><ol class="process-list">
       <li>
         <h3>Pick the work.</h3><p>
-          Find the service that fits. Use the preview request form to test the next step.
+          Choose a service and answer a few short questions to check that it fits your business.
         </p>
       </li><li>
-        <h3>Agree what’s included.</h3><p>
-          We confirm deliverables, access and approval steps in a separate agreement. Proposed scope
-          limits are flagged on each draft page.
+        <h3>Review and pay.</h3><p>
+          Review your service, separate agreement and any outside costs before payment. A sales call
+          is only needed when your request falls outside the offer.
         </p>
       </li><li>
-        <h3>Stay in control.</h3><p>
-          Your accounts and approved deliverables stay yours. Monthly services are month-to-month.
-          Review work through a simple written handoff.
+        <h3>Get started.</h3><p>
+          Follow a short onboarding checklist for your service. Your accounts stay yours, and
+          monthly services are month-to-month. Try the steps here without placing an order.
         </p>
       </li>
     </ol>
@@ -129,7 +124,7 @@ import { href } from '../lib/site';
         <p class="eyebrow">One service. One agreement.</p>
         <p class="price-static">$400</p>
         <p>Per month for ongoing help, or one time for a focused project.</p>
-        <a class="text-link" href="#price-comparison">Back to all 11 comparisons <Icon /></a>
+        <a class="text-link" href="#price-comparison">Back to service comparisons <Icon /></a>
       </div>
     </div>
   </section>
