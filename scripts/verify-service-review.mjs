@@ -91,6 +91,12 @@ for (const slug of expected) {
     `${slug}: comparison scenario must be distinguished from FM scope`,
   );
   check(row.find('[data-target-number]').text() === '$400', `${slug}: wrong FM fee`);
+  check(
+    row.find('.comparison-agency [data-price-label="agency"]').text().trim() === 'Other Agencies' &&
+      row.find('.comparison-fm [data-price-label="fm"]').text().trim() === 'Force Multiplier' &&
+      row.find('[data-fm-result] [data-price-label]').length === 0,
+    `${slug}: mobile labels must identify both prices and stay outside the animated result`,
+  );
   const summary = row.find('[data-comparison-summary]');
   check(
     summary.length === 1 && summary.text().trim() === exactTooltip,
@@ -127,11 +133,16 @@ check(
   'Comparison heading must remain Other Agencies',
 );
 check(
-  $('details#comparison-methodology > summary').length === 1 &&
-    $('a[href="#comparison-methodology"]').length > 0,
-  'Comparison methodology must be accessible from the adjacent explanation',
+  $('#comparison-methodology').length === 0 &&
+    $('a[href*="#comparison-methodology"]').length === 0 &&
+    !$('main').text().includes('How these agency estimates were modeled'),
+  'Removed methodology section and links must not remain on the comparison page',
 );
 const home = load(await fs.readFile(new URL('../dist/index.html', import.meta.url), 'utf8'));
+check(
+  home('a[href*="#comparison-methodology"]').length === 0,
+  'Homepage must not link to the removed methodology section',
+);
 check(!/published example/i.test(home('main').text()), 'Homepage uses the removed label');
 check(
   JSON.stringify(

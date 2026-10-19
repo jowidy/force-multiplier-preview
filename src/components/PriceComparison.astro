@@ -2,7 +2,6 @@
 import { agencyBenchmarks } from '../lib/agency-benchmarks';
 import { services } from '../lib/service-catalog';
 import { href } from '../lib/site';
-import ComparisonMethodology from './ComparisonMethodology.astro';
 ---
 
 <section
@@ -24,8 +23,7 @@ import ComparisonMethodology from './ComparisonMethodology.astro';
         </p>
         <p class="comparison-small">
           Modeled comparable-service SMB-to-enterprise fees for the scopes shown; actual quotes
-          vary.{' '}
-          <a href="#comparison-methodology">Methodology and scope</a>.
+          vary.
         </p>
       </div>
     </div>
@@ -83,6 +81,13 @@ import ComparisonMethodology from './ComparisonMethodology.astro';
                 </div>
                 <div class="comparison-price-track" role="presentation" data-price-track>
                   <div class="comparison-agency" role="cell" aria-label="Other Agencies">
+                    <span
+                      class="comparison-cell-label"
+                      data-price-label="agency"
+                      aria-hidden="true"
+                    >
+                      Other Agencies
+                    </span>
                     <div class="comparison-number-block">
                       <div class="comparison-number-line">
                         <strong class="comparison-source-number" data-source-number>
@@ -122,6 +127,9 @@ import ComparisonMethodology from './ComparisonMethodology.astro';
                     role="cell"
                     aria-label={`Force Multiplier: $400 ${benchmark.fmPeriod}`}
                   >
+                    <span class="comparison-cell-label" data-price-label="fm" aria-hidden="true">
+                      Force Multiplier
+                    </span>
                     <div class="comparison-fm-result" data-fm-result>
                       <strong class="comparison-target-number" data-target-number>
                         $400
@@ -137,7 +145,6 @@ import ComparisonMethodology from './ComparisonMethodology.astro';
         }
       </div>
     </div>
-    <ComparisonMethodology />
   </div>
 </section>
 
@@ -202,6 +209,8 @@ import ComparisonMethodology from './ComparisonMethodology.astro';
     font-weight: 600;
   }
   .comparison-table {
+    position: relative;
+    isolation: isolate;
     border: 1px solid #b9c8d6;
     border-radius: 12px;
     background: #fff;
@@ -212,6 +221,23 @@ import ComparisonMethodology from './ComparisonMethodology.astro';
     border-radius: 11px 11px 0 0;
     color: #fff;
     background: var(--navy);
+  }
+  @media (min-width: 900px) {
+    .comparison-table-head {
+      /* The site navigation is in normal document flow and scrolls away. */
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 2px 0 #b9c8d6;
+    }
+    .comparison-source-info summary,
+    .comparison-source-close,
+    .comparison-service a {
+      scroll-margin-top: 110px;
+    }
+  }
+  .comparison-cell-label {
+    display: none;
   }
   .comparison-table-head > div {
     padding: 20px 24px;
@@ -319,6 +345,7 @@ import ComparisonMethodology from './ComparisonMethodology.astro';
     cursor: pointer;
     list-style: none;
     color: var(--blue);
+    -webkit-tap-highlight-color: transparent;
   }
   .comparison-source-info summary::-webkit-details-marker {
     display: none;
@@ -395,7 +422,7 @@ import ComparisonMethodology from './ComparisonMethodology.astro';
   }
   .comparison-evidence {
     position: absolute;
-    top: calc(50% + 32px);
+    top: var(--comparison-popup-top, calc(50% + 32px));
     left: 0;
     right: 0;
     z-index: 8;
@@ -406,6 +433,8 @@ import ComparisonMethodology from './ComparisonMethodology.astro';
     background: #fff;
     text-align: left;
     color: var(--ink);
+    max-height: var(--comparison-popup-max-height, calc(100dvh - 16px));
+    overflow-y: auto;
   }
   .comparison-evidence p {
     font-size: 12px;
@@ -455,7 +484,48 @@ import ComparisonMethodology from './ComparisonMethodology.astro';
       border-top: 1px solid #e0e8ef;
     }
     .comparison-agency {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 44px;
+      grid-template-areas: 'label info' 'price price' 'period period';
+      align-content: center;
+      justify-items: center;
       border-left: 0;
+    }
+    .comparison-agency .comparison-number-block,
+    .comparison-agency .comparison-number-line {
+      display: contents;
+    }
+    .comparison-agency .comparison-cell-label {
+      grid-area: label;
+      margin-bottom: 0;
+    }
+    .comparison-source-info {
+      grid-area: info;
+      justify-self: end;
+    }
+    .comparison-source-number {
+      grid-area: price;
+    }
+    .comparison-agency .comparison-period {
+      grid-area: period;
+    }
+    .comparison-fm {
+      flex-direction: column;
+    }
+    .comparison-cell-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      max-width: 100%;
+      margin-bottom: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: var(--navy);
+    }
+    .comparison-fm-result {
+      padding-top: 0;
     }
     .comparison-service h3 {
       font-size: 18px;
@@ -474,7 +544,7 @@ import ComparisonMethodology from './ComparisonMethodology.astro';
       gap: 2px;
     }
     .comparison-source-info summary {
-      width: 24px;
+      width: 44px;
     }
     .comparison-source-info summary > span {
       width: 19px;
@@ -514,7 +584,7 @@ import ComparisonMethodology from './ComparisonMethodology.astro';
       padding: 16px 5px;
     }
     .comparison-source-number {
-      font-size: clamp(16px, 5.1vw, 24px);
+      font-size: clamp(18px, 5.1vw, 24px);
     }
     .comparison-target-number {
       font-size: 31px;
@@ -533,6 +603,28 @@ import ComparisonMethodology from './ComparisonMethodology.astro';
     }
     .comparison-row:global(.motion-ready) .comparison-fm-result {
       opacity: 1;
+    }
+  }
+  @media (max-width: 899px) {
+    /* Without JavaScript, the native disclosure expands in the document and remains scrollable. */
+    [data-price-comparison]:not([data-comparison-enhanced]) .comparison-source-info[open],
+    [data-price-comparison]:not([data-comparison-enhanced])
+      .comparison-source-info[open]::details-content {
+      display: contents;
+    }
+    [data-price-comparison]:not([data-comparison-enhanced]) .comparison-source-info[open] summary {
+      grid-area: info;
+      justify-self: end;
+    }
+    [data-price-comparison]:not([data-comparison-enhanced]) .comparison-evidence {
+      position: static;
+      grid-column: 1 / -1;
+      grid-row: 4;
+      align-self: start;
+      width: 100%;
+      margin-top: 8px;
+      max-height: none;
+      overflow: visible;
     }
   }
 </style>

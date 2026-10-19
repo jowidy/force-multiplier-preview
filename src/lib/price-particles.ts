@@ -26,7 +26,7 @@ export function initPriceComparisons() {
     const stop = section.querySelector<HTMLButtonElement>('[data-stop-comparisons]')!;
     const replay = section.querySelector<HTMLButtonElement>('[data-replay-comparisons]')!;
     const status = section.querySelector<HTMLElement>('[data-comparison-status]')!;
-    const HOLD = 0,
+    const HOLD = 500,
       BURST = 120,
       SWIRL = 750,
       FORM = 425,
@@ -249,7 +249,58 @@ export function initPriceComparisons() {
     });
 
     // Source disclosures remain native details/summary controls without JavaScript.
+    section.dataset.comparisonEnhanced = '';
     const details = Array.from(section.querySelectorAll<HTMLDetailsElement>('[data-source-info]'));
+    const tableHead = section.querySelector<HTMLElement>('.comparison-table-head');
+    function positionDisclosure(detail: HTMLDetailsElement) {
+      if (!detail.open) {
+        detail.style.removeProperty('--comparison-popup-top');
+        detail.style.removeProperty('--comparison-popup-max-height');
+        return;
+      }
+      const summary = detail.querySelector('summary');
+      const popup = detail.querySelector<HTMLElement>('.comparison-evidence');
+      const track = detail.closest<HTMLElement>('[data-price-track]');
+      if (!summary || !popup || !track) return;
+      const trigger = summary.getBoundingClientRect();
+      const headBounds = tableHead?.getBoundingClientRect();
+      const headerAbove =
+        headBounds &&
+        headBounds.bottom > 0 &&
+        headBounds.top < window.innerHeight &&
+        headBounds.top <= trigger.top;
+      const floor = headerAbove ? Math.max(8, headBounds.bottom + 8) : 8;
+      const viewportBottom = window.innerHeight - 8;
+      const below = Math.max(floor, trigger.bottom + 8);
+      const above = Math.min(viewportBottom, trigger.top - 8);
+      const roomBelow = Math.max(0, viewportBottom - below);
+      const roomAbove = Math.max(0, above - floor);
+      detail.style.removeProperty('--comparison-popup-max-height');
+      const naturalHeight = popup.getBoundingClientRect().height;
+      const offscreen = trigger.bottom <= floor || trigger.top >= viewportBottom;
+      const placeBelow =
+        naturalHeight <= roomBelow || (naturalHeight > roomAbove && roomBelow >= roomAbove);
+      const maxHeight = offscreen
+        ? Math.max(0, viewportBottom - floor)
+        : placeBelow
+          ? roomBelow
+          : roomAbove;
+      detail.style.setProperty('--comparison-popup-max-height', `${maxHeight}px`);
+      const height = popup.getBoundingClientRect().height;
+      const desired = placeBelow ? below : above - height;
+      const top = Math.max(floor, Math.min(desired, viewportBottom - height));
+      detail.style.setProperty(
+        '--comparison-popup-top',
+        `${top - track.getBoundingClientRect().top}px`,
+      );
+    }
+    const positionOpenDisclosures = () => {
+      details.forEach((detail) => {
+        if (detail.open) positionDisclosure(detail);
+      });
+    };
+    window.addEventListener('scroll', positionOpenDisclosures, { passive: true });
+    window.addEventListener('resize', positionOpenDisclosures);
     details.forEach((detail) => {
       const close = detail.querySelector<HTMLButtonElement>('[data-close-source]')!;
       close.hidden = false;
@@ -262,6 +313,7 @@ export function initPriceComparisons() {
           details.forEach((other) => {
             if (other !== detail) other.open = false;
           });
+        positionDisclosure(detail);
       });
       detail.addEventListener('keydown', (event) => {
         if (event.key === 'Escape') {
@@ -293,12 +345,12 @@ export function initPriceComparisons() {
         const top = bounds.top + window.scrollY;
         const bottom = bounds.bottom + window.scrollY;
         item.visible = bottom > viewport.top && top < viewport.bottom;
-        // A single scroll jump can skip IntersectionObserver's visible states entirely.
-        // Resolve every crossed offscreen row so returning never reveals an untouched price.
+        // A triggered row keeps its own hold and animation timeline, even after scrolling offscreen.
+        // Only resolve untriggered rows skipped entirely by a scroll jump.
         const crossed = previousViewport
           ? bottom >= sweptTop && top <= sweptBottom
           : bottom <= viewport.top;
-        if (!item.visible && !item.played && (crossed || item.running)) item.finish();
+        if (!item.visible && !item.played && !item.running && crossed) item.finish();
       }
       previousViewport = viewport;
       startVisibleRows();
